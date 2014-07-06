@@ -1,5 +1,7 @@
 Programming Contest - Assigments And Practices
 
+Lecture: Ha Minh Ngoc (ngoc.ha@eiu.edu.vn / https://www.facebook.com/groups/eiu.olp/)
+
 Problems by Solvers
 
 1. Anh
@@ -64,3 +66,9 @@ Problems by Solvers
     4. 
     5. 
 
+8. Ngọc
+    1. 
+    2. 
+    3. 
+    4. 
+    5. 
