@@ -35,7 +35,7 @@ public class AntonandLetters {
 	}
 }
 
-/*class Reader {
+class Reader {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 
@@ -64,4 +64,4 @@ public class AntonandLetters {
 	static Double NextDouble() throws IOException {
 		return Double.parseDouble(Next());
 	}
-}*/
+}
