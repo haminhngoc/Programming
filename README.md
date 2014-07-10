@@ -12,10 +12,10 @@ Problems by Solvers
     5. 
 
 2. Duy
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Codeforces Round #253 (Div. 2) - Problem A
+    2. Codeforces Round #253 (Div. 2) - Problem B
+    3. Codeforces Round #254 (Div. 2) - Problem A
+    4. Codeforces Round #254 (Div. 2) - Problem B
     5. 
 3. Đạt
     1. 
