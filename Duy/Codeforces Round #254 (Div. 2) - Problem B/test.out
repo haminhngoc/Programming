@@ -1,0 +1,15 @@
+Testcase 1:
+Output
+512
+Testcase 2:
+Output
+32768
+Testcase 3:
+Output
+67108864
+Testcase 4:
+Output
+34359738368
+Testcase 5:
+Output
+4398046511104
