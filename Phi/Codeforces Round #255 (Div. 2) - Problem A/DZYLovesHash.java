@@ -7,7 +7,7 @@ public class DZYLovesHash {
 	protected static final int max = 300;
 	private static BitSet bs = new BitSet(max);
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Scanner sc = new Scanner(System.in);
 		int p, n, ith, i;
 		p = sc.nextInt();
@@ -18,14 +18,11 @@ public class DZYLovesHash {
 			if (bs.get(ith % p))
 			{
 				System.out.println(i);
-				break;
+				return;
 			}
 			bs.set(ith % p,true);
 		}
-		if (i > n)
-		{
-			System.out.println(-1);
-		}
+		System.out.println(-1);
 		sc.close();
 	}
 
