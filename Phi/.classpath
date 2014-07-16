@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Codeforces Round #253 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="Codeforces Round #254 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="UVa Online Judge 406 - Prime Cuts"/>
+	<classpathentry kind="src" path="Codeforces Round #255 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="Codeforces Round #255 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #255 (Div. 2) - Problem C"/>
+	<classpathentry kind="src" path="Codeforces Round #255 (Div. 2) - Problem D"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
