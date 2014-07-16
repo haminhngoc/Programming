@@ -5,32 +5,33 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class DZYLovesFibonaccNumbers {
+public class DZYLovesFibonaccNumbers2 {
+
+	static public long MOD = 1000000009;
+	static public long[] SF;
 
 	public static void main(String[] args) throws IOException {
 
-		long MOD = 1000000009;
+		ReaderFibonacc2.Init(System.in);
 
-		ReaderFibonacc.Init(System.in);
-				
-		int n = ReaderFibonacc.nextInt(); // 300K
-		int m = ReaderFibonacc.nextInt(); // 300K
+		int n = ReaderFibonacc2.nextInt(); // 300K
+		int m = ReaderFibonacc2.nextInt(); // 300K
 
 		long[] a = new long[n];
 		for (int i = 0; i < n; i++) {
-			a[i] = ReaderFibonacc.nextInt();
+			a[i] = ReaderFibonacc2.nextInt();
 		}
 		long[] sa = new long[n];
 		sa[0] = a[0];
 		for (int i = 1; i < n; i++) {
-			sa[i] = (sa[i-1] + a[i]) % MOD;
+			sa[i] = (sa[i - 1] + a[i]) % MOD;
 		}
 
 		int[][] queries = new int[m][3];
 		for (int i = 0; i < m; i++) {
-			queries[i][0] = ReaderFibonacc.nextInt();
-			queries[i][1] = ReaderFibonacc.nextInt();
-			queries[i][2] = ReaderFibonacc.nextInt();
+			queries[i][0] = ReaderFibonacc2.nextInt();
+			queries[i][1] = ReaderFibonacc2.nextInt();
+			queries[i][2] = ReaderFibonacc2.nextInt();
 		}
 
 		long[] F = new long[Math.max(n, 3) + 1];
@@ -40,10 +41,10 @@ public class DZYLovesFibonaccNumbers {
 		for (int i = 3; i < n; i++) {
 			F[i] = (F[i - 1] + F[i - 2]) % MOD;
 		}
-		long[] SF = new long[Math.max(n, 3) + 1];
+		SF = new long[Math.max(n, 3) + 1];
 		SF[0] = 0;
 		for (int i = 1; i < n; i++) {
-			SF[i] = (SF[i-1] + F[i]) % MOD;
+			SF[i] = (SF[i - 1] + F[i]) % MOD;
 		}
 
 		long[] cacheIn = new long[n];
@@ -86,8 +87,50 @@ public class DZYLovesFibonaccNumbers {
 	}
 }
 
+class Segment {
+	public int Start;
+	public int End;
+	public long Sum;
+	public int Mid;
 
-class ReaderFibonacc {
+	public Segment(int start, int end, long sum) {
+		Start = start;
+		End = end;
+		Mid = -1;
+		Sum = sum;
+	}
+
+	public Segment Left;
+	public Segment Right;
+
+	public void Break(int midStart, int midLen, int sfStart, int sfLen) {
+		Sum = (Sum + DZYLovesFibonaccNumbers2.SF[sfStart + sfLen])
+				% DZYLovesFibonaccNumbers2.MOD;
+
+		if (midLen == End - Start) {
+			return;
+		}
+		if (Mid < 0) {
+			if (midStart == Start) {
+				Left = new Segment(Start, midStart + midLen, 0);
+				Right = new Segment(midStart + midLen, End, 0);
+
+			} else if (midStart + midLen == End) {
+
+			} else if (midStart - Start > End - midStart - midLen) {
+
+			} else {
+
+			}
+		}
+	}
+
+	public long FindSum(int start, int end) {
+		return 0;
+	}
+}
+
+class ReaderFibonacc2 {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 
