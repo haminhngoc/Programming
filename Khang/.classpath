@@ -5,6 +5,11 @@
 	<classpathentry kind="src" path="Cinema Line"/>
 	<classpathentry kind="src" path="Valera and Plates"/>
 	<classpathentry kind="src" path="IQTest"/>
+	<classpathentry kind="src" path="Anton and Letters"/>
+	<classpathentry kind="src" path="The Child and Homework"/>
+	<classpathentry kind="src" path="Lucky Sum of Digits"/>
+	<classpathentry kind="src" path="Mafia"/>
+	<classpathentry excluding="src/|Helpful Maths/|Cinema Line/|Valera and Plates/|IQTest/|Anton and Letters/|The Child and Homework/|Lucky Sum of Digits/|Mafia/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
