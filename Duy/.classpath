@@ -4,6 +4,9 @@
 	<classpathentry kind="src" path="Codeforces Round #254 (Div. 2) - Problem B"/>
 	<classpathentry kind="src" path="Codeforces Round #253 (Div. 2) - Problem A"/>
 	<classpathentry kind="src" path="Codeforces Round #253 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #252 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="Codeforces Round #252 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #252 (Div. 2) - Problem C"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

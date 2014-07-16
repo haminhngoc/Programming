@@ -16,7 +16,9 @@ Problems by Solvers
     2. Codeforces Round #253 (Div. 2) - Problem B
     3. Codeforces Round #254 (Div. 2) - Problem A
     4. Codeforces Round #254 (Div. 2) - Problem B
-    5. 
+    5. Codeforces Round #252 (Div. 2) - Problem A
+	6. Codeforces Round #252 (Div. 2) - Problem B
+	7. Codeforces Round #252 (Div. 2) - Problem C
 3. Đạt
     1. 
     2. 
