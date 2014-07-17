@@ -58,14 +58,16 @@ public class DZYLovesModification {
 			queueColumn.add(-headColumn);
 		}
 
-		long result = 0;
-		long adjustValue = 0;
-		long currentValue = 0;
+		long result = predictRowValue[0] + predictColumnValue[k];
 		for (int i = 0; i <= k; i++) {
-			adjustValue = i * (k - i) * p;
-			currentValue = predictRowValue[i] + predictColumnValue[k - i]
+			long adjustValue = i * (k - i) * p;
+			long currentValue = predictRowValue[i] + predictColumnValue[k - i]
 					- adjustValue;
-			if (currentValue > result) {
+			if (k > 1000) {
+				System.out.println(predictRowValue[i] + " "
+						+ predictColumnValue[k - i]);
+			}
+			if (currentValue >= result) {				
 				result = currentValue;
 			}
 		}

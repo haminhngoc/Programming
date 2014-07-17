@@ -47,41 +47,16 @@ public class DZYLovesFibonaccNumbers2 {
 			SF[i] = (SF[i - 1] + F[i]) % MOD;
 		}
 
-		long[] cacheIn = new long[n];
-		long[] cacheOut0 = new long[n];
-		long[] cacheOut1 = new long[n];
+		Segment segments = new Segment(0, n, 0);
 		for (int i = 0; i < m; i++) {
 			int l = queries[i][1];
 			int r = queries[i][2];
 			if (queries[i][0] == 1) {
-				cacheIn[l - 1] = (cacheIn[l - 1] + F[1]) % MOD;
-				cacheOut0[r - 1] = (cacheOut0[r - 1] + F[r - l]) % MOD;
-				cacheOut1[r - 1] = (cacheOut1[r - 1] + F[r - l + 1]) % MOD;
+				segments.Break(l, r - l, 1, r - l);
 			} else {
-				long u0 = 0;
-				long u1 = 0;
-				long temp = 0;
-				for (int j = 0; j < n; j++) {
-					temp = u1;
-					u1 = (u1 + u0) % MOD;
-					u0 = temp;
-					u1 = (u1 + cacheIn[j]) % MOD;
-					a[j] = (a[j] + u1) % MOD;
-					if (cacheOut1[j] > 0) {
-						u1 = (u1 - cacheOut1[j] + MOD) % MOD;
-						u0 = (u0 - cacheOut0[j] + MOD) % MOD;
-					}
-				}
-				long res = 0;
-				for (int j = l - 1; j < r; j++) {
-					res = (res + a[j]) % MOD;
-				}
-				System.out.println(res);
-				for (int j = 0; j < n; j++) {
-					cacheIn[j] = 0;
-					cacheOut0[j] = 0;
-					cacheOut1[j] = 0;
-				}
+				System.out
+						.println((segments.FindSum(l, r) + sa[r - l] + MOD - sa[l])
+								% MOD);
 			}
 		}
 	}
@@ -103,30 +78,72 @@ class Segment {
 	public Segment Left;
 	public Segment Right;
 
+	public long SumSF(int sfStart, int sfLen) {
+		return (DZYLovesFibonaccNumbers2.SF[sfStart + sfLen]
+				+ DZYLovesFibonaccNumbers2.MOD - DZYLovesFibonaccNumbers2.SF[sfStart])
+				% DZYLovesFibonaccNumbers2.MOD;
+	}
+
 	public void Break(int midStart, int midLen, int sfStart, int sfLen) {
 		Sum = (Sum + DZYLovesFibonaccNumbers2.SF[sfStart + sfLen])
 				% DZYLovesFibonaccNumbers2.MOD;
 
-		if (midLen == End - Start) {
+		if (midLen == End - Start || midLen == 0) {
 			return;
 		}
 		if (Mid < 0) {
 			if (midStart == Start) {
-				Left = new Segment(Start, midStart + midLen, 0);
+				Left = new Segment(Start, midStart + midLen, SumSF(sfStart,
+						sfLen)); // midLen
 				Right = new Segment(midStart + midLen, End, 0);
-
 			} else if (midStart + midLen == End) {
-
-			} else if (midStart - Start > End - midStart - midLen) {
-
+				Left = new Segment(Start, midStart, 0);
+				Right = new Segment(midStart, End, SumSF(sfStart, sfLen));
+			} else { // Start < MidStart < MidEnd < End
+				if (midStart - Start > End - midStart - midLen) {
+					Left = new Segment(Start, midStart, 0);
+					Right = new Segment(midStart, End, SumSF(sfStart, sfLen));
+					Right.Break(midStart + midLen, midLen, sfStart, sfLen);
+				} else {
+					Left = new Segment(Start, midStart + midLen, SumSF(sfStart,
+							sfLen));
+					Right = new Segment(midStart + midLen, End, 0);
+					Left.Break(midStart, midLen, sfStart, sfLen);
+				}
+			}
+		} else {
+			if (midStart < Mid && midStart + midLen <= Mid) {
+				Left.Break(midStart, midLen, sfStart, sfLen);
+			} else if (midStart < Mid && Mid < midStart + midLen) {
+				Left.Break(midStart, Mid - midStart, sfStart,
+						Math.min(sfLen, Mid - midStart));
+				Right.Break(midStart + midLen, midStart + midLen - Mid, sfLen
+						- Mid + midStart < 0 ? 0 : sfStart + Mid - midStart,
+						Math.max(0, sfLen - Mid + midStart));
 			} else {
+				Right.Break(midStart, midLen, sfStart, sfLen);
+			}
+		}
+	}
 
+	public long FindRemain(int i, Boolean left) {
+		int j = i - Start;
+		if (Mid < 0) {
+			return left ? DZYLovesFibonaccNumbers2.SF[j]
+					: (DZYLovesFibonaccNumbers2.SF[End - Start]
+							+ DZYLovesFibonaccNumbers2.MOD - DZYLovesFibonaccNumbers2.SF[j])
+							% DZYLovesFibonaccNumbers2.MOD;
+		} else {
+			if (i < Mid) {
+				return Left.FindRemain(i, left);
+			} else {
+				return Right.FindRemain(i, left);
 			}
 		}
 	}
 
 	public long FindSum(int start, int end) {
-		return 0;
+		return Sum - FindRemain(start, true) - FindRemain(end, false);
 	}
 }
 
