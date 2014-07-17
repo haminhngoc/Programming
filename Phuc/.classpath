@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CodeFores.com-Devu, the Singer and Churu, the Joker 439A"/>
+	<classpathentry kind="src" path="Codeforces - Devu, the Dumb Guy 439B"/>
+	<classpathentry kind="src" path="Test"/>
+	<classpathentry kind="src" path="CodeForces-Andrey and Problem-443D"/>
+	<classpathentry kind="src" path="CodeForce-Valera and Tubes"/>
+	<classpathentry kind="src" path="CodeForce - Valera and Fruits  441B"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesHashA"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesStrings"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesSequences"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesModification 447D"/>
+	<classpathentry kind="src" path="CodeForce-Rewards-448A"/>
+	<classpathentry kind="src" path="CodeForce-PaintingFence-448C"/>
+	<classpathentry kind="src" path="CodeForce-Divisors-448E"/>
+	<classpathentry kind="src" path="MultiplicationTable"/>
+	<classpathentry kind="src" path="Code-Force-JzzhuandChocolate"/>
+	<classpathentry kind="src" path="CodeForce-QueueonBusStop-435A"/>
+	<classpathentry kind="src" path="CodeForce-PashaMaximizes-435B"/>
+	<classpathentry kind="src" path="CodeForce-Cardiogram-435C"/>
+	<classpathentry kind="src" path="CodeForce-StartUp-421B"/>
+	<classpathentry kind="src" path="CodeForce-SerejaandMirroring-426B"/>
+	<classpathentry kind="src" path="CodeForce-PrisonTransfer-427B"/>
+	<classpathentry kind="src" path="CodeForce-KuriyamaMirai&apos;sStones-433B"/>
+	<classpathentry kind="src" path="CodeForce-Megacity-424B"/>
+	<classpathentry kind="src" path="CodeForce-FootballKit-432B"/>
+	<classpathentry kind="src" path="CodeForce-ShowerLine-431B"/>
+	<classpathentry kind="src" path="CodeForce-BallsGame-430B"/>
+	<classpathentry kind="src" path="CodeForce-Crash-417B"/>
+	<classpathentry kind="src" path="CodeForce-Football-417C"/>
+	<classpathentry kind="src" path="CodeForce-TheChildandToy-437C"/>
+	<classpathentry kind="src" path="CodeForce-PoliceRecruits-427A"/>
+	<classpathentry kind="src" path="CodeForce-RyoukoMemoryNote-433C"/>
+	<classpathentry kind="src" path="CodeForce-JzzhuandChildren-450A"/>
+	<classpathentry kind="src" path="CodeForce-JzzhuandSequences-450B"/>
+	<classpathentry kind="src" path="CodeForce-JzzhuandCities-450D"/>
+	<classpathentry kind="src" path="CodeForce-PolicePatrol-427E"/>
+	<classpathentry kind="src" path="CodeForce-SerejaandSwaps-426C"/>
+	<classpathentry kind="src" path="CodeForce-CheckPost-427"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="NewContest/Demo/bin"/>
+</classpath>
