@@ -6,6 +6,8 @@
 	<classpathentry kind="src" path="Codeforces 477 - Problem C"/>
 	<classpathentry kind="src" path="BaseCode"/>
 	<classpathentry kind="src" path="Codeforces 478 - Problem C"/>
+	<classpathentry kind="src" path="Codeforces 478 - Problem D"/>
+	<classpathentry kind="src" path="Codeforces 478 - Problem E"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
