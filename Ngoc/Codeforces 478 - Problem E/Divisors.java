@@ -181,7 +181,7 @@ public class Divisors {
 	}
 
 	public static void testAllDivisor(long x) {
-		List<Long> divisors0 = getDivisors(X);
+		List<Long> divisors0 = getDivisors(x);
 		System.out.print(divisors0.size() + ":    ");
 		for (int i = 0; i < divisors0.size(); i++) {
 			System.out.print(divisors0.get(i) + " ");
@@ -191,7 +191,7 @@ public class Divisors {
 
 	public static void testMap(long x) {
 		List<Long> divisors = new ArrayList<Long>();
-		Map<Long, List<Long>> divisorMap = getDivisorsOfDivisor(X, divisors);
+		Map<Long, List<Long>> divisorMap = getDivisorsOfDivisor(x, divisors);
 		
 		int total = 0;
 		for (int i = 0; i < divisors.size(); i++) {
