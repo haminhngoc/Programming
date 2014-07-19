@@ -4,8 +4,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class PaintingFence {
-	static int n;
-	static int[] a;
+	static int n; // 5000
+	static int[] a; // 10^9
 
 	public static void main(String[] args) throws IOException {
 		initReader();

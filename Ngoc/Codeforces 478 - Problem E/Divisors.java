@@ -4,15 +4,17 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Divisors {
-	static int n;
-	static int[] a;
+	static long X; // 10^12
+	static long k; // 10^18
+	static long[] divisorIndex;
+	static long[] divisors;
 
 	public static void main(String[] args) throws IOException {
 		initReader();
 		while (true) {
 			readInput();
 
-			int result = solve(0, n, 0);
+			int result = solve();
 
 			System.out.println(result);
 
@@ -21,36 +23,28 @@ public class Divisors {
 
 	}
 
-	public static int solve(int start, int length, int base) {
-		int min = Integer.MAX_VALUE;
-		for (int i = start; i < start + length; i++) {
-			if (a[i] < min) {
-				min = a[i];
+	public static int solve() {
+
+		return 0;
+	}
+
+	public static void Fatorization() {
+		long sq = Math.round(Math.sqrt(X)); // 10 ^ 6
+		long x = X;
+		divisorIndex[0] = 1;
+		long i = 2;
+		while (i < sq) {
+			if (x % i == 0) {
+				x = x / i;
+			} else {
+				i++;
 			}
 		}
-		int localResult = min - base;
-		int previousMin = start;
-		for (int i = start; i <= start + length; i++) {
-			if (previousMin < start + length && a[previousMin] == min) {
-				previousMin++;
-				continue;
-			}
-			if (i == start + length || a[i] == min) {
-				if (previousMin < i) {
-					localResult += solve(previousMin, i - previousMin, min);
-					previousMin = i;
-				}
-			}
-		}
-		return Math.min(length, localResult);
 	}
 
 	public static void readInput() throws IOException {
-		n = nextInt();
-		a = new int[n];
-		for (int i = 0; i < n; i++) {
-			a[i] = nextInt();
-		}
+		X = nextLong();
+		k = nextLong();
 	}
 
 	static BufferedReader reader;

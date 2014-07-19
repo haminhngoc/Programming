@@ -10,14 +10,11 @@ import java.util.StringTokenizer;
 public class DZYLovesModification {
 
 	public static void main(String[] args) throws IOException {
-		// Scanner in = new Scanner(System.in);
-		// BufferedReader in = new BufferedReader( new InputStreamReader(S));
-		Reader8 in = new Reader8();
-		in.Init(System.in);
-		int n = in.nextInt();
-		int m = in.nextInt();
-		long k = in.nextLong();
-		int p = in.nextInt();
+		Reader8.Init(System.in);
+		int n = Reader8.nextInt();
+		int m = Reader8.nextInt();
+		long k = Reader8.nextLong();
+		int p = Reader8.nextInt();
 		long[] row = new long[n];
 		long[] col = new long[m];
 		long temp = 0;
@@ -27,7 +24,7 @@ public class DZYLovesModification {
 		PriorityQueue<Long> cq = new PriorityQueue<Long>();
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < m; ++j) {
-				temp = in.nextLong();
+				temp = Reader8.nextLong();
 				row[i] += temp;
 				col[j] += temp;
 			}
