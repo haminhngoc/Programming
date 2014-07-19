@@ -8,7 +8,10 @@ public class MultiplicationTable {
 	static int m; // 500K
 	static int k; // n * m
 
+	static int lowCount;
 	static int[] lowPartition;
+
+	static int upCount;
 	static int[] upPartition;
 
 	public static void main(String[] args) throws IOException {
@@ -20,7 +23,7 @@ public class MultiplicationTable {
 
 			System.out.println(result);
 
-			// break;
+			break;
 		}
 
 	}
@@ -31,20 +34,18 @@ public class MultiplicationTable {
 			m = n;
 			n = temp;
 		}
-		k = m * n - k;
-		// int lowPartitionCount = 1;
-		lowPartition = new int[m + 2];
-		lowPartition[0] = 1;
+		int ksmallest = m * n - k + 1;
+		lowPartition = new int[m + 1];
+		lowCount = 0;
 
-		// int upPartitionCount = 1;
-		upPartition = new int[m + 2];
+		upPartition = new int[m + 1];
 		for (int i = 0; i < m; i++) {
-			upPartition[i] = 0;
+			upPartition[i] = n + 1;
 		}
 		upPartition[m] = n;
-		upPartition[m + 1] = m + 1;
+		upCount = m * n;
 
-		int[] partition = new int[m + 2];
+		int[] partition = new int[m + 1];
 
 		while (true) {
 
@@ -68,14 +69,23 @@ public class MultiplicationTable {
 				}
 
 				int partitionCount = makePartition(partition, columnPivot);
-				if (k < partitionCount) {
+				if (ksmallest <= partitionCount) {
 					upPartition = partition;
+					upCount = partitionCount;
 				} else {
 					lowPartition = partition;
+					lowCount = partitionCount;
 				}
 			} else {
 				List<Integer> inPartition = new ArrayList<Integer>();
-				//LATER				
+				for (int i = 1; i <= m; i++) {
+					if (upPartition[i] >= 1 && upPartition[i] <= n
+							&& upPartition[i] > lowPartition[i]) {
+						inPartition.add(upPartition[i] * i);
+					}
+				}
+				inPartition.sort(comparator());
+				return inPartition.get(ksmallest - lowCount);
 			}
 
 			break;
@@ -111,6 +121,14 @@ public class MultiplicationTable {
 		}
 
 		return partitionCount;
+	}
+
+	public static Comparator<Integer> comparator() {
+		return new Comparator<Integer>() {
+			public int compare(Integer arg0, Integer arg1) {
+				return Integer.compare(arg0, arg1);
+			}
+		};
 	}
 
 	public static void readInput() throws IOException {
