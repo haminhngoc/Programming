@@ -98,10 +98,10 @@ public class MultiplicationTable {
 
 		int maxItem = columnPivot * partition[columnPivot];
 		int partitionCount = columnPivot * partition[columnPivot];
+		int j = partition[columnPivot];
 		for (int i = columnPivot + 1; i < m; i++) {
-			int j = partition[columnPivot];
 			for (; j >= 1; j--) {
-				if (i * j < maxItem) {
+				if (i * j <= maxItem) {
 					break;
 				}
 			}
@@ -109,14 +109,14 @@ public class MultiplicationTable {
 			partitionCount += j;
 		}
 
-		for (int i = columnPivot; i > 1; i--) {
-			int j = partition[columnPivot];
-			for (; j < n; j++) {
-				if (i * j < maxItem) {
+		int l = columnPivot;
+		for (int i = partition[columnPivot] + 1; i < n; i++) {
+			for (; l > 0; l--) {
+				if (i * l <= maxItem) {
 					break;
 				}
 			}
-			partition[i] = j;
+			partition[l] = i;
 			partitionCount += i;
 		}
 
@@ -167,8 +167,7 @@ public class MultiplicationTable {
 	static Double nextDouble() throws IOException {
 		return Double.parseDouble(next());
 	}
-	
-	
+
 	public static int[] readLine(int n) throws IOException {
 		int[] result = new int[n];
 		for (int i = 0; i < n; i++) {
