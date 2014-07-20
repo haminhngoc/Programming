@@ -38,6 +38,11 @@ public class BaseCode {
 		n = nextInt();
 	}
 
+
+	/*****************************************************************
+	 ******************** BASIC READER *******************************
+	 *****************************************************************/
+	
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 
@@ -69,6 +74,28 @@ public class BaseCode {
 		return Double.parseDouble(next());
 	}
 
+	/*****************************************************************
+	 ******************** TIME UTILITIES *******************************
+	 *****************************************************************/
+	
+	static long startTime = 0;
+	static long preLogTime = 0;
+
+	static void logTime(String lable) {
+		long current = System.currentTimeMillis();
+		if (startTime != 0) {
+			println(lable, " - From start:", (current - startTime),
+					"- From previous:", (current - preLogTime));
+		} else {
+			startTime = current;
+		}
+		preLogTime = current;
+	}
+
+	/*****************************************************************
+	 ******************** READ UTILITIES *******************************
+	 *****************************************************************/
+	
 	public static int[] readLine(int n) throws IOException {
 		int[] result = new int[n];
 		for (int i = 0; i < n; i++) {
@@ -106,6 +133,10 @@ public class BaseCode {
 		return result;
 	}
 
+	/*****************************************************************
+	 ******************** PRINT UTILITIES *******************************
+	 *****************************************************************/
+	
 	public static void print(Object... obj) {
 		System.out.print(join(obj, " "));
 	}
@@ -172,5 +203,27 @@ public class BaseCode {
 		for (int i = 0; i < matrix.length; i++) {
 			println(join(matrix[i]));
 		}
+	}
+
+	/*****************************************************************
+	 *************** ARRAY AND STRING UTILITIES **********************
+	 *****************************************************************/
+	
+	public static int[] initArray(int value, int length){
+		int[] result = new int[length];
+		Arrays.fill(result, value);
+		return result;
+	}
+	
+	public static long[] initArray(long value, int length){
+		long[] result = new long[length];
+		Arrays.fill(result, value);
+		return result;
+	}
+	
+	public static String initString(char c, int length){
+		char[] chars = new char[length];
+		Arrays.fill(chars, c);
+		return new String(chars);
 	}
 }

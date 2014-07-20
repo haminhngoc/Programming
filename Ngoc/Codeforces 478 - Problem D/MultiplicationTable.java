@@ -6,12 +6,12 @@ import java.util.*;
 public class MultiplicationTable {
 	static int n; // 500K
 	static int m; // 500K
-	static int k; // n * m
+	static long k; // n * m
 
-	static int lowCount;
+	static long lowCount;
 	static int[] lowPartition;
 
-	static int upCount;
+	static long upCount;
 	static int[] upPartition;
 
 	public static void main(String[] args) throws IOException {
@@ -19,7 +19,7 @@ public class MultiplicationTable {
 		while (true) {
 			readInput();
 
-			int result = solve();
+			long result = solve();
 
 			System.out.println(result);
 
@@ -28,13 +28,13 @@ public class MultiplicationTable {
 
 	}
 
-	public static int solve() {
+	public static long solve() {
 		if (m < n) {
 			int temp = m;
 			m = n;
 			n = temp;
 		}
-		int ksmallest = m * n - k + 1;
+		// long ksmallest = k; // m * n - k + 1;
 		lowPartition = new int[m + 1];
 		lowCount = 0;
 
@@ -43,18 +43,24 @@ public class MultiplicationTable {
 			upPartition[i] = n + 1;
 		}
 		upPartition[m] = n;
-		upCount = m * n;
+		upCount = (long)m * n;
+
+		// println(lowCount);
+		// println(join(lowPartition));
+		// println(upCount);
+		// println(join(upPartition));
 
 		int[] partition = new int[m + 1];
+		int[] temp;
 
-		while (true) {
-
+		long element = -1;
+		while (element < 0) {
 			int validCount = 0;
 			for (int i = 1; i <= m; i++) {
 				if (upPartition[i] > lowPartition[i] + 1) {
 					validCount++;
-					partition[i] = (upPartition[i] - lowPartition[i]) / 2;
 				}
+				partition[i] = (upPartition[i] + lowPartition[i]) / 2;
 			}
 			if (validCount > 0) {
 				validCount = (validCount + 1) / 2;
@@ -67,41 +73,50 @@ public class MultiplicationTable {
 						break;
 					}
 				}
+				//println("pivot:", columnPivot, partition[columnPivot]);
 
-				int partitionCount = makePartition(partition, columnPivot);
-				if (ksmallest <= partitionCount) {
+				long partitionCount = makePartition(partition, columnPivot);
+				if (k <= partitionCount) {
+					temp = upPartition;
 					upPartition = partition;
 					upCount = partitionCount;
+					partition = temp;
 				} else {
+					temp = lowPartition;
 					lowPartition = partition;
 					lowCount = partitionCount;
+					partition = temp;
 				}
+				// println(lowCount);
+				// println(join(lowPartition));
+				// println(upCount);
+				// println(join(upPartition));
 			} else {
-				List<Integer> inPartition = new ArrayList<Integer>();
+				List<Long> inPartition = new ArrayList<Long>();
 				for (int i = 1; i <= m; i++) {
 					if (upPartition[i] >= 1 && upPartition[i] <= n
 							&& upPartition[i] > lowPartition[i]) {
-						inPartition.add(upPartition[i] * i);
+						inPartition.add((long) upPartition[i] * i);
 					}
 				}
 				inPartition.sort(comparator());
-				return inPartition.get(ksmallest - lowCount);
+				int elementIndex = (int) (k - lowCount - 1);
+				element = inPartition.get(elementIndex);
+				return element;
 			}
-
-			break;
 		}
 
 		return 0;
 	}
 
-	public static int makePartition(int[] partition, int columnPivot) {
+	public static long makePartition(int[] partition, int columnPivot) {
 
-		int maxItem = columnPivot * partition[columnPivot];
-		int partitionCount = columnPivot * partition[columnPivot];
+		long maxItem = (long) columnPivot * partition[columnPivot];
+		long partitionCount = (long) columnPivot * partition[columnPivot];
 		int j = partition[columnPivot];
-		for (int i = columnPivot + 1; i < m; i++) {
-			for (; j >= 1; j--) {
-				if (i * j <= maxItem) {
+		for (int i = columnPivot + 1; i <= m; i++) {
+			for (; j >= 0; j--) {
+				if ((long) i * j <= maxItem) {
 					break;
 				}
 			}
@@ -109,24 +124,30 @@ public class MultiplicationTable {
 			partitionCount += j;
 		}
 
-		int l = columnPivot;
-		for (int i = partition[columnPivot] + 1; i < n; i++) {
-			for (; l > 0; l--) {
-				if (i * l <= maxItem) {
+		int l = partition[columnPivot];
+		for (int i = columnPivot - 1; i >= 1; i--) {
+			while (l <= n) {
+				if (l < n && (long) i * (l + 1) <= maxItem) {
+					l++;
+					partitionCount += i;
+					continue;
+				} else if (l == n) {
+					l++;
+				} else {
 					break;
 				}
 			}
-			partition[l] = i;
-			partitionCount += i;
+			partition[i] = l;
 		}
+		partition[0] = partition[1];
 
 		return partitionCount;
 	}
 
-	public static Comparator<Integer> comparator() {
-		return new Comparator<Integer>() {
-			public int compare(Integer arg0, Integer arg1) {
-				return Integer.compare(arg0, arg1);
+	public static Comparator<Long> comparator() {
+		return new Comparator<Long>() {
+			public int compare(Long arg0, Long arg1) {
+				return Long.compare(arg0, arg1);
 			}
 		};
 	}
@@ -134,7 +155,7 @@ public class MultiplicationTable {
 	public static void readInput() throws IOException {
 		n = nextInt();
 		m = nextInt();
-		k = nextInt();
+		k = nextLong();
 	}
 
 	static BufferedReader reader;
