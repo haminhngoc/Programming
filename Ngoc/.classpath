@@ -3,6 +3,13 @@
 	<classpathentry kind="src" path="UVa 100 - The 3n + 1"/>
 	<classpathentry kind="src" path="Codeforces 477 - Problem D"/>
 	<classpathentry kind="src" path="Codeforces 477 - Problem E"/>
+	<classpathentry kind="src" path="Codeforces 477 - Problem C"/>
+	<classpathentry kind="src" path="BaseCode"/>
+	<classpathentry kind="src" path="Codeforces 478 - Problem C"/>
+	<classpathentry kind="src" path="Codeforces 478 - Problem D"/>
+	<classpathentry kind="src" path="Codeforces 478 - Problem E"/>
+	<classpathentry kind="src" path="Codeforces 433 - Problem C"/>
+	<classpathentry kind="src" path="Codeforces 433 - Problem D"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
