@@ -4,8 +4,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.lang.StringBuffer;
 
-import sun.font.CreatedFontTracker;
-
 public class Divisors {
 	static long X; // 10^12
 	static long k; // 10^18
@@ -45,15 +43,12 @@ public class Divisors {
 			Status current = stack[index];
 			if (current.number == 1) {
 				printed++;
-				// System.out.print(1 + (printed == limit ? "" : " "));
 				stringBuffer.append(1 + (printed == limit ? "" : " "));
 				index--;
 				continue;
 			}
 			if (index == ik) {
 				printed++;
-				// System.out
-				// .print(current.number + (printed == limit ? "" : " "));
 				stringBuffer.append(current.number
 						+ (printed == limit ? "" : " "));
 				index--;
@@ -61,18 +56,6 @@ public class Divisors {
 			}
 			List<Long> children = divisorMap.get(current.number);
 
-			if (children.size() == 2 && current.index == -1) {
-				int need = Math.min(ik - index, limit - printed);
-				String newString = initString('1', need);
-				printed += need;
-				stringBuffer.append(newString);
-				if (printed < limit) {
-					stringBuffer.append(current.number);
-					printed++;
-				}
-				index--;
-				continue;
-			}
 			if (current.index < children.size() - 1) {
 				current.index++;
 				long childDivisor = children.get(current.index);
@@ -438,8 +421,10 @@ class Status {
 }
 
 /*
- * class NumberDivisor { long number; List<Long> divisors = new
- * ArrayList<Long>(); }
+ * if (children.size() == 2 && current.index == -1) { int need = Math.min(ik -
+ * index, limit - printed); String newString = initString('1', need); printed +=
+ * need; stringBuffer.append(newString); if (printed < limit) {
+ * stringBuffer.append(current.number); printed++; } index--; continue; }
  */
 
 /*

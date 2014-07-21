@@ -43,7 +43,7 @@ public class MultiplicationTable {
 			upPartition[i] = n + 1;
 		}
 		upPartition[m] = n;
-		upCount = (long)m * n;
+		upCount = (long) m * n;
 
 		// println(lowCount);
 		// println(join(lowPartition));
@@ -73,7 +73,7 @@ public class MultiplicationTable {
 						break;
 					}
 				}
-				//println("pivot:", columnPivot, partition[columnPivot]);
+				// println("pivot:", columnPivot, partition[columnPivot]);
 
 				long partitionCount = makePartition(partition, columnPivot);
 				if (k <= partitionCount) {
