@@ -42,9 +42,10 @@ class TaskC {
 			ans++;
 			return;
 		}
+		long min = 1000000000 + 1;
 		long max = 0;
 		int iMax = 0;
-		int n1 = 0;
+		int nMin = 0;
 		int nextL = l;
 		for (int i = l; i <= r; i++) {
 			if(a[i] > max)
@@ -52,12 +53,17 @@ class TaskC {
 				max = a[i];
 				iMax = i;
 			}
-			if(a[i] == 1)
+			if(a[i] < min)
 			{
-				n1++;
+				min = a[i];
+				nMin = 1;
+			}
+			else if(a[i] == min)
+			{
+				nMin++;
 			}
 		}
-		if (n1 > 1)
+		if (min < nMin)
 		{
 			for (int i = l; i <= r; i++) {
 				a[i]--;
