@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Codeforce_441_A"/>
+	<classpathentry kind="src" path="Codeforce_441_B"/>
+	<classpathentry kind="src" path="Codeforce_441_C"/>
+	<classpathentry kind="src" path="Codeforce_447_A"/>
+	<classpathentry kind="src" path="Codeforce_447_B"/>
+	<classpathentry kind="src" path="Codeforce_447_C"/>
+	<classpathentry kind="src" path="Codeforce_447_D"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
