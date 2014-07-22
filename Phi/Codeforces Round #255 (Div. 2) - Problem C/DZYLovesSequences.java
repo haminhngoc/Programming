@@ -10,7 +10,7 @@ public class DZYLovesSequences {
 		int lastEnd = 0;
 		int hasMistakeAt = 0;
 		int longestSub = 2;
-		
+	/*	
 		Scanner sc = new Scanner(System.in);
 		n= sc.nextInt();
 		arr[0] = sc.nextInt();
@@ -44,7 +44,7 @@ public class DZYLovesSequences {
 				max = longest[i];
 			}
 		}
-		System.out.println(max);
+		System.out.println(max);*/
 		
 	}
 }

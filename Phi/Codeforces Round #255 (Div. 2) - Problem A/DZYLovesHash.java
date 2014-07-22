@@ -15,47 +15,78 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskB solver = new TaskB();
+		TaskC solver = new TaskC();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskB {
+class TaskC {
+	private static long ans = 0;
+	private static Long[] a = new Long[5000];
+
 	public void solve(InputReader in, PrintWriter out) {
-		int n,s;
-		n = in.nextInt();
-		s = in.nextInt();
-		List<Point> arrK = new ArrayList<Point>();
-		Point k = new Point();
-		double distance = 0;
-		double x,y;
-		
-		for(int i =0; i < n; i++)
-		{
-			x = in.nextDouble();
-			y = in.nextDouble();
-			k.distance = Math.sqrt(x+y);
-			k.population = in.nextLong();
+		int n;
+		n = in.nextInt(); // 5000
+		for (int i = 0; i < n; i++) {
+			a[i] = in.nextLong(); // 10^9
 		}
-		Collections.sort(arrK, new Comparator<Point>() {
-		    public int compare(Point p1, Point p2) {
-		        return p1.distance > p2.distance ? 1: -1;
-		    }
-		});
-		for(int i =0; i < n; i++)
+		Calculate(0,n-1);
+		out.println(ans);
+	}
+
+	private void Calculate(int l, int r) {
+		if (r < l) return;
+		if (r == l)
 		{
-			
+			ans++;
+			return;
+		}
+		long max = 0;
+		int iMax = 0;
+		int n1 = 0;
+		int nextL = l;
+		for (int i = l; i <= r; i++) {
+			if(a[i] > max)
+			{
+				max = a[i];
+				iMax = i;
+			}
+			if(a[i] == 1)
+			{
+				n1++;
+			}
+		}
+		if (n1 > 1)
+		{
+			for (int i = l; i <= r; i++) {
+				a[i]--;
+			}
+		}
+		else if (max > r-l +1)
+		{
+			a[iMax] = (long)0;
+		}
+		else
+		{
+			for (int i = l; i <= r; i++) {
+				a[i]--;
+			}
+		}
+		ans++;
+		for (int i = l; i <= r; i++) {
+			if(a[i] == 0)
+			{
+				Calculate(nextL,i-1);
+				nextL = i+1;
+			}
+			else if(i == r)
+			{
+				Calculate(nextL,r);
+			}
 		}
 	}
 }
-
-class Point
-{
-	double distance;
-	long population;
-}
-
 
 class InputReader {
 	public BufferedReader reader;
@@ -84,8 +115,9 @@ class InputReader {
 	public long nextLong() {
 		return Long.parseLong(next());
 	}
-	public float nextDouble(){
-		return (float) Double.parseDouble(next());
+
+	public double nextDouble() {
+		return Double.parseDouble(next());
 	}
 
 }
