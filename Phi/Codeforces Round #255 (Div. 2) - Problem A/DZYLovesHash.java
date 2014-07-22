@@ -1,29 +1,91 @@
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+import java.util.*;
 
 public class DZYLovesHash {
 
-	protected static final int max = 300;
-	private static BitSet bs = new BitSet(max);
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
-		int p, n, ith, i;
-		p = sc.nextInt();
-		n = sc.nextInt();
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		InputReader in = new InputReader(inputStream);
+		PrintWriter out = new PrintWriter(outputStream);
+		TaskB solver = new TaskB();
+		solver.solve(in, out);
+		out.close();
+	}
+}
+
+class TaskB {
+	public void solve(InputReader in, PrintWriter out) {
+		int n,s;
+		n = in.nextInt();
+		s = in.nextInt();
+		List<Point> arrK = new ArrayList<Point>();
+		Point k = new Point();
+		double distance = 0;
+		double x,y;
 		
-		for (i = 1; i <= n; i++) {
-			ith = sc.nextInt();
-			if (bs.get(ith % p))
-			{
-				System.out.println(i);
-				return;
-			}
-			bs.set(ith % p,true);
+		for(int i =0; i < n; i++)
+		{
+			x = in.nextDouble();
+			y = in.nextDouble();
+			k.distance = Math.sqrt(x+y);
+			k.population = in.nextLong();
 		}
-		System.out.println(-1);
-		sc.close();
+		Collections.sort(arrK, new Comparator<Point>() {
+		    public int compare(Point p1, Point p2) {
+		        return p1.distance > p2.distance ? 1: -1;
+		    }
+		});
+		for(int i =0; i < n; i++)
+		{
+			
+		}
+	}
+}
+
+class Point
+{
+	double distance;
+	long population;
+}
+
+
+class InputReader {
+	public BufferedReader reader;
+	public StringTokenizer tokenizer;
+
+	public InputReader(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
+	}
+	public float nextDouble(){
+		return (float) Double.parseDouble(next());
 	}
 
 }
