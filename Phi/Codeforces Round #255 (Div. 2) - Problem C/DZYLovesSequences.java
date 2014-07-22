@@ -5,11 +5,9 @@ public class DZYLovesSequences {
 	public static void main(String[] args) {
 		
 		int[] arr = new int[100000];
-		int[] longest = new int[100000];
-		int n, max = 2;
-		int lastEnd = 0;
-		int hasMistakeAt = 0;
-		int longestSub = 2;
+		int n;
+		int left = 0, mid = 0;
+		int longest = 2;
 		
 		Scanner sc = new Scanner(System.in);
 		n= sc.nextInt();
@@ -17,34 +15,33 @@ public class DZYLovesSequences {
 		arr[1] = sc.nextInt();
 		if (arr[0] > arr[1])
 		{
-			hasMistakeAt = 1;
+			mid = 1;
 		}
-		longest[0] = 1;
-		longest[1] = 2;
 		
 		for (int i = 2; i < n; i++)
 		{
 			arr[i] = sc.nextInt();
-			if (arr[i] >= arr[i-1] &&  hasMistakeAt != 0)
+			if (arr[i] < arr[i-1] && arr[i] >= arr[i-2]) // level 1
 			{
-				longestSub =  longestSub > i- lastEnd + 1 ? longestSub : i- lastEnd + 1;
-				lastEnd = i;
+				if (mid != left)
+				{
+					longest = longest > i - left + 1 ? longest : i -left + 1;
+					left = mid;
+					mid = i;
+				}
+				else
+				{
+					mid = i;
+				}
 			}
-			else if (noMistake)
+			if (arr[i] < arr[i-2]) // level 2
 			{
-				longest[i] = longest[i-1] + 1;
-				noMistake = false;
-			}
-			else
-			{
-				longest[i] = longest[i-1];			
-			}
-			if (longest[i] > max)
-			{
-				max = longest[i];
+				longest = longest > i - left + 1 ? longest : i -left + 1;
+				left = i -1;
+				mid = i - 1;
 			}
 		}
-		System.out.println(max);
+		System.out.println(longest);
 		
 	}
 }
