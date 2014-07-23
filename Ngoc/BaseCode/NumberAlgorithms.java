@@ -225,3 +225,13 @@ public class NumberAlgorithms {
 	}
 
 }
+
+class NumberFactor {
+	long prime;
+	int base;
+
+	public NumberFactor(long prime, int base) {
+		this.prime = prime;
+		this.base = base;
+	}
+}

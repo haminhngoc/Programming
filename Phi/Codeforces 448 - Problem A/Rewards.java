@@ -4,10 +4,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.math.BigInteger;
+import java.util.StringTokenizer;
 import java.util.*;
 
-public class DZYLovesHash {
+public class Rewards {
 
 	public static void main(String[] args) {
 
@@ -15,54 +15,41 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskB solver = new TaskB();
+		TaskA solver = new TaskA();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskB {
+class TaskA {
+	private static long ans = 0;
+	private static Long[] a = new Long[5000];
 
 	public void solve(InputReader in, PrintWriter out) {
-		long n,m,k;
-		long l,w;
-		long ans = 0;
-		n = in.nextLong(); // 1e9
-		m = in.nextLong(); // 1e9
-		k = in.nextLong(); // 1e9
-		if (k > (n-1) + (m-1))
-		{
-			out.println("-1");
-			return;
+		int ith, sum, need;
+		int n;
+		need = 0;
+		sum = 0;
+		for (int i = 0; i < 3; i++) {
+			sum += in.nextInt();
 		}
-		l = m > n ? m : n;
-		w = m > n ? n : m;
-		if (k > (l-1))
-		{
-			long temp = k - (l -1);
-			if(w%(temp+1) == 0)
-			{
-				ans = (w/(temp+1));
-			}
-			else
-			{
-				ans = w%(w/(temp+1));
-			}
+		need += (sum / 5) + (sum % 5 != 0 ? 1 : 0);
+		sum = 0;
+		for (int i = 0; i < 3; i++) {
+			sum += in.nextInt();
 		}
-		else if (l%(k+1) == 0)
+		need += (sum / 10) + (sum % 10 != 0 ? 1 : 0);
+		n = in.nextInt();
+		if (need > n)
 		{
-			ans = (l/(k+1)) * w;
-		}
-		else if(w%(k+1) == 0)
-		{
-			ans = (w/(k+1)) * l;
+			out.println("NO");
 		}
 		else
 		{
-			ans = (l/(k+1))*w;
+			out.println("YES");
 		}
-		out.println(ans);
 	}
+
 }
 
 class InputReader {
