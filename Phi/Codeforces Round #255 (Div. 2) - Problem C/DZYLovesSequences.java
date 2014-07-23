@@ -10,7 +10,7 @@ public class DZYLovesSequences {
 			order[i] = n - 1 - i;
 
 		// stable sort of characters
-		Arrays.sort(order, (a,b) -> S.charAt(a).compareTo(S.charAt(b)));
+		//Arrays.sort(order, (a,b) -> S.charAt(a).compareTo(S.charAt(b)));
 
 		int[] sa = new int[n];
 		int[] classes = new int[n];
@@ -52,7 +52,7 @@ public class DZYLovesSequences {
 		Integer[] order = new Integer[n];
 		for (int i = 0; i < n; i++)
 			order[i] = i;
-		Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
+	//	Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
 		int[] sa = new int[n];
 		int[] classes = new int[n];
 		for (int i = 0; i < n; i++) {
@@ -96,7 +96,6 @@ public class DZYLovesSequences {
 
 	// Usage example
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		String s1 = "abcab";
 		int[] sa1 = suffixArray(s1);
 
@@ -127,7 +126,6 @@ public class DZYLovesSequences {
 			}
 		}
 		System.out.println("Test passed");
-=======
 		
 		int[] arr = new int[100000];
 		int[] longest = new int[100000];
@@ -135,7 +133,7 @@ public class DZYLovesSequences {
 		int lastEnd = 0;
 		int hasMistakeAt = 0;
 		int longestSub = 2;
-		
+	/*	
 		Scanner sc = new Scanner(System.in);
 		n= sc.nextInt();
 		arr[0] = sc.nextInt();
@@ -169,8 +167,7 @@ public class DZYLovesSequences {
 				max = longest[i];
 			}
 		}
-		System.out.println(max);
+		System.out.println(max);*/
 		
->>>>>>> 4c7a98eff1ecc9e99250a4e1125716561b74c5c8
 	}
 }

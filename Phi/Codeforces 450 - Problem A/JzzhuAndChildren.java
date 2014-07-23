@@ -4,10 +4,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.util.*;
+import java.util.StringTokenizer;
 
-public class DZYLovesHash {
+public class JzzhuAndChildren {
 
 	public static void main(String[] args) {
 
@@ -15,53 +14,31 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskB solver = new TaskB();
+		TaskA solver = new TaskA();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskB {
-
+class TaskA {
 	public void solve(InputReader in, PrintWriter out) {
-		long n,m,k;
-		long l,w;
-		long ans = 0;
-		n = in.nextLong(); // 1e9
-		m = in.nextLong(); // 1e9
-		k = in.nextLong(); // 1e9
-		if (k > (n-1) + (m-1))
-		{
-			out.println("-1");
-			return;
-		}
-		l = m > n ? m : n;
-		w = m > n ? n : m;
-		if (k > (l-1))
-		{
-			long temp = k - (l -1);
-			if(w%(temp+1) == 0)
+		int m, n, ith;
+		n= in.nextInt();
+		m = in.nextInt();
+		int timesToGo = 1;
+		int maxTimes = 1;
+		int last = 1;
+		
+		for (int i = 1; i <= n; i++) {
+			ith = in.nextInt();
+			timesToGo = (ith / m) + (ith % m != 0 ? 1 : 0);
+			if (timesToGo >= maxTimes)
 			{
-				ans = (w/(temp+1));
-			}
-			else
-			{
-				ans = w%(w/(temp+1));
+				maxTimes = timesToGo;
+				last = i;
 			}
 		}
-		else if (l%(k+1) == 0)
-		{
-			ans = (l/(k+1)) * w;
-		}
-		else if(w%(k+1) == 0)
-		{
-			ans = (w/(k+1)) * l;
-		}
-		else
-		{
-			ans = (l/(k+1))*w;
-		}
-		out.println(ans);
+		out.println(last);
 	}
 }
 
@@ -91,10 +68,6 @@ class InputReader {
 
 	public long nextLong() {
 		return Long.parseLong(next());
-	}
-
-	public double nextDouble() {
-		return Double.parseDouble(next());
 	}
 
 }

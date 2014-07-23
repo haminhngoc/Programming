@@ -23,13 +23,26 @@ public class Codeforce_447_D {
 				arrRow[i] += x;
 				arrCol[j] += x;
 			}
-
+		
+		int result=0;
+while(k>0)
+{
 		int imaxRow=findMax(arrRow,row), imaxCol=findMax(arrCol, col);
-		if(imaxRow>imaxCol)
+		if(arrRow[imaxRow]>arrCol[imaxCol])
 		{
-		
+			result+=arrRow[imaxRow];
+			arrRow[imaxRow]-=row*p;
+			for(int i=0; i<col; i++)arrCol[i]-=p;
 		}
-		
+		else
+		{
+			result+=arrCol[imaxCol];
+			arrRow[imaxCol]-=col*p;
+			for(int i=0; i<row; i++)arrRow[i]-=p;
+		}
+		k--;
+}	
+
 		scan.close();
 	}
 
