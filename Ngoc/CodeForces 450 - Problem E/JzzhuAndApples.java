@@ -2,11 +2,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class JzzhuAndApples {
 	static boolean test = true;
 
 	static int n; // 10^6
+	static Apple[] apples;
 
 	public static void main(String[] args) throws IOException {
 		initReader();
@@ -27,11 +29,47 @@ public class JzzhuAndApples {
 	}
 
 	public static int solve() {
+		eratosthenes2();
+		List<Number> primes = new ArrayList<Number>();
+		for (int i = 2; i < n; i++) {
+			primes.add(i);
+		}
+
 		return 0;
+	}
+
+	public static void eratosthenes2() {
+		for (int i = 2; i < n; i++) {
+			if (apples[i].isPrime) {
+				int j = i + i;
+				int count = 0;
+				for (; j < n; j += i) {
+					count++;
+					apples[j].isPrime = false;
+					apples[j].primies.add(i);
+				}
+				apples[i].multiply = count;
+			}
+		}
 	}
 
 	public static void readInput() throws IOException {
 		n = nextInt();
+		apples = new Apple[n];
+		for (int i = 0; i < n; i++) {
+			apples[i] = new Apple(i);
+		}
+	}
+
+	static class Apple {
+		public int number;
+		public boolean isPrime = true;
+		public int multiply = 0;
+		public List<Integer> primies = new ArrayList<Integer>();
+
+		public Apple(int number) {
+			this.number = number;
+		}
 	}
 
 	/*****************************************************************
@@ -77,7 +115,8 @@ public class JzzhuAndApples {
 	static long preLogTime = 0;
 
 	static void logTime(String lable) {
-		if(!test) return;
+		if (!test)
+			return;
 		long current = System.currentTimeMillis();
 		if (startTime != 0) {
 			println(lable, " - From start:", (current - startTime),
@@ -133,17 +172,19 @@ public class JzzhuAndApples {
 	 ******************** PRINT UTILITIES *******************************
 	 *****************************************************************/
 
-	public static void printTest(Object... obj){
-		if(!test) return;
-		System.out.print(join(obj, " "));		
+	public static void printTest(Object... obj) {
+		if (!test)
+			return;
+		System.out.print(join(obj, " "));
 	}
-	
-	public static void printTestLn(Object... obj){
-		if(!test) return;
-		System.out.println(join(obj, " "));		
+
+	public static void printTestLn(Object... obj) {
+		if (!test)
+			return;
+		System.out.println(join(obj, " "));
 	}
-	
-	public static void print(Object... obj) {		
+
+	public static void print(Object... obj) {
 		System.out.print(join(obj, " "));
 	}
 

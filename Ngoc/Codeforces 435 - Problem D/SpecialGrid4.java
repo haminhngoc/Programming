@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class SpecialGrid3 {
+public class SpecialGrid4 {
 
 	static int n; // 400
 	static int m; // 400
@@ -26,7 +26,6 @@ public class SpecialGrid3 {
 		initReader();
 		readInput();
 		long result = solve();
-
 		System.out.println(result);
 	}
 
@@ -70,35 +69,58 @@ public class SpecialGrid3 {
 				}
 			}
 		}
-
-		return countTriangle2();
+		return countTriangle4();
 	}
 
-	public static long countTriangle2() {
+	public static long countTriangle4() {
 		long count = 0;
-		for (int k = 0, nextk = 2; k < 8; k++, nextk = ((nextk + 1) & 0x00000007)) {
-			int nextK = ((k + 3) & 0x00000007);
-			int vx = vectors[k][0], vy = vectors[k][1];
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < m; j++) {
-					short[] point = a[i][j];
-					if (point != null) {
-						int edge = Math.min(point[k], point[nextk]);
-						for (int u = 1, nextX = i + vx, nextY = j + vy; u <= edge; u++, nextX += vx, nextY += vy) {
-							int needLen = ((k & 0x00000001) == 0 ? u : 2 * u);
-							/*
-							 * This line below take 400+ms. Just to read 1.3M
-							 * times from memory
-							 */
-							if (a[nextX][nextY][nextK] >= needLen) {
+		short[] point, nextPoint;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				point = a[i][j];
+				if (point != null) {
+					for (int u = j + 1; u < m; u++) {
+						int len = u - j;
+						if (point[0] >= len) {
+							nextPoint = a[i][u];
+							if (point[2] >= len && nextPoint[3] >= len)
 								count++;
+							if (point[6] >= len && nextPoint[5] >= len)
+								count++;
+							if (point[1] >= len && nextPoint[2] >= len)
+								count++;
+							if (point[7] >= len && nextPoint[6] >= len)
+								count++;
+							if ((len & 0x00000001) == 0) {
+								int halfLen = len >> 1;
+								if (point[1] >= halfLen
+										&& nextPoint[3] >= halfLen)
+									count++;
+								if (point[7] >= halfLen
+										&& nextPoint[5] >= halfLen)
+									count++;
 							}
+							// System.out.println(count + ": " + i + "," + j
+							// + " - " + i + "," + u);
 						}
-
+					}
+					for (int u = i + 2; u < n; u += 2) {
+						int len = u - i;
+						if (point[2] >= len) {
+							int haftLen = len >> 1;
+							nextPoint = a[u][j];
+							if (point[1] >= haftLen && nextPoint[7] >= haftLen)
+								count++;
+							if (point[3] >= haftLen && nextPoint[5] >= haftLen)
+								count++;
+						}
+						// System.out.println(count + ": " + i + "," + j + " - "
+						// + u + "," + j);
 					}
 				}
 			}
 		}
+
 		return count;
 	}
 
@@ -154,50 +176,4 @@ public class SpecialGrid3 {
 	static Double nextDouble() throws IOException {
 		return Double.parseDouble(next());
 	}
-	
-
-	public static long countTriangle() {
-		long count = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				short[] point = a[i][j];
-				if (point != null) {
-					for (int k = 0, nextk = 2; k < 8; k++, nextk = ((nextk + 1) & 0x00000007)) {
-						int edge = Math.min(point[k], point[nextk]);
-						int vx = vectors[k][0], vy = vectors[k][1];
-						int nextK = ((k + 3) & 0x00000007);
-						for (int u = 1, nextX = i + vx, nextY = j + vy; u <= edge; u++, nextX += vx, nextY += vy) {
-							int needLen = ((k & 0x00000001) == 0 ? u : 2 * u);
-							/*
-							 * This line below take 800+ms. Just to read 1.3M
-							 * times from memory
-							 */
-							if (a[nextX][nextY][nextK] >= needLen) {
-								count++;
-							}
-						}
-					}
-
-				}
-			}
-		}
-		return count;
-	}
-	
-	public static void printMatrix() {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				// if (point != null) {
-				// for (int k = 0; k < 8; k++) {
-				// System.out.print(point.rootEdges[k]);
-				// }
-				// } else {
-				// System.out.print(" ");
-				// }
-				// System.out.print("\t|");
-			}
-			System.out.println("");
-		}
-	}
-
 }
