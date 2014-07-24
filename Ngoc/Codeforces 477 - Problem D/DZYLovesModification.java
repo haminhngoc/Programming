@@ -60,14 +60,19 @@ public class DZYLovesModification {
 
 		long result = predictRowValue[0] + predictColumnValue[k];
 		for (int i = 0; i <= k; i++) {
-			long adjustValue = i * (k - i) * p;
+			long adjustValue = (long)i * (k - i) * p;
 			long currentValue = predictRowValue[i] + predictColumnValue[k - i]
 					- adjustValue;
-			if (k > 1000) {
-				System.out.println(predictRowValue[i] + " "
-						+ predictColumnValue[k - i]);
-			}
-			if (currentValue >= result) {				
+			//if (k > 1000) {
+			//	System.out.println(predictRowValue[i] + " "
+			//			+ predictColumnValue[k - i]);
+			//}
+
+			//System.out.println(i + ": " + predictRowValue[i] + " + "
+			//		+ predictColumnValue[k - i] + " - " + adjustValue + " = "
+			//		+ currentValue);
+			
+			if (currentValue > result) {				
 				result = currentValue;
 			}
 		}
