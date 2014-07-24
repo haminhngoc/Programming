@@ -102,22 +102,6 @@ public class SpecialGrid3 {
 		return count;
 	}
 
-	public static void printMatrix() {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				// if (point != null) {
-				// for (int k = 0; k < 8; k++) {
-				// System.out.print(point.rootEdges[k]);
-				// }
-				// } else {
-				// System.out.print(" ");
-				// }
-				// System.out.print("\t|");
-			}
-			System.out.println("");
-		}
-	}
-
 	public static void readInput() throws IOException {
 		n = nextInt();
 		m = nextInt();
@@ -199,4 +183,21 @@ public class SpecialGrid3 {
 		}
 		return count;
 	}
+	
+	public static void printMatrix() {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				// if (point != null) {
+				// for (int k = 0; k < 8; k++) {
+				// System.out.print(point.rootEdges[k]);
+				// }
+				// } else {
+				// System.out.print(" ");
+				// }
+				// System.out.print("\t|");
+			}
+			System.out.println("");
+		}
+	}
+
 }
