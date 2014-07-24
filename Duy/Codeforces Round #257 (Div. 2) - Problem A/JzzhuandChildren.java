@@ -2,51 +2,58 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+public class JzzhuandChildren {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		JzzhuandChildren main = new JzzhuandChildren();
 		main.solve();
-
 	}
 
 	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+		ReaderJzzhuandChildren reader = new ReaderJzzhuandChildren();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
-		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
-			{
-				max = input;
+		int n = reader.NextInt();
+		int m = reader.NextInt();
+		List<Integer> inputs = new ArrayList<Integer>();
+		List<Integer> ith = new ArrayList<Integer>();
+		int temp = 0;
+		for (int i = 0; i < n; i++) {
+			temp = reader.NextInt();
+			inputs.add(temp);
+			ith.add(i+1);
+		}
+		int size = inputs.size();
+		
+		while (size > 1) {
+			for (int i = 0; i < size; i++) {
+				temp = inputs.get(i);
+				if (temp > m) {
+					inputs.set(i, temp-m);
+				}
+				else
+				{
+					inputs.remove(i);
+					ith.remove(i);
+					if(inputs.size()==1)
+					{
+						System.out.print(ith.get(ith.size() - 1));
+						return;
+					}
+					size--;
+					i--;
+				}
 			}
-			
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+		System.out.print(1);
+
 	}
 }
 
-class Reader6 {
+class ReaderJzzhuandChildren {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

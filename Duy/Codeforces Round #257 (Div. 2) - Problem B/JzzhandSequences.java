@@ -2,51 +2,54 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+public class JzzhandSequences {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		JzzhandSequences main = new JzzhandSequences();
 		main.solve();
-
 	}
 
 	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+		ReaderJzzhandSequences reader = new ReaderJzzhandSequences();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
-		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
+		long f1 = reader.NextLong();
+		long f2 = reader.NextLong();
+		long n = reader.NextLong();
+		long fn = 0;
+
+		long f3 = f2 - f1;
+		long temp = n / 3;
+		long ith = n % 3;
+		if (ith == 1) {
+			fn = f1;
+		}
+		if (ith == 2) {
+			fn = f2;
+		}
+		if (ith == 0) {
+			fn = f3;
+			temp--;
+		}
+		if (temp % 2 == 1) {
+			fn *= -1;
+		}
+		long res = 0;
+		if (fn < 0) {
+			res =fn + 1000000007;
+			while(res<0)
 			{
-				max = input;
+				res +=1000000007;
 			}
-			
+		} else {
+			res = fn % 1000000007;
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+		System.out.print(res);
 	}
 }
 
-class Reader6 {
+class ReaderJzzhandSequences {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

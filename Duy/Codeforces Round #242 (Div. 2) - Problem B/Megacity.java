@@ -2,51 +2,65 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+public class Megacity {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		Megacity main = new Megacity();
 		main.solve();
-
 	}
 
 	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+		ReaderMegacity reader = new ReaderMegacity();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
-		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
-			{
-				max = input;
+		int n = reader.NextInt();
+		int s = reader.NextInt();
+		List<City> inputs = new ArrayList<City>();
+		City city;
+		int x;
+		int y;
+		int si;
+		for (int i = 0; i < n; i++) {
+			x = reader.NextInt();
+			y = reader.NextInt();
+			si = reader.NextInt();
+			city = new City(Math.sqrt(x * x + y * y), si);
+			inputs.add(city);
+		}
+		Collections.sort(inputs, new Comparator<City>() {
+			@Override
+			public int compare(City o1, City o2) {
+				return Double.compare(o1.r, o2.r);
 			}
-			
+		});
+		int length = inputs.size();
+		for (int i = 0; i < length; i++) {
+			s += inputs.get(i).si;
+			if (s >= 1000000) {
+				System.out.print(inputs.get(i).r);
+				return;
+			}
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+		System.out.print(-1);
 	}
 }
 
-class Reader6 {
+class City {
+	double r;
+	int si;
+
+	public City(double radius, int s) {
+		r = radius;
+		si = s;
+	}
+}
+
+class ReaderMegacity {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

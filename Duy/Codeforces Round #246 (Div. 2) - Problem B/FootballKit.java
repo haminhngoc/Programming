@@ -2,51 +2,53 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+
+public class FootballKit {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		// TODO Auto-generated method stub
+		FootballKit main = new FootballKit();
 		main.solve();
-
 	}
-
-	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+	void solve() throws IOException
+	{
+		ReaderFootballKit reader = new ReaderFootballKit();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
+		int n = reader.NextInt();//10^5
+		int[] homes = new int[n];
+		int[] aways = new int[n];
+		int[] sumHome = new int[100001];
+		int[][] result = new int[n][2];
+		int home =0;
+		int away = 0;
+		for(int i = 0 ; i < n ; i++)
 		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
+			home = reader.NextInt();
+			away = reader.NextInt();
+			homes[i] = home;
+			aways[i] = away;
+			sumHome[home]++;
+		}
+		int resHome = 0;
+		for(int i = 0 ; i < n ;i++)
+		{
+			resHome=0;
+			if(sumHome[aways[i]] != 0)
 			{
-				max = input;
+				resHome+=sumHome[aways[i]];
 			}
-			
+			result[i][0] = (resHome += n-1);
+			result[i][1] = (n-1)*2 - result[i][0];
 		}
-		for(int i = 0; i<s.length();i++)
+		for(int i = 0 ; i < n ;i++)
 		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
+			System.out.print(result[i][0] + " " + result[i][1] + "\n");
 		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
 	}
 }
-
-class Reader6 {
+class ReaderFootballKit {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

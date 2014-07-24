@@ -2,51 +2,44 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+
+public class StartUp {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		StartUp main = new StartUp();
 		main.solve();
-
 	}
-
-	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+	void solve() throws IOException
+	{
+		ReaderStartUp reader = new ReaderStartUp();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
+		char[] patern = new char[]{'B','C','D','E','F','G','J','K','L','N','P','Q','R','S','Z'};
+		char[] inputs = reader.Next().toCharArray();
+		int length =inputs.length;
+		int paternLength =patern.length;
+		for(int i = 0 ; i < length;i++ )
 		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
+			if(inputs[i] != inputs[length-1-i])
 			{
-				max = input;
+				System.out.print("NO");
+				return;
 			}
-			
+			for(int j = 0 ; j <paternLength;j++)
+			{
+				if(inputs[i] == patern[j])
+				{
+					System.out.print("NO");
+					return;
+				}
+			}
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+		System.out.print("YES");
 	}
-}
 
-class Reader6 {
+}
+class ReaderStartUp {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

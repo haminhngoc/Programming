@@ -2,51 +2,46 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+public class JzzhuandChocolate {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		JzzhuandChocolate main = new JzzhuandChocolate();
 		main.solve();
-
 	}
 
 	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+		ReaderJzzhuandChocolate reader = new ReaderJzzhuandChocolate();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
-		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
-			{
-				max = input;
+		long n = reader.NextLong();
+		long m = reader.NextLong();
+		long k = reader.NextLong();
+		long res = 0;
+		long smallest = 0;
+
+		if (k > m + n - 2) {
+			System.out.print(-1);
+			return;
+		}
+		long temp = 0;
+		long tempRes = 0;
+		for (int i = 0; i < 2; i++) {
+			if (k <= m - 1) {
+				tempRes = n * (m / (k + 1));
+			} else {
+				tempRes = n / (k - (m -1) + 1);
 			}
-			
+			temp = n;
+			n = m;
+			m = temp;
+			res = Math.max(res, tempRes);
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+		System.out.print(res);
 	}
 }
 
-class Reader6 {
+class ReaderJzzhuandChocolate {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 

@@ -2,51 +2,44 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-public class DZYLovesStrings {
+public class PrisonTransfer {
 
 	public static void main(String[] args) throws IOException {
-		DZYLovesStrings main = new DZYLovesStrings();
+		PrisonTransfer main = new PrisonTransfer();
 		main.solve();
-
 	}
 
 	void solve() throws IOException {
-		Reader6 reader = new Reader6();
+		ReaderPrisonTransfer reader = new ReaderPrisonTransfer();
 		reader.Init(System.in);
-		String s = reader.Next();
-		int k = reader.NextInt();
-		Vector letterValues = new Vector();
-		int result = 0;
-		int input = 0;
-		int max = 0;
-		for(int i = 0 ; i < 26 ;i++)
-		{
-			input = reader.NextInt();
-			letterValues.add(input);
-			if(input > max)
-			{
-				max = input;
+		int n = reader.NextInt();
+		int t = reader.NextInt();
+		int c = reader.NextInt();
+		//int[] prisoners = new int[n];
+		int prisoner =0;
+		int count = 0;
+		int res = 0;
+		for (int i = 0; i < n; i++) {
+			prisoner = reader.NextInt();
+			if (prisoner <= t) {
+				count++;
+			} else {
+				count = 0;
 			}
-			
+			if (count == c) {
+				res++;
+				count--;
+			}
 		}
-		for(int i = 0; i<s.length();i++)
-		{
-			int temp = s.charAt(i)-'a';
-			result += (int)letterValues.get(temp)*(i+1);
-		}
-		for(int i = k ; i > 0 ;i--)
-		{
-			result += max*(i+s.length());
-		}
-		System.out.print(result);
+
+		System.out.print(res);
 	}
+
 }
 
-class Reader6 {
+class ReaderPrisonTransfer {
 	static BufferedReader reader;
 	static StringTokenizer tokenizer;
 
