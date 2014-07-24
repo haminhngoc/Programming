@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CodeFores.com-Devu, the Singer and Churu, the Joker 439A"/>
+	<classpathentry kind="src" path="Codeforces - Devu, the Dumb Guy 439B"/>
+	<classpathentry kind="src" path="Test"/>
+	<classpathentry kind="src" path="CodeForces-Andrey and Problem-443D"/>
+	<classpathentry kind="src" path="CodeForce-Valera and Tubes"/>
+	<classpathentry kind="src" path="CodeForce - Valera and Fruits  441B"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesHashA"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesStrings"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesSequences"/>
+	<classpathentry kind="src" path="TestLamda"/>
+	<classpathentry kind="src" path="CodeForce-DZYLovesModification 447D"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="NewContest/Demo/bin"/>
+</classpath>

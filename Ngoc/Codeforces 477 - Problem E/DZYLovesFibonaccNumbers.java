@@ -1,31 +1,36 @@
-//import java.util.List;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class DZYLovesFibonaccNumbers {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		long MOD = 1000000009;
 
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt(); // 300K
-		int m = sc.nextInt(); // 300K
+		ReaderFibonacc.Init(System.in);
+				
+		int n = ReaderFibonacc.nextInt(); // 300K
+		int m = ReaderFibonacc.nextInt(); // 300K
 
 		long[] a = new long[n];
 		for (int i = 0; i < n; i++) {
-			a[i] = sc.nextInt();
+			a[i] = ReaderFibonacc.nextInt();
 		}
 		long[] sa = new long[n];
 		sa[0] = a[0];
 		for (int i = 1; i < n; i++) {
-			sa[i] = (sa[i] + a[i]) % MOD;
+			sa[i] = (sa[i-1] + a[i]) % MOD;
 		}
 
 		int[][] queries = new int[m][3];
 		for (int i = 0; i < m; i++) {
-			queries[i][0] = sc.nextInt();
-			queries[i][1] = sc.nextInt();
-			queries[i][2] = sc.nextInt();
+			queries[i][0] = ReaderFibonacc.nextInt();
+			queries[i][1] = ReaderFibonacc.nextInt();
+			queries[i][2] = ReaderFibonacc.nextInt();
 		}
 
 		long[] F = new long[Math.max(n, 3) + 1];
@@ -38,7 +43,7 @@ public class DZYLovesFibonaccNumbers {
 		long[] SF = new long[Math.max(n, 3) + 1];
 		SF[0] = 0;
 		for (int i = 1; i < n; i++) {
-			SF[i] = (SF[i] + F[i]) % MOD;
+			SF[i] = (SF[i-1] + F[i]) % MOD;
 		}
 
 		long[] cacheIn = new long[n];
@@ -78,5 +83,35 @@ public class DZYLovesFibonaccNumbers {
 				}
 			}
 		}
+	}
+}
+
+
+class ReaderFibonacc {
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String Next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(Next());
+	}
+
+	static long NextLong() throws IOException {
+		return Long.parseLong(Next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(Next());
 	}
 }

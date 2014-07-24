@@ -3,6 +3,16 @@
 	<classpathentry kind="src" path="Codeforce_441_A"/>
 	<classpathentry kind="src" path="Codeforce_441_B"/>
 	<classpathentry kind="src" path="Codeforce_441_C"/>
+	<classpathentry kind="src" path="Codeforce_447_A"/>
+	<classpathentry kind="src" path="Codeforce_447_B"/>
+	<classpathentry kind="src" path="Codeforce_447_C"/>
+	<classpathentry kind="src" path="Codeforce_447_D"/>
+	<classpathentry kind="src" path="Codeforces_448_C"/>
+	<classpathentry kind="src" path="Codeforces_448_A"/>
+	<classpathentry kind="src" path="Codeforces_448_B"/>
+	<classpathentry kind="src" path="Codeforces_450_A"/>
+	<classpathentry kind="src" path="Codeforces_450_B"/>
+	<classpathentry kind="src" path="Codeforces_450_C"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
