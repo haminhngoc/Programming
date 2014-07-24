@@ -2,7 +2,6 @@ import java.util.*;
 
 public class PaintingFence {
 
-	private static final long MAX = 1000000000;
 	private static Scanner reader = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -16,27 +15,19 @@ public class PaintingFence {
 		long previous = n;
 		while (n > 0) {
 			step++;
-			// /
-			// int test = GetOptimalIndex(fencePlanks, n);
-			// System.out.println("Optimal Index: " + test);
-			remain -= Decrease(fencePlanks, n,
+			remain -= PaintAHorizontalBrush(fencePlanks, n,
 					GetOptimalIndex(fencePlanks, n, n - step));
 			if (remain + step < previous)
 				previous = remain + step;
 
-			// for (int i = 0; i < n; i++) {
-			// System.out.print(fencePlanks[i] + " ");
-			// }
-			// System.out.println("solution:" + previous + "  ");
-
 			// STOP HERE
-			if (remain == 0 || (step >= n && remain > 0))
+			if (remain == 0 || (step == n && remain > 0))
 				break;
 		}
 		System.out.println(previous);
 	}
 
-	private static int Decrease(long[] array, int n, int start) {
+	private static int PaintAHorizontalBrush(long[] array, int n, int start) {
 		int nDone = 0;
 		while (start < n) {
 			if (array[start] > 0) {
@@ -53,88 +44,40 @@ public class PaintingFence {
 	// Test Graph
 	private static int GetOptimalIndex(long[] array, int n, int limit) {
 		int start = 0;
-		long sumHeight = 0;
 		long count = 0;
-		int nDone = 0;
 		Boolean isCounting = false;
 		long[][] label = new long[2][n];
 		for (int i = 0; i < n; i++) {
 			if (array[i] > 0) {
-				if (sumHeight == 0) {
+				if (count == 0) {
 					isCounting = true;
 					start = i;
 				}
 				if (isCounting) {
-					if (array[i] == 1)
-						nDone++;
-					sumHeight += array[i];
 					count++;
+					label[1][start] += array[i] > limit ? limit : array[i];
 				}
-			} else if (sumHeight > 0) {
-				label[0][start] = nDone;				
-				label[1][start] = count;
-				nDone = 0;
-				sumHeight = 0;
+			} else if (count > 0) {
+				label[0][start] = count;
 				count = 0;
 				isCounting = false;
 			}
 			if (i == n - 1) {
-				label[0][start] = nDone;				
-				label[1][start] = count;
+				label[0][start] = count;
 			}
-		}		
-
+		}
 		// /
 		int optimalIndex = 0;
 		for (int i = 0; i < n; i++) {
-			if (label[1][i] == 0)
+			if (label[0][i] == 0)
 				continue;
-			if (label[1][optimalIndex] == 0) {
+			if (label[0][optimalIndex] == 0) {
 				optimalIndex = i;
-			} else if (label[0][i] > label[0][optimalIndex]) {
-				optimalIndex = i;
-			} else if (ComparePerformance(array, label, i, optimalIndex, limit)) {
+			} else if ((limit * label[0][i] - label[1][i]) > (limit
+					* label[0][optimalIndex] - label[1][optimalIndex])) {
 				optimalIndex = i;
 			}
 		}
 		return optimalIndex;
-	}
-
-	private static Boolean ComparePerformance(long[] array, long label[][],
-			int indexA, int indexB, int limit) {
-		double nDoneA = 0;
-		double nDoneB = 0;
-		long minA = MAX;
-		long minB = MAX;
-		long length = label[1][indexA] > label[1][indexB] ? label[1][indexA]
-				: label[1][indexB];
-		for (int i = 0; i < length; i++) {
-			if (indexA + i < indexA + label[1][indexA]) {
-				if (array[indexA + i] < minA)
-					minA = array[indexA + i];
-			}
-			if (indexB + i < indexB + label[1][indexB]) {
-				if (array[indexB + i] < minB)
-					minB = array[indexB + i];
-			}
-		}
-		if (minA >= limit)
-			return false;
-
-		for (int i = 0; i < length; i++) {
-			if (indexA + i < indexA + label[1][indexA]) {
-				if (array[indexA + i] == minA)
-					nDoneA++;
-			}
-			if (indexB + i < indexB + label[1][indexB]) {
-				if (array[indexB + i] == minB)
-					nDoneB++;
-			}
-		}
-		if ((nDoneA / minA) + ((label[1][indexA] - nDoneA) * minA) > (nDoneB / minB)
-				+ ((label[1][indexB] - nDoneB) * minB)) {
-			return true;
-		}
-		return false;
-	}
+	}	
 }
