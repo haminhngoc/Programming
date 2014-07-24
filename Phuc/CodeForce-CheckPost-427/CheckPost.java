@@ -18,17 +18,46 @@ public class CheckPost {
 		for (int i = 0; i < n; ++i) {
 			cost[i] = reader.nextLong();
 		}
-		List<Integer>[] g = new List[n + 1];
+		List<Integer>[] g = new List[n];
+		for (int i = 0; i < n; i++) {
+			g[i] = new ArrayList<Integer>();
+		}
+
 		int m = reader.nextInt();
 		int x, y;
 		for (int i = 0; i < m; ++i) {
 			x = reader.nextInt();
 			y = reader.nextInt();
-			g[x].add(y);
+			g[x - 1].add(y - 1);
 		}
 
 		List<List<Integer>> scComponents = getSCComponents(g);
-		// int m = reader.nextInt();
+		long count = 1;
+		long min = 0;
+		long tempMin = Long.MAX_VALUE;
+		long tempCount = 0;
+
+		int length = scComponents.size();
+		for (int i = 0; i < length; ++i) {
+			List<Integer> component = scComponents.get(i);
+
+			tempMin = Long.MAX_VALUE;
+			tempCount = 0;
+			int size = component.size();
+			for (int v : component) {
+				if (cost[v] < tempMin) {
+					tempCount = 1;
+					tempMin = cost[v];
+				} else if (cost[v] == tempMin) {
+					tempCount++;
+				}
+			}
+
+			count *= tempCount;
+			min += tempMin;
+
+		}
+		System.out.println(min + " " + count % 1000000007);
 
 	}
 
@@ -47,9 +76,9 @@ public class CheckPost {
 	private static Stack<Integer> stack;
 
 	/** function to get all strongly connected components **/
-	public static List<List<Integer>> getSCComponents(List<Integer>[] graph) {
-		V = graph.length;
-		graph = graph;
+	public static List<List<Integer>> getSCComponents(List<Integer>[] graph1) {
+		V = graph1.length;
+		graph = graph1;
 		low = new int[V];
 		visited = new boolean[V];
 		stack = new Stack<Integer>();
