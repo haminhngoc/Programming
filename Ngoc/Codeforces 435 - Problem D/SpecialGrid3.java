@@ -74,34 +74,6 @@ public class SpecialGrid3 {
 		return countTriangle2();
 	}
 
-	public static long countTriangle() {
-		long count = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				short[] point = a[i][j];
-				if (point != null) {
-					for (int k = 0, nextk = 2; k < 8; k++, nextk = ((nextk + 1) & 0x00000007)) {
-						int edge = Math.min(point[k], point[nextk]);
-						int vx = vectors[k][0], vy = vectors[k][1];
-						int nextK = ((k + 3) & 0x00000007);
-						for (int u = 1, nextX = i + vx, nextY = j + vy; u <= edge; u++, nextX += vx, nextY += vy) {
-							int needLen = ((k & 0x00000001) == 0 ? u : 2 * u);
-							/*
-							 * This line below take 800+ms. Just to read 1.3M
-							 * times from memory
-							 */
-							if (a[nextX][nextY][nextK] >= needLen) {
-								count++;
-							}
-						}
-					}
-
-				}
-			}
-		}
-		return count;
-	}
-
 	public static long countTriangle2() {
 		long count = 0;
 		for (int k = 0, nextk = 2; k < 8; k++, nextk = ((nextk + 1) & 0x00000007)) {
@@ -197,5 +169,34 @@ public class SpecialGrid3 {
 
 	static Double nextDouble() throws IOException {
 		return Double.parseDouble(next());
+	}
+	
+
+	public static long countTriangle() {
+		long count = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				short[] point = a[i][j];
+				if (point != null) {
+					for (int k = 0, nextk = 2; k < 8; k++, nextk = ((nextk + 1) & 0x00000007)) {
+						int edge = Math.min(point[k], point[nextk]);
+						int vx = vectors[k][0], vy = vectors[k][1];
+						int nextK = ((k + 3) & 0x00000007);
+						for (int u = 1, nextX = i + vx, nextY = j + vy; u <= edge; u++, nextX += vx, nextY += vy) {
+							int needLen = ((k & 0x00000001) == 0 ? u : 2 * u);
+							/*
+							 * This line below take 800+ms. Just to read 1.3M
+							 * times from memory
+							 */
+							if (a[nextX][nextY][nextK] >= needLen) {
+								count++;
+							}
+						}
+					}
+
+				}
+			}
+		}
+		return count;
 	}
 }
