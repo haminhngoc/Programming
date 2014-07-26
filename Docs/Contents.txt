@@ -1,0 +1,109 @@
+Kick Off
+	+ Introduction
+		+ Google interview questions
+		+ Programming => Problem Solving
+		+ Improve CS knowledge
+	+ Use Source Control
+		+ Introduction Github
+		+ Why do we need Gidhub
+		+ Software Requirement
+		+ Clone your local repository
+			+ https://github.com/haminhngoc/Programming
+			+ git@github.com:haminhngoc/Programming.git
+		+ Commit / Push / and Pull
+		+ Be careful!
+	+ CodeForces
+		+ Introduction
+		+ Create Account
+		+ Problemset
+		+ Contests
+		+ Jugment
+		+ Famous people
+	+ Introduction Eclipse and Sample Java Program
+		+ New Project / Class
+		+ Standard Input/output
+		+ Parse Number
+		+ Submission
+		+ Debuging: Variables, Watch, BreakPoints
+	+ Have fun with first problem!
+
+
+Basic problem skills
+	+ Using List, ArrayList
+	+ Sorting, Multiple Criterias Sort
+	+ Declare Nested Class
+		+ Static Class vs Non Static Class
+	+ Using Heap ~ Priority Class
+	+ BufferedReader + StringTokenizer
+	+ String.toCharArray and new String(char[])
+	+ Map char to number 
+	+ Number Range: int (-2*10^9 - 2*10^9), long, short
+	+ SubArray scaning with complexity O(n) (DZYLovesSequences)
+	+ Complexity in practice
+		+ O(n^2): ~ 5*10^4
+		+ O(n): ~ 10^9
+		+ O(nlgn): ~ 10^8
+
+
+Be more professional
+	+ Common program structure
+		+ TIME UTILITIES
+		+ READ UTILITIES
+		+ JOIN UTILITIES
+		+ PRINT UTILITIES
+		+ ARRAY AND STRING UTILITIES 
+		+ Switching between Test and Release
+		+ Automat testcases
+	+ Problem solving skills
+		+ Reuse and benefits (Modification, )
+		+ Accumulate sum (B-??Stone, DZYLovesFibonaccNumbers)
+		+ Greedy trap (Modification, C-PaintingFence)
+		+ Projection (DZYLovesFibonaccNumbers, RyoukoMemoryNote)
+		+ Binary Partition (MultiplicationTable)
+
+
+Generalize and Performance
+	+ Arithmetic operators (+, -, *) : 4*2.5*10^9
+	+ Devide (/): Take care
+	+ Access Memory: Ram (GB) - L3 (Shared 8M) - L2(256) - L1(32)
+	+ Bit operator: & | >> << ^
+/* Performance improvement
+ * GridPoint[][] => int[][][] => short[][][]
+ * k % 8 => map[k] => k & 0x00000007
+ * len % 2 == 0 => len & 0x00000001
+ * len / 2 => len >> 0x00000001
+ * for(i) for(j) for(k) a[i][j][k] => for(k) for(i) for(j)
+ * count += (fx ? 0 : 1) => if(fx) count++;
+ * for(u; u++) len = 2 * u => for(u, len; u++, len+=2)  
+ * => point, nextPoint
+ * for(k:1-8) for(i) for(j) for(u) {Check();} 
+ * 		=> for(k:1-4) for(i) for(j) for(u) {check(); check();} 
+ * 		=> for(i) for(j) for(u) {check(); check(); check(); check(); check(); check(); check(); check();}
+ * */
+
+/* Generalize
+ * vectors: left->right, ->bottomRight, -> bottom, -> bottomLeft, -> left, -> topLeft, -> top, -> topRight
+ * traverseVectors: row left to right, column top to bottom, 
+ * 		diagonal left to bottomRight, diagonal top to bottomRight
+ * 		diagonal left to topRight, diagonal bottom to topRight
+ */
+
+
+Advance Java and Java SDK
+	+ Lamda Expression
+	+ Parameters ...
+	+ Finally
+
+ArrrayAlgorithms
+
+GeometryAlgorithms
+
+GraphAlgorithms
+
+NumberAlgorithms
+
+SetAlgorithms
+
+Miscelaneous Techniques
+
+General Problem Solving Guide

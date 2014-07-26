@@ -102,7 +102,8 @@ public class SpecialGrid4 {
 							}
 							// System.out.println(count + ": " + i + "," + j
 							// + " - " + i + "," + u);
-						}
+						} else
+							break;
 					}
 					for (int u = i + 2; u < n; u += 2) {
 						int len = u - i;
@@ -113,7 +114,8 @@ public class SpecialGrid4 {
 								count++;
 							if (point[3] >= haftLen && nextPoint[5] >= haftLen)
 								count++;
-						}
+						} else
+							break;
 						// System.out.println(count + ": " + i + "," + j + " - "
 						// + u + "," + j);
 					}
@@ -177,3 +179,24 @@ public class SpecialGrid4 {
 		return Double.parseDouble(next());
 	}
 }
+
+/* Performance improvement
+ * GridPoint[][] => int[][][] => short[][][]
+ * k % 8 => map[k] => k & 0x00000007
+ * len % 2 == 0 => len & 0x00000001
+ * len / 2 => len >> 0x00000001
+ * for(i) for(j) for(k) a[i][j][k] => for(k) for(i) for(j)
+ * count += (fx ? 0 : 1) => if(fx) count++;
+ * for(u; u++) len = 2 * u => for(u, len; u++, len+=2)  
+ * => point, nextPoint
+ * for(k:1-8) for(i) for(j) for(u) {Check();} 
+ * 		=> for(k:1-4) for(i) for(j) for(u) {check(); check();} 
+ * 		=> for(i) for(j) for(u) {check(); check(); check(); check(); check(); check(); check(); check();}
+ * */
+
+/* Generalize
+ * vectors: left->right, ->bottomRight, -> bottom, -> bottomLeft, -> left, -> topLeft, -> top, -> topRight
+ * traverseVectors: row left to right, column top to bottom, 
+ * 		diagonal left to bottomRight, diagonal top to bottomRight
+ * 		diagonal left to topRight, diagonal bottom to topRight
+ */
