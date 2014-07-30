@@ -2,24 +2,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
 
-public class JzzhuAndApples {
+public class GameOutcome {
 	static boolean test = false;
 
-	static int n; // 10^6
-	// static Apple[] apples;
-	static boolean[] isPrimes;
-	static boolean[] isPrinteds;
-
 	public static void main(String[] args) throws IOException {
+
 		initReader();
 		logTime("");
 		while (true) {
-			readInput();
 
 			logTime("Read:");
-			int result = solve();
+			solve();
 			logTime("Solved:");
 
 			if (!test)
@@ -28,87 +22,38 @@ public class JzzhuAndApples {
 
 	}
 
-	public static int solve() {
-		int count = 0;
+	public static void solve() throws IOException {
 
-		isPrimes = new boolean[n + 1];
-		isPrinteds = new boolean[n + 1];
-		Arrays.fill(isPrimes, true);
-		Arrays.fill(isPrinteds, false);
-		int sqrtn = (int) Math.ceil(Math.sqrt(n));
-		for (int i = 2; i <= n; i++) {
-			if (isPrimes[i] && i <= sqrtn) {
-				for (int j = i * i; j <= n; j += i) {
-					isPrimes[j] = false;
-				}
-			}
+		long test = nextLong();
+
+		for (int i = 0; i < test; i++) {
+			long n, k, d1, d2; // 10^12
+			n = nextLong();
+			k = nextLong();
+			d1 = nextLong();
+			d2 = nextLong();
+			long max1 = Long.MAX_VALUE, max2 = Long.MAX_VALUE, max3 = Long.MAX_VALUE;
+
+			long base = (k - d1 - d2);
+			if (base >= 0 && base % 3 == 0)
+				max1 = Math.max(base / 3 + d1, base / 3 + d2);
+			base = (k - 2 * d1 + d2);
+			if (d1 > d2 && base >= 0 && base % 3 == 0)
+				max1 = Math.min(max1, base / 3 + d1);
+			base = (k - 2 * d2 + d1);
+			if (d2 >= d1 && base >= 0 && base % 3 == 0)
+				max1 = Math.min(max1, base / 3 + d2);
+			base = k - 2 * d1 - d2;
+			if (base >= 0 && base % 3 == 0)
+				max2 = base / 3 + d1 + d2;
+			base = k - 2 * d2 - d1;
+			if (base >= 0 && base % 3 == 0)
+				max2 = Math.min(max2, base / 3 + d1 + d2);
+			long min = Math.min(max1, max2);
+			// max1 + " " + max2 + " - " +
+			System.out.println((n % 3 == 0 && min <= n / 3 ? "yes" : "no"));
 		}
-
-		StringBuffer result = new StringBuffer();
-
-		List<Integer> list = new ArrayList<Integer>();
-		for (int i = n; i >= 2; i--) {
-			if (isPrimes[i]) {
-				list.clear();
-				for (int j = i; j <= n; j += i) {
-					if (!isPrinteds[j]) {
-						list.add(j);
-					}
-				}
-
-				int size = list.size();
-				if (size > 1) {
-					count += size / 2;
-					if (size % 2 == 0) {
-						for (int k = 0; k < size; k += 2) {
-							result.append(list.get(k) + " " + list.get(k + 1)
-									+ "\r\n");
-							isPrinteds[list.get(k)] = true;
-							isPrinteds[list.get(k + 1)] = true;
-						}
-					} else {
-						result.append(list.get(0) + " " + list.get(2) + "\r\n");
-						isPrinteds[list.get(0)] = true;
-						isPrinteds[list.get(2)] = true;
-						for (int k = 3; k < size; k += 2) {
-							result.append(list.get(k) + " " + list.get(k + 1)
-									+ "\r\n");
-							isPrinteds[list.get(k)] = true;
-							isPrinteds[list.get(k + 1)] = true;
-						}
-					}
-
-					//System.out.println("Sum of " + i + " is "+ (size / 2));
-				}
-			}
-		}
-
-		System.out.println(count);
-		System.out.println(result);
-
-		return count;
 	}
-
-	public static void eratosthenes() {
-		// for (int i = 2; i <= n; i++) {
-		// if (apples[i].isPrime) {
-		// int j = i * i;
-		// int count = 1;
-		// for (; j <= n; j += i) {
-		// apples[j].isPrime = false;
-		// }
-		// }
-		// }
-	}
-
-	public static void readInput() throws IOException {
-		n = nextInt();
-	}
-
-	// static class Apple {
-	// public boolean isPrime = true;
-	// public boolean printed = false;
-	// }
 
 	/*****************************************************************
 	 ******************** BASIC READER *******************************

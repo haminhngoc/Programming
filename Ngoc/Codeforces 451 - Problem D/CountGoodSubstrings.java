@@ -2,24 +2,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
 
-public class JzzhuAndApples {
+public class CountGoodSubstrings {
 	static boolean test = false;
 
-	static int n; // 10^6
-	// static Apple[] apples;
-	static boolean[] isPrimes;
-	static boolean[] isPrinteds;
+	static char[] chars;
 
 	public static void main(String[] args) throws IOException {
+
 		initReader();
 		logTime("");
 		while (true) {
 			readInput();
 
 			logTime("Read:");
-			int result = solve();
+			solve();
 			logTime("Solved:");
 
 			if (!test)
@@ -28,87 +25,82 @@ public class JzzhuAndApples {
 
 	}
 
-	public static int solve() {
-		int count = 0;
+	static class Infor {
+		long sum = 0;
+		long sum2 = 0;
+		long oddCount = 0;
+		long eventCount = 0;
+		long diffOdd = 0;
+		long diffEvent = 0;
+		long selfOdd = 0;
+		long selfEvent = 0;
 
-		isPrimes = new boolean[n + 1];
-		isPrinteds = new boolean[n + 1];
-		Arrays.fill(isPrimes, true);
-		Arrays.fill(isPrinteds, false);
-		int sqrtn = (int) Math.ceil(Math.sqrt(n));
-		for (int i = 2; i <= n; i++) {
-			if (isPrimes[i] && i <= sqrtn) {
-				for (int j = i * i; j <= n; j += i) {
-					isPrimes[j] = false;
+		public void add(int from, int to) {
+			int len = to - from + 1;
+			sum += len;
+			sum2 += (len * len);
+			if ((len & 0x00000001) != 0) {
+				if ((to & 0x00000001) != 0) {
+					diffOdd += oddCount;
+					diffEvent += eventCount;
+					oddCount++;
+				} else {
+					diffOdd += eventCount;
+					diffEvent += oddCount;
+					eventCount++;
 				}
 			}
+
+			long countSelf = (len * (len + 1)) >> 1;
+			long diffSelf = (len + 1) / 2;
+			selfOdd += (countSelf + diffSelf) / 2;
+			selfEvent += (countSelf - diffSelf) / 2;
 		}
 
-		StringBuffer result = new StringBuffer();
-
-		List<Integer> list = new ArrayList<Integer>();
-		for (int i = n; i >= 2; i--) {
-			if (isPrimes[i]) {
-				list.clear();
-				for (int j = i; j <= n; j += i) {
-					if (!isPrinteds[j]) {
-						list.add(j);
-					}
-				}
-
-				int size = list.size();
-				if (size > 1) {
-					count += size / 2;
-					if (size % 2 == 0) {
-						for (int k = 0; k < size; k += 2) {
-							result.append(list.get(k) + " " + list.get(k + 1)
-									+ "\r\n");
-							isPrinteds[list.get(k)] = true;
-							isPrinteds[list.get(k + 1)] = true;
-						}
-					} else {
-						result.append(list.get(0) + " " + list.get(2) + "\r\n");
-						isPrinteds[list.get(0)] = true;
-						isPrinteds[list.get(2)] = true;
-						for (int k = 3; k < size; k += 2) {
-							result.append(list.get(k) + " " + list.get(k + 1)
-									+ "\r\n");
-							isPrinteds[list.get(k)] = true;
-							isPrinteds[list.get(k + 1)] = true;
-						}
-					}
-
-					//System.out.println("Sum of " + i + " is "+ (size / 2));
-				}
-			}
+		public long getOdd() {
+			long total = (sum * sum - sum2) / 2; // Odd + Event
+			long diff = diffOdd - diffEvent; // Odd - Event
+			return (total + diff) / 2 + selfOdd;
 		}
 
-		System.out.println(count);
-		System.out.println(result);
-
-		return count;
+		public long getEvent() {
+			long total = (sum * sum - sum2) / 2; // Odd + Event
+			long diff = diffOdd - diffEvent; // Odd - Event
+			return (total - diff) / 2 + selfEvent;
+		}
 	}
 
-	public static void eratosthenes() {
-		// for (int i = 2; i <= n; i++) {
-		// if (apples[i].isPrime) {
-		// int j = i * i;
-		// int count = 1;
-		// for (; j <= n; j += i) {
-		// apples[j].isPrime = false;
-		// }
-		// }
-		// }
+	public static void solve() {
+		long count = 0;
+
+		Infor inforA = new Infor();
+		Infor inforB = new Infor();
+
+		int n = chars.length;
+		int pre = 0;
+		char preChar = chars[pre];
+		for (int i = 1; i <= n; i++) {
+			if (i == n || chars[i] != preChar) {
+
+				if (preChar == 'a')
+					inforA.add(pre, i - 1);
+				else
+					inforB.add(pre, i - 1);
+
+				pre = i;
+				preChar = pre < n ? chars[pre] : '\0';
+			}
+		}
+
+		long event = inforA.getEvent() + inforB.getEvent();
+		long odd = inforA.getOdd() + inforB.getOdd();
+		System.out.println(event + " " + odd);
 	}
 
 	public static void readInput() throws IOException {
-		n = nextInt();
+		String text = nextLine();
+		chars = text.toCharArray();
 	}
-
-	// static class Apple {
-	// public boolean isPrime = true;
-	// public boolean printed = false;
-	// }
 
 	/*****************************************************************
 	 ******************** BASIC READER *******************************

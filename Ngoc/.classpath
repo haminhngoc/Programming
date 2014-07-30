@@ -2,8 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="Codeforces 433 - Problem D"/>
 	<classpathentry kind="src" path="CodeForces 427 - Problem C"/>
-	<classpathentry kind="src" path="CodeForces 450 - Problem E"/>
-	<classpathentry kind="src" path="Codeforces 435 - Problem D"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
