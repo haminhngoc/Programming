@@ -23,6 +23,8 @@
 	<classpathentry kind="src" path="Codeforces_451_B"/>
 	<classpathentry kind="src" path="Codeforces_451_C"/>
 	<classpathentry kind="src" path="Codeforces_426_B"/>
+	<classpathentry kind="src" path="Codeforces_430_B"/>
+	<classpathentry kind="src" path="Codeforces_430_A"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
