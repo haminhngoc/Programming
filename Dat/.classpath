@@ -11,6 +11,16 @@
 	<classpathentry kind="src" path="CodeForce_257_Div2_A_Jzzhu and Children"/>
 	<classpathentry kind="src" path="CodeForce_257_Div2_B_Jzzhu and Sequences"/>
 	<classpathentry kind="src" path="CodeForce_257_Div2_C_Jzzhu and Chocolate"/>
+	<classpathentry kind="src" path="CodeForce_424_A"/>
+	<classpathentry kind="src" path="CodeForce_424_B"/>
+	<classpathentry kind="src" path="CodeForce_424_C"/>
+	<classpathentry kind="src" path="CodeForce_426_A"/>
+	<classpathentry kind="src" path="CodeForce_426_B"/>
+	<classpathentry kind="src" path="CodeForce_427_A"/>
+	<classpathentry kind="src" path="CodeForce_451_A"/>
+	<classpathentry kind="src" path="CodeForce_451_B"/>
+	<classpathentry kind="src" path="CodeForce_451_C"/>
+	<classpathentry kind="src" path="CodeForce_451_D"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

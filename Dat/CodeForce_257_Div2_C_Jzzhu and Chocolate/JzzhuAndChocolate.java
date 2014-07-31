@@ -11,8 +11,8 @@ public class JzzhuAndChocolate {
 		int totalCutMax=m+n-2;
 		if(k>totalCutMax)System.out.print(-1);
 		else{
-			int temp=1;
-			while(Math.pow(k, temp)%(m*n)0)
+			
+			System.out.print((int)(m*n/(k+1)));
 		}
 	}
 
