@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class HarmonyChest3 {
-	static boolean test = true;
+	static boolean test = false;
 
 	static class Item {
 		public int a;
@@ -49,9 +49,11 @@ public class HarmonyChest3 {
 			logTime("Solved:");
 
 			Arrays.sort(a, posComparator);
+			StringBuilder sOut = new StringBuilder();
 			for (int i = 0; i < n; i++) {
-				System.out.print(a[i].b + " ");
+				sOut.append(a[i].b + " ");
 			}
+			System.out.println(sOut);
 
 			if (!test)
 				break;
@@ -69,7 +71,7 @@ public class HarmonyChest3 {
 		}
 
 		int len = n - start;
-		bOptions = new short[len][61];
+		bOptions = new short[len][39];
 		indexes = new short[len];
 		result = new int[len];
 		short j = 0;
@@ -112,7 +114,7 @@ public class HarmonyChest3 {
 		int i = len - 1;
 		while (i >= 0) {
 			indexes[i]++;
-			if (indexes[i] >= 60 || bOptions[i][indexes[i]] == 0) {
+			if (indexes[i] >= 39 || bOptions[i][indexes[i]] == 0) {
 				i--;
 				continue;
 			}
