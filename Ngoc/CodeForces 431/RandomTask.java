@@ -3,21 +3,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class ExpectedMaximum {
+public class RandomTask {
 	static boolean test = false;
 
-	static int m; // 10^5
 	static int n; // 10^6
 
 	public static void main(String[] args) throws IOException {
-
+		
 		initReader();
 		logTime("");
 		while (true) {
 			readInput();
 
 			logTime("Read:");
-			double result = solve();
+			int result = solve();
 			logTime("Solved:");
 
 			System.out.println(result);
@@ -28,22 +27,11 @@ public class ExpectedMaximum {
 
 	}
 
-	public static double solve() {
-
-		double pre = 0;
-		double sum = 0;
-
-		for (double i = 1; i <= m; i++) {
-			double temp = Math.pow(i/m, n);
-			sum += (temp - pre)*i;
-			pre = temp;
-		}
-
-		return sum;
+	public static int solve() {
+		return 0;
 	}
 
 	public static void readInput() throws IOException {
-		m = nextInt();
 		n = nextInt();
 	}
 
@@ -90,8 +78,7 @@ public class ExpectedMaximum {
 	static long preLogTime = 0;
 
 	static void logTime(String lable) {
-		if (!test)
-			return;
+		if(!test) return;
 		long current = System.currentTimeMillis();
 		if (startTime != 0) {
 			println(lable, " - From start:", (current - startTime),
@@ -147,19 +134,17 @@ public class ExpectedMaximum {
 	 ******************** PRINT UTILITIES *******************************
 	 *****************************************************************/
 
-	public static void printTest(Object... obj) {
-		if (!test)
-			return;
-		System.out.print(join(obj, " "));
+	public static void printTest(Object... obj){
+		if(!test) return;
+		System.out.print(join(obj, " "));		
 	}
-
-	public static void printTestLn(Object... obj) {
-		if (!test)
-			return;
-		System.out.println(join(obj, " "));
+	
+	public static void printTestLn(Object... obj){
+		if(!test) return;
+		System.out.println(join(obj, " "));		
 	}
-
-	public static void print(Object... obj) {
+	
+	public static void print(Object... obj) {		
 		System.out.print(join(obj, " "));
 	}
 

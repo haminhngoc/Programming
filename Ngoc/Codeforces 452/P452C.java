@@ -3,24 +3,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class ExpectedMaximum {
+public class P452C {
 	static boolean test = false;
-
-	static int m; // 10^5
-	static int n; // 10^6
+	static int n;
+	static int m;
 
 	public static void main(String[] args) throws IOException {
 
 		initReader();
 		logTime("");
+
 		while (true) {
 			readInput();
 
 			logTime("Read:");
-			double result = solve();
+			solve();
 			logTime("Solved:");
-
-			System.out.println(result);
 
 			if (!test)
 				break;
@@ -28,23 +26,32 @@ public class ExpectedMaximum {
 
 	}
 
-	public static double solve() {
+	public static void solve() throws IOException {
 
-		double pre = 0;
-		double sum = 0;
+		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
+		// bat ky trong m bo bai ban dau
+		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
+		// conf laij
+		// Suy ra
+		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
+		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
+		// + xac suat chon khong phai a1 la (n-1)/n
+		// + trong do xac xuat loai A la (m-1)/(m*n-1)
+		// -- vi loai A con (m-1) trong tong so (m*n-1)
+		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
+		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
+		// (n-1)*(m-1)/n/(m*n-1)
 
-		for (double i = 1; i <= m; i++) {
-			double temp = Math.pow(i/m, n);
-			sum += (temp - pre)*i;
-			pre = temp;
+		double result = 1.0;
+		if (m > 1 || n > 1) {
+			result = 1 / n + (m - 1) * (n - 1) / n / (n * m - 1);
 		}
-
-		return sum;
+		System.out.println(result);
 	}
 
 	public static void readInput() throws IOException {
-		m = nextInt();
-		n = nextInt();
+		int n = nextInt();
+		int m = nextInt();
 	}
 
 	/*****************************************************************
@@ -94,8 +101,7 @@ public class ExpectedMaximum {
 			return;
 		long current = System.currentTimeMillis();
 		if (startTime != 0) {
-			println(lable, " - From start:", (current - startTime),
-					"- From previous:", (current - preLogTime));
+			println(lable, " - From start:", (current - startTime), "- From previous:", (current - preLogTime));
 		} else {
 			startTime = current;
 		}
@@ -132,8 +138,7 @@ public class ExpectedMaximum {
 		return result;
 	}
 
-	public static long[][] readMatrixLong(int row, int column)
-			throws IOException {
+	public static long[][] readMatrixLong(int row, int column) throws IOException {
 		long[][] result = new long[row][column];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {

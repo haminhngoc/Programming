@@ -3,24 +3,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class ExpectedMaximum {
+public class P452A {
 	static boolean test = false;
+	static int n;
+	static String word;
 
-	static int m; // 10^5
-	static int n; // 10^6
+	static String[] words = new String[] { "vaporeon", "jolteon", "flareon", "espeon", "umbreon", "leafeon", "glaceon",
+			"sylveon" };
 
 	public static void main(String[] args) throws IOException {
 
 		initReader();
 		logTime("");
+
 		while (true) {
 			readInput();
 
 			logTime("Read:");
-			double result = solve();
+			solve();
 			logTime("Solved:");
-
-			System.out.println(result);
 
 			if (!test)
 				break;
@@ -28,23 +29,24 @@ public class ExpectedMaximum {
 
 	}
 
-	public static double solve() {
-
-		double pre = 0;
-		double sum = 0;
-
-		for (double i = 1; i <= m; i++) {
-			double temp = Math.pow(i/m, n);
-			sum += (temp - pre)*i;
-			pre = temp;
+	public static void solve() {
+		for (int i = 0; i < words.length; i++) {
+			if (word.length() == words[i].length()) {
+				boolean ok = true;
+				for (int j = 0; j < word.length(); j++) {
+					ok &= (word.charAt(j) == '.' || word.charAt(j) == words[i].charAt(j));
+				}
+				if (ok) {
+					System.out.println(words[i]);
+					return;
+				}
+			}
 		}
-
-		return sum;
 	}
 
 	public static void readInput() throws IOException {
-		m = nextInt();
 		n = nextInt();
+		word = next();
 	}
 
 	/*****************************************************************
@@ -94,8 +96,7 @@ public class ExpectedMaximum {
 			return;
 		long current = System.currentTimeMillis();
 		if (startTime != 0) {
-			println(lable, " - From start:", (current - startTime),
-					"- From previous:", (current - preLogTime));
+			println(lable, " - From start:", (current - startTime), "- From previous:", (current - preLogTime));
 		} else {
 			startTime = current;
 		}
@@ -132,8 +133,7 @@ public class ExpectedMaximum {
 		return result;
 	}
 
-	public static long[][] readMatrixLong(int row, int column)
-			throws IOException {
+	public static long[][] readMatrixLong(int row, int column) throws IOException {
 		long[][] result = new long[row][column];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {

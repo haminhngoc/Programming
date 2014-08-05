@@ -3,24 +3,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class ExpectedMaximum {
+public class P452B {
 	static boolean test = false;
-
-	static int m; // 10^5
-	static int n; // 10^6
+	static int n;
+	static int m;
 
 	public static void main(String[] args) throws IOException {
 
 		initReader();
 		logTime("");
+
 		while (true) {
 			readInput();
 
 			logTime("Read:");
-			double result = solve();
+			solve();
 			logTime("Solved:");
-
-			System.out.println(result);
 
 			if (!test)
 				break;
@@ -28,23 +26,45 @@ public class ExpectedMaximum {
 
 	}
 
-	public static double solve() {
+	public static void solve() {
+		int p1r = 0, p1c = 0;
+		int p4r = n;
+		int p4c = m;
+		int p2r = 0;
+		int p2c = 1;
+		int p3r = n;
+		int p3c = m - 1;
 
-		double pre = 0;
-		double sum = 0;
-
-		for (double i = 1; i <= m; i++) {
-			double temp = Math.pow(i/m, n);
-			sum += (temp - pre)*i;
-			pre = temp;
+		if ((n > m && m != 0) || n == 0) {
+			p2r = 0;
+			p2c = 1;
+			p3r = n;
+			p3c = m - 1;
+		} else {
+			p2r = 1;
+			p2c = 0;
+			p3r = n - 1;
+			p3c = m;
 		}
 
-		return sum;
+		// Wrong with test case 2 2. Think later
+		if ((p2r - p3r) * (p2r - p3r) + (p2c - p3c) * (p2c - p3c) < (p2r - p4r) * (p2r - p4r) + (p2c - p4c)
+				* (p2c - p4c)) {
+			System.out.println(p2r + " " + p2c);
+			System.out.println(p4r + " " + p4c);
+			System.out.println(p1r + " " + p1c);
+			System.out.println(p3r + " " + p3c);
+		} else {
+			System.out.println(p2r + " " + p2c);
+			System.out.println(p3r + " " + p3c);
+			System.out.println(p1r + " " + p1c);
+			System.out.println(p4r + " " + p4c);
+		}
 	}
 
 	public static void readInput() throws IOException {
-		m = nextInt();
 		n = nextInt();
+		m = nextInt();
 	}
 
 	/*****************************************************************
@@ -94,8 +114,7 @@ public class ExpectedMaximum {
 			return;
 		long current = System.currentTimeMillis();
 		if (startTime != 0) {
-			println(lable, " - From start:", (current - startTime),
-					"- From previous:", (current - preLogTime));
+			println(lable, " - From start:", (current - startTime), "- From previous:", (current - preLogTime));
 		} else {
 			startTime = current;
 		}
@@ -132,8 +151,7 @@ public class ExpectedMaximum {
 		return result;
 	}
 
-	public static long[][] readMatrixLong(int row, int column)
-			throws IOException {
+	public static long[][] readMatrixLong(int row, int column) throws IOException {
 		long[][] result = new long[row][column];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {

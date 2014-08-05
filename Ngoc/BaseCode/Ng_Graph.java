@@ -9,47 +9,37 @@ public class Ng_Graph {
 	static int UG_CC(int nVertex, int[][] edges) {
 		final int[] roots = new int[nVertex + 1]; // Omit vertext0
 
-		int count = nVertex;
-
+		int count = 0;
 		int nEdge = edges.length;
+
 		for (int i = 0; i < nEdge; i++) {
 			int v0 = edges[i][0];
 			int v1 = edges[i][1];
-			if (roots[v0] == 0 && roots[v1] != 0) {
-				roots[v0] = roots[v1];
-				count--;
-			} else if (roots[v1] != 0 && roots[v0] != 0) {
-				roots[v1] = roots[v0];
-				count--;
-			} else if (roots[v0] == 0) {
-				// No matter v0 and v1, any way still be OK
-				if (v0 < v1) {
-					roots[v1] = v0;
-					count--;
-				} else {
-					roots[v0] = v1;
-					count--;
-				}
-				// else v1 == v1 : omit
-			} else {
-				int root0 = findTopRoot(roots, v0);
-				int root1 = findTopRoot(roots, v1);
-				if (root0 < root1) {
-					roots[root1] = root0;
-					count--;
-				} else if (root1 < root0) {
-					roots[root0] = root1;
-					count--;
-				}
-				// else root0 == root1 : do not change
-
+			if (v0 == v1)
+				continue;
+			int root0 = findTopRoot(roots, v0);
+			int root1 = findTopRoot(roots, v1);
+			if (v0 == root1 || v1 == root0)
+				continue;
+			if (root0 == 0 && root1 > 0) {
+				roots[v0] = root1;
+				count++;
+			} else if (root1 == 0 && root0 > 0) {
+				roots[v1] = root0;
+				count++;
+			} else if (root0 == 0 && root1 == 0) {
+				roots[v1] = v0;
+				count++;
+			} else if (root0 != root1) {
+				roots[root1] = root0;
+				count++;
 			}
 		}
 
 		// Export Count Of Each Group
 		int[] groupCounts = new int[nVertex + 1];
 		for (int i = 1; i <= nVertex; i++) {
-			int topRoot = findTopRoot_AndModifyParent(roots, i);
+			int topRoot = modifyParentToTopRoot(roots, i);
 			groupCounts[topRoot]++;
 		}
 
@@ -76,23 +66,28 @@ public class Ng_Graph {
 	// Find top root of vertex
 	static int findTopRoot(int[] roots, int vertex) {
 		int root = roots[vertex];
-		while (root > 0) {
+		if (root == 0)
+			return 0;
+		// while (roots[root] > 0 && roots[root] != root) {
+		while (roots[root] > 0) {
 			root = roots[root];
 		}
 		return root;
 	}
 
-	static int findTopRoot_AndModifyParent(int[] roots, int vertex) {
+	static int modifyParentToTopRoot(int[] roots, int vertex) {
 		int root = roots[vertex];
-		while (root > 0) {
+		if (root == 0)
+			return 0;
+		// while (roots[root] > 0 && roots[root] != root) {
+		while (roots[root] > 0) {
 			root = roots[root];
 		}
-
-		if (root > 0)
-			roots[vertex] = root;
-		int parent = roots[vertex];
+		int parent = vertex;
 		while (parent != root) {
+			int next = roots[parent];
 			roots[parent] = root;
+			parent = next;
 		}
 		return root;
 	}
@@ -158,6 +153,24 @@ public class Ng_Graph {
 		return 0;
 	}
 
+	
+	
+	
+	
+	
+
+
+	static class Edge {
+		public int v1;
+		public int v2;
+
+		public Edge(int v1, int v2) {
+
+		}
+	}
+	
+	
+	
 	public static void main(String[] args) {
 
 		System.out.println("---------END----------");
