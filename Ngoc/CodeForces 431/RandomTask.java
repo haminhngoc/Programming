@@ -6,7 +6,8 @@ import java.util.*;
 public class RandomTask {
 	static boolean test = false;
 
-	static int n; // 10^6
+	static int n; // 10^18
+	static int k; // 1..64
 
 	public static void main(String[] args) throws IOException {
 		
@@ -33,6 +34,7 @@ public class RandomTask {
 
 	public static void readInput() throws IOException {
 		n = nextInt();
+		k= nextInt();
 	}
 
 	/*****************************************************************
