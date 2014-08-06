@@ -21,19 +21,26 @@ public class DZYLovesStrings {
 		int k = reader.NextInt();
 		Vector letterValues = new Vector();
 		int result = 0;
+		int input = 0;
+		int max = 0;
 		for(int i = 0 ; i < 26 ;i++)
 		{
-			letterValues.add(reader.NextInt());
+			input = reader.NextInt();
+			letterValues.add(input);
+			if(input > max)
+			{
+				max = input;
+			}
+			
 		}
 		for(int i = 0; i<s.length();i++)
 		{
-			int temp = (int)s.charAt(i)-97;
+			int temp = s.charAt(i)-'a';
 			result += (int)letterValues.get(temp)*(i+1);
 		}
-		Collections.sort(letterValues);
 		for(int i = k ; i > 0 ;i--)
 		{
-			result += (int)letterValues.get(25)*(i+s.length());
+			result += max*(i+s.length());
 		}
 		System.out.print(result);
 	}
