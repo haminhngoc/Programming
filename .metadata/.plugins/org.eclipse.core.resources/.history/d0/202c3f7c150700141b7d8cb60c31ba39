@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+
+public class codeforces_444B_LovesFFT {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n = in.nextLong()();
+		int d = in.nextLong()();
+		
+
+	}
+
+}
