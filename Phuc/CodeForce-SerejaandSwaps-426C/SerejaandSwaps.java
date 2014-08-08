@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -35,54 +36,73 @@ public class SerejaandSwaps {
 			}
 		};
 
-		int tempLength;
-		int lisLegnth;
+		/*
+		 * int tempLength; int lisLegnth; for (int i = 0; i < n; ++i) { for (int
+		 * j = 0; j < n; ++j) { temp = 0; for (int h = 0; h < n; ++h) { if (h <
+		 * i || h > i + j) { list.add(a[h]); } else { listTemp.add(a[h]); temp
+		 * += a[h]; } } Collections.sort(list, new Comparator<Integer>() {
+		 * 
+		 * @Override public int compare(Integer o1, Integer o2) { return
+		 * Integer.compare(o1, o2); } }); Collections.sort(listTemp, new
+		 * Comparator<Integer>() {
+		 * 
+		 * @Override public int compare(Integer o1, Integer o2) { return
+		 * Integer.compare(o1, o2); } });
+		 * 
+		 * lisLegnth = list.size(); tempLength = listTemp.size(); int h = 0; int
+		 * m = 0; int t = lisLegnth - 1; while (h < k && t >= 0 && m <
+		 * tempLength && listTemp.get(m) < list.get(t)) { temp += list.get(t) -
+		 * listTemp.get(m); h++; m++; t--; } if (temp > max) { max = temp; }
+		 * 
+		 * list.clear(); listTemp.clear(); } }
+		 * 
+		 * System.out.println(max); }
+		 */
+		Items[] arr = new Items[n];
+		Items tempItems;
 		for (int i = 0; i < n; ++i) {
-			for (int j = 0; j < n; ++j) {
-				temp = 0;
-				for (int h = 0; h < n; ++h) {
-					if (h < i || h > i + j) {
-						list.add(a[h]);
-					} else {
-						listTemp.add(a[h]);
-						temp += a[h];
+			arr[i] = new Items();
+			arr[i].a = a[i];
+			arr[i].b = i;
+		}
+		Arrays.sort(arr, new Comparator<Items>() {
+			@Override
+			public int compare(Items o1, Items o2) {
+				return Integer.compare(o1.a, o2.a);
+			}
+		});
+		int max1 = Integer.MIN_VALUE;
+		for (int left = 0; left < n; ++left) {
+			long sum = 0;
+			for (int right = left; right < n; ++right) {
+				int[] x = Arrays.copyOfRange(a, left, right+1);
+				Arrays.sort(x);
+				sum+=a[right];
+				int index = 0;
+				int count = 0;
+				int i = n - 1;
+				int len = x.length;
+				long tempSum = sum;
+				while (i >= 0 && index < len && count < k
+						&& arr[i].a > x[index]) {
+					if (arr[i].b < left || arr[i].b > right) {
+						tempSum += arr[i].a - x[index];
+						count++;
+						index++;
 					}
+					i--;
 				}
-				Collections.sort(list, new Comparator<Integer>() {
-					@Override
-					public int compare(Integer o1, Integer o2) {
-						return Integer.compare(o1, o2);
-					}
-				});
-				Collections.sort(listTemp, new Comparator<Integer>() {
-					@Override
-					public int compare(Integer o1, Integer o2) {
-						return Integer.compare(o1, o2);
-					}
-				});
-
-				lisLegnth = list.size();
-				tempLength = listTemp.size();
-				int h = 0;
-				int m = 0;
-				int t = lisLegnth - 1;
-				while (h < k && t >= 0 && m < tempLength
-						&& listTemp.get(m) < list.get(t)) {
-					temp += list.get(t) - listTemp.get(m);
-					h++;
-					m++;
-					t--;
+				if (tempSum > max1) {
+					max1 = (int) tempSum;
 				}
-				if (temp > max) {
-					max = temp;
-				}
-
-				list.clear();
-				listTemp.clear();
 			}
 		}
+		System.out.println(max1);
+	}
 
-		System.out.println(max);
+	static class Items {
+		int a;
+		int b;
 	}
 }
 

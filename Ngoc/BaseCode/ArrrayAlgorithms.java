@@ -77,4 +77,16 @@ public class ArrrayAlgorithms {
 	*/
 	
 	
+	/*****************************************************************
+	 ************************** SEARCH *****************************
+	 *****************************************************************/
+	
+	/*
+	 * + Longest increase subArray
+	 * + Maximize (Max(sub) - Min(sub))
+	 * + Maximize (LocalMaximum - LocalMinimum)
+	 * + Maximize (LocalMaximum - LocalMinimum) with condition LocalMinimum has appear before LocalMaximum
+	 * + SubArray has maximum total
+	*/
+	
 }
