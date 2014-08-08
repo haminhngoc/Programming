@@ -15,32 +15,20 @@ public class Codeforces_426_B {
 				a[i] += x;
 			}
 		}
-		int result=n;
-		int N=n;
-		while(N%2==0)
-		{
-			if (Check(a, n, N)==false)
-			{
-					result=N;
-					N--;
-			}
-			else
-			{
-				result=N/2;
-				N=N/2;
-			}
-		}
-		
-		
+		int result = Check(a, n, n);
 		System.out.println(result);
 		scan.close();
 	}
 
-	private static boolean Check(String[] a, int n, int m) {
+	private static int Check(String[] a, int n, int m) {
 		// TODO Auto-generated method stub
-			for (int i = 0; i < m / 2; i++)
+		if (m % 2 == 0) {
+			for (int i = 0; i < m / 2; i++) {
 				if (a[i].equals(a[m - 1 - i]) == false)
-					return false;
-		return true;
+					return m;
+			}
+			return Check(a, n, m / 2);
+		}
+		return m;
 	}
 }
