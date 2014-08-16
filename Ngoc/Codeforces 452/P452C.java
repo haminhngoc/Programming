@@ -42,9 +42,9 @@ public class P452C {
 		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
 		// (n-1)*(m-1)/n/(m*n-1)
 
-		double result = 1.0;
+		double result = 1;
 		if (m > 1 || n > 1) {
-			result = 1 / n + (m - 1) * (n - 1) / n / (n * m - 1);
+			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
 		}
 		System.out.println(result);
 	}

@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class P452B {
+public class P458A {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -21,26 +21,74 @@ public class P452B {
 	}
 
 	static void solve() {
-		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
-		// bat ky trong m bo bai ban dau
-		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
-		// conf laij
-		// Suy ra
-		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
-		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
-		// + xac suat chon khong phai a1 la (n-1)/n
-		// + trong do xac xuat loai A la (m-1)/(m*n-1)
-		// -- vi loai A con (m-1) trong tong so (m*n-1)
-		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
-		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
-		// (n-1)*(m-1)/n/(m*n-1)
+		String s1 = ns();
+		String s2 = ns();
 
-		int n = ni();
-		int m = ni();
-		double result = 1;
-		if (m > 1 || n > 1) {
-			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
+		int len1 = s1.length();
+		int len2 = s2.length();
+		int maxLen = Math.max(len1, len2);
+		char[] c1 = s1.toCharArray();
+		char[] c2 = s2.toCharArray();
+		int d1 = maxLen - c1.length;
+		int d2 = maxLen - c2.length;
+
+		for (int i = 0; i < maxLen; i++) {
+			if (i - d1 >= 0 && i - d2 >= 0 && c1[i - d1] == c2[i - d2]) {
+				c1[i - d1] = '0';
+				c2[i - d2] = '0';
+			}
 		}
+
+		int i = 0, j = 0;
+
+		char result = '=';
+		while (i < len1 && j < len2) {
+			while (i < len1 && c1[i] == '0')
+				i++;
+			while (j < len2 && c2[j] == '0')
+				j++;
+			int r1 = len1 - i;
+			int r2 = len2 - j;
+			if (r1 < r2 - 1) {
+				result = '<';
+				break;
+			}
+			if (r1 - 1 > r2) {
+				result = '>';
+				break;
+			}
+
+			if (r1 == r2) { // == 0
+				break;
+			}
+
+			if (r1 > r2) { // r1 = r2 + 1
+				if (r2 > 1 && c2[j + 1] == '1') {
+					i += 3;
+					j += 2;
+				} else if (r2 > 1 && c2[j + 1] == '0' && c1[i + 2] == '0') {
+					c1[i + 2] = '1';
+					i += 2;
+					j += 1;
+				} else {
+					result = '>';
+					break;
+				}
+			} else { // r1 + 1 = r2
+				if (r1 > 1 && c1[i + 1] == '1') {
+					j += 3;
+					i += 2;
+				} else if (r1 > 1 && c1[i + 1] == '0' && c2[j + 2] == '0') {
+					c2[j + 2] = '1';
+					j += 2;
+					i += 1;
+				} else {
+					result = '<';
+					break;
+				}
+			}
+		}
+
 		System.out.println(result);
 
 	}
