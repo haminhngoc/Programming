@@ -1,0 +1,3 @@
+Accepted
+Time: 93 ms
+Memory: 12 KB

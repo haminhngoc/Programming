@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0042)http://codeforces.com/contest/458/problems -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="X-Csrf-Token" content="dcg2eac47e4646g822e3d6e70fbag860">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="profileName" content="p1">
+    <meta name="google-site-verification" content="OTd2dN5x4nS4OPknPI9JFg36fKxjqY0i1PSfFPv_J90">
+    <meta property="fb:admins" content="100001352546622">
+    <meta property="og:image" content="http://worker.codeforces.ru/static/images/codeforces-vk-square-en.png">
+    <meta property="og:title" content="Problems - Codeforces">
+    <meta property="og:site_name" content="Codeforces">
+    
+    <meta name="cc" content="qeygdtounev4">
+    
+    <meta name="verify-reformal" content="f56f99fd7e087fb6ccb48ef2">
+    <title>Problems - Codeforces</title>
+        <meta name="description" content="Codeforces. Programming competitions and contests, programming community">
+        <meta name="keywords" content="programming algorithm contest competition informatics olympiads c++ java graphs vkcup">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="./Problems - Codeforces_files/font-awesome.min.css" type="text/css" charset="utf-8">
+
+        <link href="./Problems - Codeforces_files/css" rel="stylesheet" type="text/css">
+
+
+    <link rel="shortcut icon" type="image/png" href="http://worker.codeforces.ru/static/favicon.png">
+
+    <!--CombineResourcesFilter-->
+    <link charset="utf-8" href="./Problems - Codeforces_files/2efacdd0e5f54ef6bba27854086632b9_e6c7bbf7f2db4d1fd3c962dc7382f2e.css" rel="stylesheet" type="text/css">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+
+    <script type="text/javascript" async="" src="./Problems - Codeforces_files/ga.js"></script><script src="./Problems - Codeforces_files/89b3ee750b2212159cecc5edcdb53b8e_fea11fc7deebf9a46491423e00bd8b9.js" type="text/javascript"> </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--/CombineResourcesFilter-->
+
+    <link rel="stylesheet" href="./Problems - Codeforces_files/style.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="./Problems - Codeforces_files/style(1).css" type="text/css" charset="utf-8">
+
+    <script type="text/javascript" src="./Problems - Codeforces_files/share.js" charset="utf-8"></script>
+    
+    <script type="text/javascript" src="./Problems - Codeforces_files/jquery.markitup.js"></script>
+    <script type="text/javascript" src="./Problems - Codeforces_files/set.js"></script>
+
+    <!--[if IE]>
+    <style>
+        #sidebar {
+            padding-left: 1em;
+            margin: 1em 1em 1em 0;
+        }
+    </style>
+    <![endif]-->
+
+
+</head>
+<body><span style="display:none;" class="csrf-token" data-csrf="dcg2eac47e4646g822e3d6e70fbag860">&nbsp;</span>
+<!-- Codeforces JavaScripts. -->
+<script type="text/javascript">
+    if (window.parent.frames.length > 0) {
+        window.stop();
+    }
+</script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+    $.ajaxPrefilter(function(options, originalOptions, xhr) {
+        var csrf = Codeforces.getCsrfToken();
+
+        if (csrf) {
+            var data = originalOptions.data;
+            if (originalOptions.data !== undefined) {
+                if (Object.prototype.toString.call(originalOptions.data) === '[object String]') {
+                    data = $.deparam(originalOptions.data);
+                }
+            } else {
+                data = {};
+            }
+            options.data = $.param($.extend(data, { csrf_token: csrf }));
+        }
+    });
+
+    window.getCodeforcesServerTime = function(callback) {
+        $.post("/data/time", {}, callback, "json");
+    }
+
+    window.updateTypography = function () {
+        $("div.ttypography code").addClass("tt");
+        $("div.ttypography pre>code").addClass("prettyprint").removeClass("tt");
+        $("div.ttypography table").addClass("bordertable");
+        prettyPrint();
+    }
+
+    $.ajaxSetup({ scriptCharset: "utf-8" ,contentType: "application/x-www-form-urlencoded; charset=UTF-8", headers: {
+        'X-Csrf-Token': Codeforces.getCsrfToken()
+    }});
+
+    window.updateTypography();
+
+    Codeforces.signForms();
+
+    $(".second-level-menu-list").lavaLamp({
+        fx: "backout",
+        speed: 1000
+    });
+
+
+    Codeforces.countdown();
+    $("a[rel='photobox']").colorbox();
+
+
+        });
+    </script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-743380-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = (document.location.protocol == 'https:' ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<div id="body">
+<div style="width: 950px; margin: 0 auto;">
+    <div id="header" style="position:relative;">
+        <div style="float:left;">
+            <div style="padding:0 0 0 2px;color:#black;font-size:26px;">
+<a href="http://codeforces.com/memsql2014"><img src="./Problems - Codeforces_files/memsql_logo_small.png"></a> <span style="position:relative;bottom:20px;left:5px;font-family:Arial;">Start[c]UP 2.0</span>
+</div>
+
+        </div>
+        <div class="lang">
+            <div style="text-align: right;">
+                <a href="http://codeforces.com/contest/458/problems?locale=en"><img src="./Problems - Codeforces_files/gb.png" title="In English" alt="In English"></a>
+                <a href="http://codeforces.com/contest/458/problems?locale=ru"><img src="./Problems - Codeforces_files/ru.png" title="По-русски" alt="По-русски"></a>
+            </div>
+        </div>
+        <br style="clear: both;">
+    </div>
+
+    <div style="text-align: center;font-size: 18px;margin-bottom: 0.5em;" class="caption">MemSQL Start[c]UP 2.0 - Round 2 - Online Round</div>
+    <div style="border-top: 1px solid #ccc; height: 1em;"></div>
+
+        <div style="margin-bottom: 4em;page-break-after: always;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="A">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">A. Golden System</div><div class="time-limit"><div class="property-title">time limit per test</div>1 second</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>Piegirl got bored with binary, decimal and other integer based counting systems. Recently she discovered some interesting properties about number <img align="middle" class="tex-formula" src="./Problems - Codeforces_files/cf667d5378aa3553058e0b348b30c37378759ffd.png">, in particular that <span class="tex-span"><i>q</i><sup class="upper-index">2</sup> = <i>q</i> + 1</span>, and she thinks it would make a good base for her new unique system. She called it "golden system". In golden system the number is a non-empty string containing 0's and 1's as digits. The decimal value of expression <span class="tex-span"><i>a</i><sub class="lower-index">0</sub><i>a</i><sub class="lower-index">1</sub>...<i>a</i><sub class="lower-index"><i>n</i></sub></span> equals to <img align="middle" class="tex-formula" src="./Problems - Codeforces_files/51c20c3ef1a1e517fd60f28ab2fdea1fd54d65c7.png">.</p><p>Soon Piegirl found out that this system doesn't have same properties that integer base systems do and some operations can not be performed on it. She wasn't able to come up with a fast way of comparing two numbers. She is asking for your help.</p><p>Given two numbers written in golden system notation, determine which of them has larger decimal value.</p></div><div class="input-specification"><div class="section-title">Input</div><p>Input consists of two lines — one for each number. Each line contains non-empty string consisting of '0' and '1' characters. The length of each string does not exceed <span class="tex-span">100000</span>.</p></div><div class="output-specification"><div class="section-title">Output</div><p>Print "<span class="tex-font-style-tt">&gt;</span>" if the first number is larger, "<span class="tex-font-style-tt">&lt;</span>" if it is smaller and "<span class="tex-font-style-tt">=</span>" if they are equal.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>1000<br>111<br></pre></div><div class="output"><div class="title">Output</div><pre>&lt;<br></pre></div><div class="input"><div class="title">Input</div><pre>00100<br>11<br></pre></div><div class="output"><div class="title">Output</div><pre>=<br></pre></div><div class="input"><div class="title">Input</div><pre>110<br>101<br></pre></div><div class="output"><div class="title">Output</div><pre>&gt;<br></pre></div></div></div><div class="note"><div class="section-title">Note</div><p>In the first example first number equals to <img align="middle" class="tex-formula" src="./Problems - Codeforces_files/9c955eec678d6e7dcdc7c94fb203e922d2ad19ad.png">, while second number is approximately <span class="tex-span">1.618033988<sup class="upper-index">2</sup> + 1.618033988 + 1 ≈ 5.236</span>, which is clearly a bigger number.</p><p>In the second example numbers are equal. Each of them is <span class="tex-span"> ≈ 2.618</span>.</p></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+        <div style="margin-bottom: 4em;page-break-after: always;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="B">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">B. Distributed Join</div><div class="time-limit"><div class="property-title">time limit per test</div>1 second</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>Piegirl was asked to implement two table join operation for distributed database system, minimizing the network traffic.</p><p>Suppose she wants to join two tables, <span class="tex-span"><i>A</i></span> and <span class="tex-span"><i>B</i></span>. Each of them has certain number of rows which are distributed on different number of partitions. Table <span class="tex-span"><i>A</i></span> is distributed on the first cluster consisting of <span class="tex-span"><i>m</i></span> partitions. Partition with index <span class="tex-span"><i>i</i></span> has <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> rows from <span class="tex-span"><i>A</i></span>. Similarly, second cluster containing table <span class="tex-span"><i>B</i></span> has <span class="tex-span"><i>n</i></span> partitions, <span class="tex-span"><i>i</i></span>-th one having <span class="tex-span"><i>b</i><sub class="lower-index"><i>i</i></sub></span> rows from <span class="tex-span"><i>B</i></span>. </p><p>In one network operation she can copy one row from any partition to any other partition. At the end, for each row from <span class="tex-span"><i>A</i></span> and each row from <span class="tex-span"><i>B</i></span> there should be a partition that has both rows. Determine the minimal number of network operations to achieve this.</p></div><div class="input-specification"><div class="section-title">Input</div><p>First line contains two integer numbers, <span class="tex-span"><i>m</i></span> and <span class="tex-span"><i>n</i></span> (<span class="tex-span">1 ≤ <i>m</i>, <i>n</i> ≤ 10<sup class="upper-index">5</sup></span>). Second line contains description of the first cluster with <span class="tex-span"><i>m</i></span> space separated integers, <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> <span class="tex-span">(1 ≤ <i>a</i><sub class="lower-index"><i>i</i></sub> ≤ 10<sup class="upper-index">9</sup>)</span>. Similarly, third line describes second cluster with <span class="tex-span"><i>n</i></span> space separated integers, <span class="tex-span"><i>b</i><sub class="lower-index"><i>i</i></sub></span> <span class="tex-span">(1 ≤ <i>b</i><sub class="lower-index"><i>i</i></sub> ≤ 10<sup class="upper-index">9</sup>)</span>.</p></div><div class="output-specification"><div class="section-title">Output</div><p>Print one integer — minimal number of copy operations.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>2 2<br>2 6<br>3 100<br></pre></div><div class="output"><div class="title">Output</div><pre>11<br></pre></div><div class="input"><div class="title">Input</div><pre>2 3<br>10 10<br>1 1 1<br></pre></div><div class="output"><div class="title">Output</div><pre>6<br></pre></div></div></div><div class="note"><div class="section-title">Note</div><p>In the first example it makes sense to move all the rows to the second partition of the second cluster which is achieved in <span class="tex-span">2 + 6 + 3 = 11</span> operations</p><p>In the second example Piegirl can copy each row from <span class="tex-span"><i>B</i></span> to the both partitions of the first cluster which needs <span class="tex-span">2·3 = 6</span> copy operations.</p></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+        <div style="margin-bottom: 4em;page-break-after: always;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="C">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">C. Elections</div><div class="time-limit"><div class="property-title">time limit per test</div>2 seconds</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>You are running for a governor in a small city in Russia. You ran some polls and did some research, and for every person in the city you know whom he will vote for, and how much it will cost to bribe that person to vote for you instead of whomever he wants to vote for right now. You are curious, what is the smallest amount of money you need to spend on bribing to win the elections. To win elections you need to have strictly more votes than any other candidate.</p></div><div class="input-specification"><div class="section-title">Input</div><p>First line contains one integer <span class="tex-span"><i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 10<sup class="upper-index">5</sup></span>) — number of voters in the city. Each of the next <span class="tex-span"><i>n</i></span> lines describes one voter and contains two integers <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> and <span class="tex-span"><i>b</i><sub class="lower-index"><i>i</i></sub></span> (<span class="tex-span">0 ≤ <i>a</i><sub class="lower-index"><i>i</i></sub> ≤ 10<sup class="upper-index">5</sup>;&nbsp;0 ≤ <i>b</i><sub class="lower-index"><i>i</i></sub> ≤ 10<sup class="upper-index">4</sup></span>) — number of the candidate that voter is going to vote for and amount of money you need to pay him to change his mind. You are the candidate <span class="tex-span">0</span> (so if a voter wants to vote for you, <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> is equal to zero, in which case <span class="tex-span"><i>b</i><sub class="lower-index"><i>i</i></sub></span> will also be equal to zero).</p></div><div class="output-specification"><div class="section-title">Output</div><p>Print one integer — smallest amount of money you need to spend to win the elections.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>5<br>1 2<br>1 2<br>1 2<br>2 1<br>0 0<br></pre></div><div class="output"><div class="title">Output</div><pre>3<br></pre></div><div class="input"><div class="title">Input</div><pre>4<br>1 2<br>1 2<br>2 1<br>0 0<br></pre></div><div class="output"><div class="title">Output</div><pre>2<br></pre></div><div class="input"><div class="title">Input</div><pre>1<br>100000 0<br></pre></div><div class="output"><div class="title">Output</div><pre>0<br></pre></div></div></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+        <div style="margin-bottom: 4em;page-break-after: always;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="D">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">D. Bingo!</div><div class="time-limit"><div class="property-title">time limit per test</div>1 second</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>The game of bingo is played on a <span class="tex-span">5 × 5</span> square grid filled with distinct numbers between <span class="tex-span">1</span> and <span class="tex-span">75</span>. In this problem you will consider a generalized version played on an <span class="tex-span"><i>n</i> × <i>n</i></span> grid with distinct numbers between <span class="tex-span">1</span> and <span class="tex-span"><i>m</i></span> <span class="tex-span">(<i>m</i> ≥ <i>n</i><sup class="upper-index">2</sup>)</span>. </p><p>A player begins by selecting a randomly generated bingo grid (generated uniformly among all available grids). Then <span class="tex-span"><i>k</i></span> distinct numbers between <span class="tex-span">1</span> and <span class="tex-span"><i>m</i></span> will be called at random (called uniformly among all available sets of <span class="tex-span"><i>k</i></span> numbers). For each called number that appears on the grid, the player marks that cell. The score at the end is 2 raised to the power of (number of completely marked rows plus number of completely marked columns).</p><p>Determine the expected value of the score. The expected score may be very large. If the expected score is larger than <span class="tex-span">10<sup class="upper-index">99</sup></span>, print <span class="tex-span">10<sup class="upper-index">99</sup></span> instead (for example as "<span class="tex-font-style-tt">1e99</span>" without the quotes).</p></div><div class="input-specification"><div class="section-title">Input</div><p>Input will consist of three integers <span class="tex-span"><i>n</i></span>, <span class="tex-span"><i>m</i></span>, <span class="tex-span"><i>k</i></span> <span class="tex-span">(1 ≤ <i>n</i> ≤ 300;&nbsp;<i>n</i><sup class="upper-index">2</sup> ≤ <i>m</i> ≤ 100000;&nbsp;<i>n</i> ≤ <i>k</i> ≤ <i>m</i>)</span>.</p></div><div class="output-specification"><div class="section-title">Output</div><p>Print the smaller of <span class="tex-span">10<sup class="upper-index">99</sup></span> and the expected score. Your answer must be correct within an absolute or relative error of <span class="tex-span">10<sup class="upper-index"> - 9</sup></span>.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>1 2 1<br></pre></div><div class="output"><div class="title">Output</div><pre>2.5<br></pre></div><div class="input"><div class="title">Input</div><pre>2 4 3<br></pre></div><div class="output"><div class="title">Output</div><pre>4<br></pre></div><div class="input"><div class="title">Input</div><pre>7 59164 40872<br></pre></div><div class="output"><div class="title">Output</div><pre>3.1415926538<br></pre></div></div></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+        <div style="margin-bottom: 4em;page-break-after: always;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="E">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">E. Flow Optimality</div><div class="time-limit"><div class="property-title">time limit per test</div>2 seconds</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>There is a computer network consisting of <span class="tex-span"><i>n</i></span> nodes numbered 1 through <span class="tex-span"><i>n</i></span>. There are links in the network that connect pairs of nodes. A pair of nodes may have multiple links between them, but no node has a link to itself.</p><p>Each link supports unlimited bandwidth (in either direction), however a link may only transmit in a single direction at any given time. The cost of sending data across a link is proportional to the square of the bandwidth. Specifically, each link has a positive weight, and the cost of sending data across the link is the weight times the square of the bandwidth.</p><p>The network is connected (there is a series of links from any node to any other node), and furthermore designed to remain connected in the event of any single node failure.</p><p>You needed to send data from node 1 to node <span class="tex-span"><i>n</i></span> at a bandwidth of some positive number <span class="tex-span"><i>k</i></span>. That is, you wish to assign a bandwidth to each link so that the bandwidth into a node minus the bandwidth out of a node is <span class="tex-span"> - <i>k</i></span> for node 1, <span class="tex-span"><i>k</i></span> for node <span class="tex-span"><i>n</i></span>, and 0 for all other nodes. The individual bandwidths do not need to be integers.</p><p>Wishing to minimize the total cost, you drew a diagram of the network, then gave the task to an intern to solve. The intern claimed to have solved the task and written the optimal bandwidths on your diagram, but then spilled coffee on it, rendering much of it unreadable (including parts of the original diagram, and the value of <span class="tex-span"><i>k</i></span>).</p><p>From the information available, determine if the intern's solution may have been optimal. That is, determine if there exists a valid network, total bandwidth, and optimal solution which is a superset of the given information. Furthermore, determine the efficiency of the intern's solution (if possible), where efficiency is defined as total cost divided by total bandwidth.</p></div><div class="input-specification"><div class="section-title">Input</div><p>Input will begin with two integers <span class="tex-span"><i>n</i></span> and <span class="tex-span"><i>m</i></span> (<span class="tex-span">2 ≤ <i>n</i> ≤ 200000</span>; <span class="tex-span">0 ≤ <i>m</i> ≤ 200000</span>), the number of nodes and number of known links in the network, respectively. Following this are <span class="tex-span"><i>m</i></span> lines with four integers each: <span class="tex-span"><i>f</i></span>, <span class="tex-span"><i>t</i></span>, <span class="tex-span"><i>w</i></span>, <span class="tex-span"><i>b</i></span> (<span class="tex-span">1 ≤ <i>f</i> ≤ <i>n</i>;&nbsp;1 ≤ <i>t</i> ≤ <i>n</i>;&nbsp;<i>f</i> ≠ <i>t</i>;&nbsp;1 ≤ <i>w</i> ≤ 100;&nbsp;0 ≤ <i>b</i> ≤ 100</span>). This indicates there is a link between nodes <span class="tex-span"><i>f</i></span> and <span class="tex-span"><i>t</i></span> with weight <span class="tex-span"><i>w</i></span> and carrying <span class="tex-span"><i>b</i></span> bandwidth. The direction of bandwidth is from <span class="tex-span"><i>f</i></span> to <span class="tex-span"><i>t</i></span>.</p></div><div class="output-specification"><div class="section-title">Output</div><p>If the intern's solution is definitely not optimal, print "BAD <span class="tex-span"><i>x</i></span>", where <span class="tex-span"><i>x</i></span> is the first link in the input that violates the optimality of the solution. If the intern's solution may be optimal, print the efficiency of the solution if it can be determined rounded to the nearest integer, otherwise print "UNKNOWN".</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>4 5<br>1 2 1 2<br>1 3 4 1<br>2 3 2 1<br>2 4 4 1<br>3 4 1 2<br></pre></div><div class="output"><div class="title">Output</div><pre>6<br></pre></div><div class="input"><div class="title">Input</div><pre>5 5<br>2 3 1 1<br>3 4 1 1<br>4 2 1 1<br>1 5 1 1<br>1 5 100 100<br></pre></div><div class="output"><div class="title">Output</div><pre>BAD 3<br></pre></div><div class="input"><div class="title">Input</div><pre>6 4<br>1 3 31 41<br>1 5 59 26<br>2 6 53 58<br>4 6 97 93<br></pre></div><div class="output"><div class="title">Output</div><pre>UNKNOWN<br></pre></div><div class="input"><div class="title">Input</div><pre>7 5<br>1 7 2 1<br>2 3 1 1<br>4 5 1 0<br>6 1 10 0<br>1 3 1 1<br></pre></div><div class="output"><div class="title">Output</div><pre>BAD 4<br></pre></div></div></div><div class="note"><div class="section-title">Note</div><p>Although the known weights and bandwidths happen to always be integers, the weights and bandwidths of the remaining links are not restricted to integers.</p></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+        <div style="margin-bottom: 2em;">
+<!-- Frame: ProblemViewFrame.ftl -->
+<div class="problemindexholder" problemindex="F">
+<div class="ttypography"><div class="problem-statement"><div class="header"><div class="title">F. An easy problem about trees</div><div class="time-limit"><div class="property-title">time limit per test</div>2 seconds</div><div class="memory-limit"><div class="property-title">memory limit per test</div>256 megabytes</div><div class="input-file"><div class="property-title">input</div>standard input</div><div class="output-file"><div class="property-title">output</div>standard output</div></div><div><p>Pieguy and Piegirl are playing a game. They have a rooted binary tree, that has a property that each node is either a leaf or has exactly two children. Each leaf has a number associated with it.</p><p>On his/her turn a player can choose any two leafs that share their immediate parent, remove them, and associate either of their values with their parent, that now became a leaf (the player decides which of the two values to associate). The game ends when only one node (the one that was the root of the tree) is left.</p><p>Pieguy goes first, and his goal is to maximize the value that will be associated with the root when the game ends. Piegirl wants to minimize that value. Assuming that both players are playing optimally, what number will be associated with the root when the game ends?</p></div><div class="input-specification"><div class="section-title">Input</div><p>First line contains a single integer <span class="tex-span"><i>t</i></span> (<span class="tex-span">1 ≤ <i>t</i> ≤ 100</span>) — number of test cases. Then <span class="tex-span"><i>t</i></span> test cases follow. Each test case begins with an empty line, followed by a line with a single integer <span class="tex-span"><i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 250</span>), followed by <span class="tex-span"><i>n</i></span> lines describing <span class="tex-span"><i>n</i></span> nodes of the tree. Each of those <span class="tex-span"><i>n</i></span> lines either contains a non-negative number <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span>, indicating a leaf node with value <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> (<span class="tex-span">0 ≤ <i>a</i><sub class="lower-index"><i>i</i></sub> ≤ 1000</span>) associated with it, or <span class="tex-span"> - 1</span> followed by integers <span class="tex-span"><i>l</i></span> and <span class="tex-span"><i>r</i></span>, indicating a non-leaf node with children <span class="tex-span"><i>l</i></span> and <span class="tex-span"><i>r</i></span> (<span class="tex-span">0 ≤ <i>l</i>, <i>r</i> ≤ <i>n</i> - 1</span>). Nodes are numbered from <span class="tex-span">0</span> to <span class="tex-span"><i>n</i> - 1</span>. The root is always node <span class="tex-span">0</span>.</p></div><div class="output-specification"><div class="section-title">Output</div><p>For each test case print one line with one integer on it — the number that will be associated with the root when the game ends.</p></div><div class="sample-tests"><div class="section-title">Sample test(s)</div><div class="sample-test"><div class="input"><div class="title">Input</div><pre>4<br><br>3<br>-1 1 2<br>10<br>5<br><br>5<br>-1 1 2<br>-1 3 4<br>10<br>5<br>20<br><br>7<br>-1 1 2<br>-1 3 4<br>-1 5 6<br>1<br>2<br>3<br>4<br><br>11<br>-1 1 2<br>-1 3 4<br>-1 5 6<br>-1 7 8<br>15<br>7<br>-1 9 10<br>7<br>8<br>9<br>11<br></pre></div><div class="output"><div class="title">Output</div><pre>10<br>10<br>4<br>8<br></pre></div></div></div></div></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function endsWith(string, suffix) {
+            return string.indexOf(suffix, string.length - suffix.length) !== -1;
+        }
+
+        var inputFileDiv = $("div.input-file");
+        var inputFile = inputFileDiv.text();
+        var outputFileDiv = $("div.output-file");
+        var outputFile = outputFileDiv.text();
+
+        if (!endsWith(inputFile, "standard input")) {
+            inputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        if (!endsWith(outputFile, "standard output")) {
+            outputFileDiv.attr("style", "font-weight: bold");
+        }
+
+        var titleDiv = $("div.header div.title");
+
+
+
+    });
+</script>
+<!-- /Frame: ProblemViewFrame.ftl -->        </div>
+
+    <br style="clear:both;">
+
+    <div id="footer">
+        <div><a href="http://codeforces.com/">Codeforces</a> (c) Copyright 2010-2014 Mike Mirzayanov</div>
+        <div>The only programming contests Web 2.0 platform</div>
+
+    </div>
+</div>
+</div>
+
+
+<!-- /Page: CompleteProblemsViewPage.ftl --><div id="datepick-div" style="display: none;"></div><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="display: none; padding-bottom: 42px; padding-right: 42px;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" style="width: 0px; height: 0px; overflow: hidden; float: left;"></div><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><div id="cboxNext" style="float: left;"></div><div id="cboxPrevious" style="float: left;"></div><div id="cboxSlideshow" style="float: left;"></div><div id="cboxClose" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div></body></html>
