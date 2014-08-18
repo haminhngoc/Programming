@@ -1,6 +1,3 @@
-/**
- * 
- */
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,12 +10,13 @@ import java.util.List;
  * @author duy
  * 
  */
-public class A1 {
-	static String INPUT = "3\n" + "10\n" + "2 1 -1 2 5 8 9 1 2 3\n" + "5\n"
-			+ "5 4 3 2 1\n" + "10\n" + "1 2 3 2 1 10 100 1000 10000 100000\n";
+public class A2 {
+	static String INPUT = "3\n" + "10\n" + "2 1 -1 2 5 8 9 -1 2 3\n" + "5\n"
+			+ "-5 4 3 2 -1\n" + "11\n"
+			+ "-1 2 3 2 1 -10 100 1000 10000 100000 1000000\n";
 
 	public static void main(String[] args) {
-		oj = false; // Fasle to run 3 testcases, True to type input.
+		oj = true; // Fasle to run 3 testcases, True to type input.
 		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
 		input();
 		long s = System.currentTimeMillis();
@@ -40,15 +38,23 @@ public class A1 {
 				res.append(a[i][0] + "\n");
 				continue;
 			}
-			for (int j = 0; j < n[i]; j++) {
-				count++;
-				if (a[i][j] > a[i][j + 1]) {
+			for (int j = 0; j <= n[i]; j++) {
+				if (a[i][j] < 0) {
 					if (count > max) {
 						max = count;
-						end = j;
+						end = j - 1;
 					}
 					count = 0;
 				}
+				else
+				{
+					count++;
+				}
+			}
+			if(max == 0)
+			{
+				System.out.println("n/a");
+				return;
 			}
 			for (int j = end - max + 1; j <= end; j++) {
 				res.append(a[i][j] + " ");
@@ -61,7 +67,7 @@ public class A1 {
 	/*********************************** INPUT *********************************************/
 	static int nTestCases; // number of testcases
 	static int[] n; // length of ith testcase
-	static int[][] a; // ith arrays
+	static int[][] a; // ith array
 
 	static void input() {
 		nTestCases = nextInt();
@@ -70,10 +76,10 @@ public class A1 {
 		for (int i = 0; i < nTestCases; i++) {
 			n[i] = nextInt();
 			a[i] = new int[n[i] + 1];
+			a[i][n[i]] = -1;
 			for (int j = 0; j < n[i]; j++) {
 				a[i][j] = nextInt();
 			}
-			a[i][n[i]] = a[i][n[i] - 1] - 1;
 		}
 	}
 
