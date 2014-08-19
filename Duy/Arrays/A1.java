@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,10 +7,6 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 
-/**
- * @author duy
- * 
- */
 public class A1 {
 	static String INPUT = "3\n" + "10\n" + "2 1 -1 2 5 8 9 1 2 3\n" + "5\n"
 			+ "5 4 3 2 1\n" + "10\n" + "1 2 3 2 1 10 100 1000 10000 100000\n";

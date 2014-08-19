@@ -6,10 +6,6 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 
-/**
- * @author duy
- * 
- */
 public class A2 {
 	static String INPUT = "3\n" + "10\n" + "2 1 -1 2 5 8 9 -1 2 3\n" + "5\n"
 			+ "-5 4 3 2 -1\n" + "11\n"
