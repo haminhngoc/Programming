@@ -28,6 +28,8 @@
 	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem A"/>
 	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem B"/>
 	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem C"/>
+	<classpathentry kind="src" path="Array"/>
+	<classpathentry kind="src" path="Arrays"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
