@@ -300,3 +300,25 @@ public class Ng_Array {
 	}
 
 }
+
+/*
+Bài tập Array (String), SubArray (String) liên tục. Tất cả bài tập làm trên Array số nguyên, có kích thước n, chỉ số bắt đầu từ 0
+ 1. Tìm dãy con liên tục, không giảm dài nhất
+ 2. Tìm dãy con liên tục, chứa các phần tử không âm dài nhất.
+ 3. 
+ 4. Tìm dãy con liên tục, dài nhất sao cho được phép thay đổi nhiều nhất một phần tử để trở thành dãy không giảm
+ 5. Tìm hai chỉ số 0 <= i < j < n sao cho a[j] - a[i] là lớn nhất
+ 6. Tìm dãy con liên tục, có tổng lớn nhất 
+ 7. Tìm dãy con liên tục dài nhất có phần tử lớn nhất nằm giữa K1, K2
+ 8. Tìm dãy con liên tục dài nhất có độ chênh lệch không quá K
+
+Yêu cầu khó hơn:
+ 4, 5, 6: Nếu có nhiều kết quả, xuất ra kết quả ngắn nhất
+
+Let modify: Tìm dãy con liên tục, có độ chênh lệch lớn nhất (hiệu phần tử lớn nhất và phần tử nhỏ nhất)
+ 
+ Array không liên tục
+ 1. Có bao nhiêu cách chọn danh sách con trong dãy sao cho không có phần tử nào trong danh sách con trùng nhau
+ 2. f(i): số lượng chỉ số 0 <= k <= i thỏa mãn ak = ai. Tính toàn bộ f(0), f(1),...f(n-1)
+ 3. 
+ */
