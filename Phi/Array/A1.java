@@ -29,6 +29,10 @@ class TaskC {
 		int cnt = 1;
 		int max = 0;
 
+		if (n == 1) {
+			out.println(1);
+			return;
+		}
 		for (int i = 1; i < n - 1; ++i) {
 			temp = in.nextInt();
 			if (temp < last) {
