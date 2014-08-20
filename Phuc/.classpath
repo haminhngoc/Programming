@@ -60,6 +60,14 @@
 	<classpathentry kind="src" path="CodeForces-LittlePonyandExpectedMaximum-454C"/>
 	<classpathentry kind="src" path="CodeForces-Ping-Pong (Easy Version)-320B"/>
 	<classpathentry kind="src" path="CodeForces-Malek Dance Club-320C"/>
+	<classpathentry kind="src" path="CodeForces-4point polyline-452B"/>
+	<classpathentry kind="src" path="CodeForces-AB"/>
+	<classpathentry kind="src" path="CodeForces-Laptops-456A"/>
+	<classpathentry kind="src" path="CodeForces-Fedya and Maths-456B"/>
+	<classpathentry kind="src" path="CodeForces-Boredom-456C"/>
+	<classpathentry kind="src" path="CodeForces-Ciel and Flowers-322B"/>
+	<classpathentry kind="src" path="CodeForces=Ciel and Robot=322C"/>
+	<classpathentry kind="src" path="Array"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="NewContest/Demo/bin"/>
 </classpath>
