@@ -15,7 +15,6 @@ public class SerejaAndMirroring {
 		}
 		boolean isTrue=true;
 		int row = n;
-		int minimum = row;
 		while (isTrue) {
 			if (row % 2 == 0) {
 				row=row/2;
@@ -28,8 +27,7 @@ public class SerejaAndMirroring {
 							isTrue=false;
 						}
 					}
-				}
-				
+				}			
 			}
 			else {
 				System.out.print(row);
