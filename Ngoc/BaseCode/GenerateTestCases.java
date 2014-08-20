@@ -1,8 +1,21 @@
 import java.io.IOException;
+import java.util.Arrays;
 
 public class GenerateTestCases {
 	public static void main(String[] args) throws IOException {
-		generate433C(10);
+		//generate433C(10);
+		generate433D();
+	}
+	
+	public static void generate433D(){
+		int n = 400;
+		int m = 399;
+		System.out.println(n + " " + m);
+		for (int i = 0; i < n; i++) {
+			char[] arr = new char[m];
+			Arrays.fill(arr, '0');
+			System.out.println(new String(arr));
+		}
 	}
 
 	public static void generate433C(int number) {
