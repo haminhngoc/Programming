@@ -4,13 +4,13 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class P452B {
+public class P458C {
 	static InputStream is;
 	static PrintWriter out;
-	static String INPUT = "";
+	static String INPUT = "5 " + "1 2 1 2 1 2 2 1 0 0";
 
 	public static void main(String[] args) throws Exception {
-		oj = true;
+		// oj = true;
 		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
 		out = new PrintWriter(System.out);
 
@@ -21,28 +21,94 @@ public class P452B {
 	}
 
 	static void solve() {
-		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
-		// bat ky trong m bo bai ban dau
-		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
-		// conf laij
-		// Suy ra
-		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
-		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
-		// + xac suat chon khong phai a1 la (n-1)/n
-		// + trong do xac xuat loai A la (m-1)/(m*n-1)
-		// -- vi loai A con (m-1) trong tong so (m*n-1)
-		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
-		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
-		// (n-1)*(m-1)/n/(m*n-1)
-
 		int n = ni();
-		int m = ni();
-		double result = 1;
-		if (m > 1 || n > 1) {
-			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
-		}
-		System.out.println(result);
+		int MAX = 100001;
 
+		Candidate[] candidates = new Candidate[MAX];
+
+		for (int i = 0; i < n; i++) {
+			int candidate = ni();
+			int cost = ni();
+			Candidate can = candidates[candidate];
+			if (can == null) {
+				can = candidates[candidate] = new Candidate();
+			}
+			can.costs.add(cost);
+		}
+		candidates[0].isMe = true;
+
+		Arrays.sort(candidates, canComp);
+
+		int noCandidate = 0;
+		for (int i = MAX - 1; i >= 0; i--) {
+			if (candidates[i] != null) {
+				noCandidate = i + 1;
+				break;
+			}
+		}
+
+		for (int i = 0; i < noCandidate; i++) {
+			candidates[i].costs.sort(costCompDes);
+		}
+
+		int maxVoted = candidates[noCandidate - 1].costs.size();
+		int[] topDown = new int[maxVoted + 1];
+		Candidate me = null;
+		int meIndex;
+		int meVote = me.costs.size();
+		for (meIndex = noCandidate - 1; meIndex >= 0; meIndex--) {
+			Candidate can = candidates[meIndex];
+			if (can.isMe) {
+				me = can;
+				break;
+			}
+			for (int j = can.costs.size() - 1; j >= meVote; j--) {
+				topDown[j] += can.costs.get(j);
+			}
+		}
+
+		PriorityQueue<Integer> lowestCosts = new PriorityQueue<Integer>();
+		for (int i = meIndex - 1; i >= 0; i--) {
+			Candidate can = candidates[i];
+			for (int j = can.costs.size() - 1; j >= 0; j--) {
+				lowestCosts.add(can.costs.get(j));
+			}
+		}
+
+		PriorityQueue<Integer> curCosts = new PriorityQueue<Integer>();
+		int[] bottomUp = new int[maxVoted + 1];
+		
+		// Too tired to do more, I guess you have understood this idea		
+
+		int result = 0;
+		for (int i = maxVoted; i >= meIndex; i--) {
+			result = Math.max(result, topDown[i] + bottomUp[i]);
+		}
+
+		System.out.println(result);
+	}
+
+	static Comparator<Integer> costCompDes = new Comparator<Integer>() {
+		@Override
+		public int compare(Integer arg0, Integer arg1) {
+			return -Integer.compare(arg0, arg1);
+		}
+	};
+
+	static Comparator<Candidate> canComp = new Comparator<Candidate>() {
+		@Override
+		public int compare(Candidate arg0, Candidate arg1) {
+			if (arg0 == null)
+				return 1;
+			if (arg1 == null)
+				return -1;
+			return Integer.compare(arg0.costs.size(), arg1.costs.size());
+		}
+	};
+
+	static class Candidate {
+		List<Integer> costs = new ArrayList<Integer>();
+		boolean isMe = false;
 	}
 
 	/*****************************************************************

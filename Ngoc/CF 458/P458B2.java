@@ -4,45 +4,66 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class P452B {
+public class P458B2 {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
 
 	public static void main(String[] args) throws Exception {
 		oj = true;
-		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
+		is = System.in;
 		out = new PrintWriter(System.out);
 
 		long s = System.currentTimeMillis();
 		solve();
+
 		out.flush();
 		tr(System.currentTimeMillis() - s + "ms");
 	}
 
 	static void solve() {
-		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
-		// bat ky trong m bo bai ban dau
-		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
-		// conf laij
-		// Suy ra
-		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
-		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
-		// + xac suat chon khong phai a1 la (n-1)/n
-		// + trong do xac xuat loai A la (m-1)/(m*n-1)
-		// -- vi loai A con (m-1) trong tong so (m*n-1)
-		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
-		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
-		// (n-1)*(m-1)/n/(m*n-1)
-
-		int n = ni();
 		int m = ni();
-		double result = 1;
-		if (m > 1 || n > 1) {
-			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
-		}
-		System.out.println(result);
+		int n = ni();
 
+		int[] a = new int[m];
+		long totalA = 0;
+		for (int j = 0; j < m; j++) {
+			int value = ni();
+			totalA += value;
+			a[j] = value;
+		}
+
+		int[] b = new int[n];
+		long totalB = 0;
+		for (int i = 0; i < n; i++) {
+			int value = ni();
+			totalB += value;
+			b[i] = value;
+		}
+
+		Arrays.sort(a);
+		Arrays.sort(b);
+
+		if (a[m - 1] < b[n - 1]) {
+			int[] tempA = a;
+			a = b;
+			b = tempA;
+
+			int temp = n;
+			n = m;
+			m = temp;
+
+			long temTotal = totalA;
+			totalA = totalB;
+			totalB = temTotal;
+		}
+
+		long result = totalB;
+		for (int j = 0; j < m - 1; j++) {
+			result += Math.min(a[j], totalB);
+		}
+
+		System.out.println(result);
 	}
 
 	/*****************************************************************

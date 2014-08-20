@@ -1,58 +1,52 @@
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.*;
 
-public class P452B {
-	static InputStream is;
-	static PrintWriter out;
-	static String INPUT = "";
+public class P424C3 {
 
-	public static void main(String[] args) throws Exception {
-		oj = true;
-		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
-		out = new PrintWriter(System.out);
+	public static void main(String[] args) throws IOException {
+		is = System.in;
 
-		long s = System.currentTimeMillis();
-		solve();
-		out.flush();
-		tr(System.currentTimeMillis() - s + "ms");
-	}
+		int n = ni(); // 10^6
 
-	static void solve() {
-		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
-		// bat ky trong m bo bai ban dau
-		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
-		// conf laij
-		// Suy ra
-		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
-		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
-		// + xac suat chon khong phai a1 la (n-1)/n
-		// + trong do xac xuat loai A la (m-1)/(m*n-1)
-		// -- vi loai A con (m-1) trong tong so (m*n-1)
-		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
-		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
-		// (n-1)*(m-1)/n/(m*n-1)
-
-		int n = ni();
-		int m = ni();
-		double result = 1;
-		if (m > 1 || n > 1) {
-			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
+		int sum = 0;
+		for (int i = 0; i < n; i++) {
+			sum ^= ni();
 		}
-		System.out.println(result);
 
+		int len2 = n / 2 + 1;
+		int[] acc = new int[len2 + 1];
+		int cur = 0;
+		for (int i = 2; i < len2; i++) {
+			cur ^= (i - 1);
+			acc[i] = cur;
+
+			sum ^= acc[n % i + 1];
+			if (((n / i) & 0x01) == 0) {
+				sum ^= cur;
+			}
+		}
+		if ((n & 0x01) == 1) {
+			cur ^= len2 - 1;
+			len2++;
+		}
+		for (int i = len2; i <= n; i++) {
+			cur ^= (i - 1);
+			sum ^= cur;
+		}
+
+		System.out.println(sum);
 	}
 
 	/*****************************************************************
 	 ******************** BASIC READER *******************************
 	 *****************************************************************/
 
-	static byte[] inbuf = new byte[1024];
-	static int lenbuf = 0, ptrbuf = 0;
+	static InputStream is;
+	static private byte[] inbuf = new byte[1024];
+	static private int lenbuf = 0, ptrbuf = 0;
 
-	static int readByte() {
+	static private int readByte() {
 		if (lenbuf == -1)
 			throw new InputMismatchException();
 		if (ptrbuf >= lenbuf) {
@@ -68,36 +62,37 @@ public class P452B {
 		return inbuf[ptrbuf++];
 	}
 
-	static boolean isSpaceChar(int c) {
+	static private boolean isSpaceChar(int c) {
 		return !(c >= 33 && c <= 126);
 	}
 
-	static int skip() {
+	static private int skip() {
 		int b;
 		while ((b = readByte()) != -1 && isSpaceChar(b))
 			;
 		return b;
 	}
 
-	static double nd() {
+	static private double nd() {
 		return Double.parseDouble(ns());
 	}
 
-	static char nc() {
+	static private char nc() {
 		return (char) skip();
 	}
 
-	static String ns() {
+	static private String ns() {
 		int b = skip();
 		StringBuilder sb = new StringBuilder();
-		while (!(isSpaceChar(b))) {
+		while (!(isSpaceChar(b))) { // when nextLine, (isSpaceChar(b) && b !=
+									// ' ')
 			sb.appendCodePoint(b);
 			b = readByte();
 		}
 		return sb.toString();
 	}
 
-	static char[] ns(int n) {
+	static private char[] ns(int n) {
 		char[] buf = new char[n];
 		int b = skip(), p = 0;
 		while (p < n && !(isSpaceChar(b))) {
@@ -107,21 +102,21 @@ public class P452B {
 		return n == p ? buf : Arrays.copyOf(buf, p);
 	}
 
-	static char[][] nm(int n, int m) {
+	static private char[][] nm(int n, int m) {
 		char[][] map = new char[n][];
 		for (int i = 0; i < n; i++)
 			map[i] = ns(m);
 		return map;
 	}
 
-	static int[] na(int n) {
+	static private int[] na(int n) {
 		int[] a = new int[n];
 		for (int i = 0; i < n; i++)
 			a[i] = ni();
 		return a;
 	}
 
-	static int ni() {
+	static private int ni() {
 		int num = 0, b;
 		boolean minus = false;
 		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
@@ -141,7 +136,7 @@ public class P452B {
 		}
 	}
 
-	static long nl() {
+	private long nl() {
 		long num = 0;
 		int b;
 		boolean minus = false;
@@ -162,11 +157,4 @@ public class P452B {
 		}
 	}
 
-	static boolean oj = System.getProperty("ONLINE_JUDGE") != null;
-
-	static void tr(Object... o) {
-		if (!oj) {
-			System.out.println(Arrays.deepToString(o));
-		}
-	}
 }

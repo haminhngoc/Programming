@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class P452B {
+public class P456D {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -21,28 +21,66 @@ public class P452B {
 	}
 
 	static void solve() {
-		// Phan tich: Chon mot bai bat ky trong nhom cung giong nhu chon con bai
-		// bat ky trong m bo bai ban dau
-		// Khi chon lan 2, ta da biet mot con. Nhung chua biet gi ve n-1 con
-		// conf laij
-		// Suy ra
-		// Lan chon 1: xac xuat duoc loai A la m/(m*n) = 1/n, goi bai nay la a1
-		// Lan chon 2: xac suat duoc chinh xac a1 la 1/n
-		// + xac suat chon khong phai a1 la (n-1)/n
-		// + trong do xac xuat loai A la (m-1)/(m*n-1)
-		// -- vi loai A con (m-1) trong tong so (m*n-1)
-		// => xac suat loai A la 1/n(1/n + (n-1)/n * (m-1)/(m*n-1))
-		// => n loai tuong duong => xac xuat hai bai trung la 1/n +
-		// (n-1)*(m-1)/n/(m*n-1)
-
+		int CHARCOUNT = 'z' - 'a' + 1;
+		int MAX = 100001; // 10^5 + 1
 		int n = ni();
-		int m = ni();
-		double result = 1;
-		if (m > 1 || n > 1) {
-			result = (double)1 / n + (double)(m - 1) * (n - 1) / n / (n * m - 1);
+		int k = ni();
+
+		int[][] tree = new int[MAX][CHARCOUNT];
+		int nodeCount = 0;
+
+		for (int i = 0; i < n; i++) {
+			String s = ns();
+			int sLen = s.length();
+			int curNode = 0;
+			for (int j = 0; j < sLen; j++) {
+				int c = s.charAt(j) - 'a';
+				if (tree[curNode][c] == 0) {
+					tree[curNode][c] = ++nodeCount;
+				}
+				curNode = tree[curNode][c];
+			}
+		}
+
+		boolean[] canWin = new boolean[MAX + 1];
+		boolean[] canLose = new boolean[MAX + 1];
+		int branchCount = 0;
+		int cantWinCount = 0;
+		int cantLoseCount = 0;
+		for (int i = nodeCount; i >= 0; i--) {
+			cantWinCount = 0;
+			cantLoseCount = 0;
+			branchCount = 0;
+			for (int j = 0; j < CHARCOUNT; j++) {
+				int next = tree[i][j];
+				if (next > 0) {
+					branchCount++;
+					if (!canWin[next])
+						cantWinCount++;
+					if (!canLose[next])
+						cantLoseCount++;
+				}
+			}
+			if (branchCount == 0)
+				canLose[i] = true;
+			if (cantWinCount > 0)
+				canWin[i] = true;
+			if (cantLoseCount > 0)
+				canLose[i] = true;
+		}
+
+		String result = "";
+		String first = "First";
+		String second = "Second";
+
+		if (canWin[0] && canLose[0]) {
+			result = first;
+		} else if (canWin[0]) { // !canLose[0]
+			result = k % 2 == 0 ? second : first;
+		} else { // canLose[0] && !canWin[0]
+			result = second;
 		}
 		System.out.println(result);
-
 	}
 
 	/*****************************************************************
