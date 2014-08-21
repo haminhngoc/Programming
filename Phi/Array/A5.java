@@ -26,6 +26,7 @@ class TaskA {
 		int n = in.nextInt();
 		int[] a = new int[n];
 		int i = n - 1, j = n;
+		int it = 0;
 		for (int t = 0; t < n; t++) {
 			a[t] = in.nextInt();
 		}
@@ -36,11 +37,12 @@ class TaskA {
 		for (int t = n - 1; t > 0; t--) {
 			if (a[t] > max) {
 				max = a[t];
-				j = t + 1;
+				it = t + 1;
 			}
 			if (max - a[t - 1] > maxD) {
 				maxD = max - a[t - 1];
 				i = t;
+				j = it;
 			}
 		}
 		out.println(i + " " + j);
