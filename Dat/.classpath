@@ -21,6 +21,12 @@
 	<classpathentry kind="src" path="CodeForce_451_B"/>
 	<classpathentry kind="src" path="CodeForce_451_C"/>
 	<classpathentry kind="src" path="CodeForce_451_D"/>
+	<classpathentry kind="src" path="CodeForce_431_C"/>
+	<classpathentry kind="src" path="CodeForce_454_A"/>
+	<classpathentry kind="src" path="CodeForce_454_B"/>
+	<classpathentry kind="src" path="CodeForce_454_C"/>
+	<classpathentry kind="src" path="BaseCode"/>
+	<classpathentry kind="src" path="Array"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
