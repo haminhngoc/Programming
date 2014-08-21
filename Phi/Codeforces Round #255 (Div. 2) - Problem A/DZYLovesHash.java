@@ -7,6 +7,10 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.*;
 
+import sun.awt.RepaintArea;
+
+import com.sun.media.sound.RIFFInvalidDataException;
+
 public class DZYLovesHash {
 
 	public static void main(String[] args) {
@@ -15,53 +19,26 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskB solver = new TaskB();
+		TaskC solver = new TaskC();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskB {
+class TaskC {
 
+	void swap(Integer a,Integer b)
+	{
+		Integer temp = new Integer(a);
+		a = new Integer(b);
+		b = new Integer(temp);
+	}
+	
 	public void solve(InputReader in, PrintWriter out) {
-		long n,m,k;
-		long l,w;
-		long ans = 0;
-		n = in.nextLong(); // 1e9
-		m = in.nextLong(); // 1e9
-		k = in.nextLong(); // 1e9
-		if (k > (n-1) + (m-1))
-		{
-			out.println("-1");
-			return;
-		}
-		l = m > n ? m : n;
-		w = m > n ? n : m;
-		if (k > (l-1))
-		{
-			long temp = k - (l -1);
-			if(w%(temp+1) == 0)
-			{
-				ans = (w/(temp+1));
-			}
-			else
-			{
-				ans = w%(w/(temp+1));
-			}
-		}
-		else if (l%(k+1) == 0)
-		{
-			ans = (l/(k+1)) * w;
-		}
-		else if(w%(k+1) == 0)
-		{
-			ans = (w/(k+1)) * l;
-		}
-		else
-		{
-			ans = (l/(k+1))*w;
-		}
-		out.println(ans);
+		Integer a = 5;
+		Integer b = 4;
+		swap(a,b);
+		out.println(a + " " + b);
 	}
 }
 
