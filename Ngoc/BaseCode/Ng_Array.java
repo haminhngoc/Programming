@@ -42,6 +42,38 @@ public class Ng_Array {
 		return maxLen;
 	}
 
+	// Longest increase sub-sequence
+	static int LongestIncrease2(int[] source) {
+		int maxLen = 1;
+		int maxPos = 0;
+		int pre = 0;
+		int len = source.length;
+		for (int i = 0; i < len - 1; i++) {
+			if ( source[i] > source[i + 1]) {
+				if (maxLen < i - pre + 1) {
+					maxLen = i - pre + 1;
+					maxPos = pre;
+				}
+				pre = i+1;
+			} else if (i == len - 2 && source[i] <= source[i + 1]) {
+				if (maxLen < i + 1 - pre + 1) {
+					maxLen = i + 1 - pre + 1;
+					maxPos = pre;
+				}
+				pre = i+1;
+			}
+		}
+		for (int i = 0; i < len; i++) {
+			if (i == maxPos)
+				printTest("(");
+			printTest(source[i] + " ");
+			if (i == maxPos + maxLen - 1)
+				printTest(")");
+		}
+		printTestLn("");
+		return maxLen;
+	}
+
 	// Maximum increase sub-sequence
 	static int MaximumIncrease(int[] source) {
 		int max = 0;
@@ -79,6 +111,41 @@ public class Ng_Array {
 		return max;
 	}
 
+	// Maximum increase sub-sequence
+	static int MaximumIncrease2(int[] source) {
+		int max = 0;
+		int maxLen = 1;
+		int maxPos = 0;
+		int pre = 0;
+		int len = source.length;
+		for (int i = 0; i < len - 1; i++) {
+			if (source[i] > source[i + 1]) {
+				if (max < source[i] - source[pre]) {
+					max = source[i] - source[pre];
+					maxPos = pre;
+					maxLen = i - pre + 1;
+				}
+				pre = i+1;
+			} else if (i == len - 2 && source[i] <= source[i + 1]) {
+				if (max < source[i + 1] - source[pre]) {
+					max = source[i + 1] - source[pre];
+					maxPos = pre;
+					maxLen = i + 1 - pre + 1;
+				}
+				pre = i+1;
+			}
+		}
+		for (int i = 0; i < len; i++) {
+			if (i == maxPos)
+				printTest("(");
+			printTest(source[i] + " ");
+			if (i == maxPos + maxLen - 1)
+				printTest(")");
+		}
+		printTestLn(" = " + max);
+		return max;
+	}
+	
 	// Maximum Bottom to Top
 	static int MBT(int[] source) {
 		int len = source.length;
@@ -230,16 +297,21 @@ public class Ng_Array {
 				{ 2, -1, 2, -1, -1, 2, 1, -1 }, { 2, -1, 2, -1, 2, -2, 1, -1 },
 				{ 2, 1, 0, -1, -2, -3 } };
 
-		// for (int i = 0; i < samples.length; i++) {
-		// int[] source = samples[i];
-		// LongestIncrease(source);
-		// }
-		// printTestLn("-------------------");
-		// for (int i = 0; i < samples.length; i++) {
-		// int[] source = samples[i];
-		// MaximumIncrease(source);
-		// }
+		for (int i = 0; i < samples.length; i++) {
+		int[] source = samples[i];
+		LongestIncrease2(source);
+		}
+		 printTestLn("-------------------");
+		 for (int i = 0; i < samples.length; i++) {
+		 int[] source = samples[i];
+		 MaximumIncrease(source);
+		 }
 
+		 printTestLn("-------------------");
+		 for (int i = 0; i < samples.length; i++) {
+		 int[] source = samples[i];
+		 MaximumIncrease2(source);
+		 }
 		// printTestLn("-------------------");
 		// for (int i = 0; i < samples.length; i++) {
 		// int[] source = samples[i];
