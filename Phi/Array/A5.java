@@ -4,14 +4,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.math.BigInteger;
 import java.util.*;
 
-import sun.awt.RepaintArea;
-
-import com.sun.media.sound.RIFFInvalidDataException;
-
-public class DZYLovesHash {
+public class A5 {
 
 	public static void main(String[] args) {
 
@@ -19,26 +14,39 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskC solver = new TaskC();
+		TaskA solver = new TaskA();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskC {
+class TaskA {
 
-	void swap(Integer a,Integer b)
-	{
-		Integer temp = new Integer(a);
-		a = new Integer(b);
-		b = new Integer(temp);
-	}
-	
 	public void solve(InputReader in, PrintWriter out) {
-		Integer a = 5;
-		Integer b = 4;
-		swap(a,b);
-		out.println(a + " " + b);
+		int n = in.nextInt();
+		int[] a = new int[n];
+		int i = n - 1, j = n;
+		int it = 0;
+		for (int t = 0; t < n; t++) {
+			a[t] = in.nextInt();
+		}
+
+		long max = Long.MIN_VALUE;
+		long maxD = Long.MIN_VALUE;
+		
+		for (int t = n - 1; t > 0; t--) {
+			if (a[t] > max) {
+				max = a[t];
+				it = t + 1;
+			}
+			if (max - a[t - 1] > maxD) {
+				maxD = max - a[t - 1];
+				i = t;
+				j = it;
+			}
+		}
+		out.println(i + " " + j);
+
 	}
 }
 
