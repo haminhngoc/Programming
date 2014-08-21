@@ -1,73 +1,93 @@
-
+/**
+ * 
+ */
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 
+/**
+ * @author duy
+ * 
+ */
 public class A1 {
-	static String INPUT = "3\n" + "10\n" + "2 1 -1 2 5 8 9 1 2 3\n" + "5\n"
-			+ "5 4 3 2 1\n" + "10\n" + "1 2 3 2 1 10 100 1000 10000 100000\n";
+	static String INPUT = "3 " + "10 " + "2 1 -1 2 5 8 9 1 2 3 " + "5 "
+			+ "5 4 3 2 1 " + "10 " + "1 2 3 2 1 10 100 1000 10000 100000 ";
 
-	public static void main(String[] args) {
-		oj = false; // Fasle to run 3 testcases, True to type input.
-		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
-		input();
-		long s = System.currentTimeMillis();
-		solve();
-		tr(System.currentTimeMillis() - s + "ms");
+	public enum Modes {
+		TEST, CODEFORCES, ACM;
+	};
+
+	static public void setMode(Modes mode) {
+		switch (mode) {
+		case TEST:
+			is = new ByteArrayInputStream(INPUT.getBytes());
+			break;
+		case CODEFORCES:
+			is = System.in;
+			oj = true;
+			break;
+		case ACM:
+			is = System.in;
+			isACM = true;
+			break;
+		default:
+			System.out.println("This mode is not available ! ");
+		}
 	}
 
-	static void solve() {
-		int max;
-		int count;
-		int end;
-		StringBuilder res = new StringBuilder();
-
+	public static void main(String[] args) {
+		setMode(Modes.TEST);
+		input();
+		long s = 0;
 		for (int i = 0; i < nTestCases; i++) {
-			max = 0;
-			count = 0;
-			end = 0;
-			if (n[i] == 1) {
-				res.append(a[i][0] + "\n");
-				continue;
-			}
-			for (int j = 0; j < n[i]; j++) {
-				count++;
-				if (a[i][j] > a[i][j + 1]) {
-					if (count > max) {
-						max = count;
-						end = j;
-					}
-					count = 0;
-				}
-			}
-			for (int j = end - max + 1; j <= end; j++) {
-				res.append(a[i][j] + " ");
-			}
-			res.append("\n");
+			s = System.currentTimeMillis();
+			solve(a[i]);
+			tr(System.currentTimeMillis() - s + " ms");
 		}
-		System.out.println(res);
+	}
+
+	static void solve(int s[]) {
+		int max = 1;
+		int pos = 0;
+		int end = 0;
+		int length = s.length;
+		int val = 0;
+
+		for (int i = 0; i < length - 1; i++) {
+			val = i - pos + 1;
+
+			if (i == length - 2 && s[i] <= s[i + 1]) {
+				val++;
+			}
+
+			if (s[i] > s[i + 1] || i == length - 2) {
+				if (val > max) {
+					max = val;
+					end = i == length - 2 ? i + 1 : i;
+				}
+				pos = i + 1;
+			}
+		}
+		printArray(s, end - max + 1, end);
 	}
 
 	/*********************************** INPUT *********************************************/
-	static int nTestCases; // number of testcases
+	static int nTestCases = 1; // number of testcases
 	static int[] n; // length of ith testcase
 	static int[][] a; // ith arrays
 
 	static void input() {
-		nTestCases = nextInt();
+		nTestCases = !oj ? nextInt() : 1;
 		n = new int[nTestCases];
 		a = new int[nTestCases][];
 		for (int i = 0; i < nTestCases; i++) {
 			n[i] = nextInt();
-			a[i] = new int[n[i] + 1];
-			for (int j = 0; j < n[i]; j++) {
-				a[i][j] = nextInt();
-			}
-			a[i][n[i]] = a[i][n[i] - 1] - 1;
+			a[i] = nextAi(n[i]);
 		}
 	}
 
@@ -180,10 +200,27 @@ public class A1 {
 	}
 
 	static boolean oj = System.getProperty("ONLINE_JUDGE") != null;
+	static boolean isACM = false;
 
 	static void tr(Object... o) {
-		if (!oj) {
+		if (!oj && !isACM) {
 			System.out.println(Arrays.deepToString(o));
 		}
+	}
+
+	/***************************************************************************************/
+
+	static void printArray(int[] a, int start, int end) {
+		int[] subArray = Arrays.copyOfRange(a, start, end + 1);
+		printArray(subArray);
+	}
+
+	static void printArray(int[] a) {
+		int length = a.length;
+		StringBuilder out = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			out.append(a[i] + " ");
+		}
+		System.out.println(out);
 	}
 }
