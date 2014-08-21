@@ -31,8 +31,8 @@ public class Prime {
 		bs.set(0, false);
 		bs.set(1);
 		bs.set(2);
-		primes.add(1);
 		for(int i = 2; i < max; i++)
+		primes.add(1);
 		{
 			if (bs.get(i))
 			{
