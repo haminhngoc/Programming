@@ -8,21 +8,31 @@ public class A6 {
 		int n = scan.nextInt();
 		int a[] = new int[n];
 		int arr[] = new int[n];
-		a[0] = scan.nextInt();
-		arr[0] = a[0];
+		arr[0] = scan.nextInt();
+		a[0] = arr[0];
 		for (int i = 1; i < n; i++) {
-			a[i] = scan.nextInt();
-			arr[i] = a[i] + arr[i - 1];
+			arr[i] = scan.nextInt();
+			a[i] = arr[i] + a[i - 1];
 		}
-		int max = 0, l = 0, r = 0;
-		for (int i = 0; i < n - 1; i++)
-			for (int j = n - 1; j > i; j--)
-				if ((arr[j] - arr[i]) > max) {
-					max = arr[j] - arr[i];
-					l = i;
-					r = j;
+		int max = 0, l = 0, r = 0, imin = 0, imax = 0;
+		for (int i = 1; i < n; i++) {
+			if (a[i] > a[r])
+				r = i;
+			if (a[i] < a[l]) {
+				if (a[r] - a[l] > max) {
+					imin = l;
+					imax = r;
+					max = a[r] - a[l];
 				}
-		System.out.println(l + " " + r);
+				l = i;
+				r = i;
+			}
+		}
+		if (a[r] - a[l] > max) {
+			imin = l;
+			imax = r;
+		}
+		System.out.println(imin + " " + imax);
 		scan.close();
 	}
 
