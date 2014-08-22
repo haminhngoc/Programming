@@ -9,27 +9,29 @@ public class A5 {
 		int a[] = new int[n];
 		for (int i = 0; i < n; i++)
 			a[i] = scan.nextInt();
-		int max = 0, l = 0, r = 0, imin=0, imax=0;
-		for (int i = 1; i < n ; i++)
-			{
-				if(a[i]>a[r]) r=i;
-				if(a[i]<a[l])
-				{
-					if(a[r]-a[l]>max)
-					{
-						imin=l;
-						imax=r;
-						max=a[r]-a[l];
-					}
-					l=i;
-					r=i;
+		int max = Integer.MIN_VALUE, l = 0, r = 1, imin = 0, imax = 0;
+		for (int i = 1; i < n; i++) {
+			if (a[i] > a[r]) {
+				r = i;
+				if (a[r] - a[l] > max) {
+					imin = l;
+					imax = r;
 				}
 			}
-		if(a[r]-a[l]>max)
-		{
-			imin=l;
-			imax=r;
+			if (a[i] < a[l]) {
+				if (a[r] - a[l] > max) {
+					imin = l;
+					imax = r;
+					max = a[r] - a[l];
+				}
+				l = i;
+				if (i < n - 1)
+					r = i + 1;
+			}
 		}
+
+		if (imax == 0)
+			imax = 1;
 		System.out.println(imin + " " + imax);
 		scan.close();
 	}
