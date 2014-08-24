@@ -387,10 +387,32 @@ Bài tập Array (String), SubArray (String) liên tục. Tất cả bài tập 
 Yêu cầu khó hơn:
  4, 5, 6: Nếu có nhiều kết quả, xuất ra kết quả ngắn nhất
 
-Let modify: Tìm dãy con liên tục, có độ chênh lệch lớn nhất (hiệu phần tử lớn nhất và phần tử nhỏ nhất)
  
  Array không liên tục
+ Class 1:
  1. Có bao nhiêu cách chọn danh sách con trong dãy sao cho không có phần tử nào trong danh sách con trùng nhau
  2. f(i): số lượng chỉ số 0 <= k <= i thỏa mãn ak = ai. Tính toàn bộ f(0), f(1),...f(n-1)
+ 3. Cho n ruồi giấm đực kích thước a1, a2,...an. Và n ruồi giấm cái kích thước b1, b2,...bn.
+ 	Nếu ghép cặp một ruồi giấm ai, và bj sẽ sinh ra con có kích thươc sqrt(ai*bj).
+ 	Hãy ghép chúng thành n cặp sao cho tổng kích thước các con là lớn nhất.
+ 	Kết quả nhỏ nhất được không?
+ 4. Cho dãy không âm, tìm tổng lớn nhất dãy con sao cho không có hai phân tử nào đứng liên tiếp. App dụng cho CF256C
+ 	Giải quyết bài toán khi có số âm?
+ 
+ Class 2:
+ 1. Tìm dãy con không nhất thiết liên tục, tăng dài nhất
+ 2. 
+ 
+ 
+ So sánh hai dãy con:
+ Class 1:
+ 1. Ghép cặp |ha-hb| < K => Số cặp nhiều nhiều nhất.
+ 2. Cho hai dãy A, B. a có thể ghép cặp với B khi a-k1 < b < a+k2. Tính tổng số cách chọn ra một cặp
  3. 
+ 
+ 
+ Class 2:
+ 1. lcs
+ 2. 
+ 
  */
