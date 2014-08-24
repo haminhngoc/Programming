@@ -4,42 +4,41 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class WonderRoom {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
-		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
 
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
+		long n = nextLong();
+		long a = nextLong();
+		long b = nextLong();
+		long min = Math.min(a, b);
+		long max = Math.max(a, b);
+		if (a * b >= 6 * n) {
+			System.out.println(a * b);
+			System.out.println(a + " " + b);
+		} else {
+			long temp = 6 * n;
+			long end = (6 * n + min);
 
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
+			for (; temp <= end; ++temp) {
+				long t = (long) Math.sqrt(temp);
 
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
+				for (long i = min; i <= t; ++i) {
+					if (temp % i == 0 && temp / i >= max) {
+						if (b >= a) {
+							System.out.println(temp);
+							System.out.println(i + " " + (temp / i));
+							return;
+						} else {
+							System.out.println(temp);
+							System.out.println((temp / i) + " " + i);
+							return;
+						}
+					}
 				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
 			}
 		}
-		System.out.println(iR + " " + jR);
 
 	}
 

@@ -4,43 +4,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class PashMarkAndFlowers {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
 		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
-
-		int iR = 0;
-		int jR = 1;
 		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		long countMin = 0;
+		long countMax = 0;
+		//int temp = nextInt();
+		int temp;
+		for (int i = 0; i < n; ++i) {
+			temp = nextInt();
+			if (temp > max) {
+				max = temp;
+				countMax = 1;
+			} else if (temp == max) {
+				countMax++;
+			}
 
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+			if (temp < min) {
+				min = temp;
+				countMin = 1;
+			} else if (temp == min) {
+				countMin++;
 			}
 		}
-		System.out.println(iR + " " + jR);
-
+		if (max == min) {
+			System.out.println(0 + " " + countMax * (countMax - 1) / 2);
+		} else {
+			System.out.println((max - min) + " " + countMax * countMin);
+		}
 	}
 
 	static BufferedReader reader;
@@ -69,4 +64,5 @@ public class A5 {
 	static Double NextDouble() throws IOException {
 		return Double.parseDouble(next());
 	}
+
 }

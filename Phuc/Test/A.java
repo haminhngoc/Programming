@@ -4,42 +4,32 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class A {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
+
 		int n = nextInt();
-		int a[] = new int[n];
+
+		int s = nextInt();
+		int max = -1;
 		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
+			int x = nextInt();
+			int y = nextInt();
 
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+			if (x * 100 + y > s * 100) {
+				continue;
+			}
+			if (y == 0 && max != -1) {
+				continue;
+			} else if (y == 0 && max == -1) {
+				max = 0;
+			} else {
+				max = Math.max(max, 100 - y);
 			}
 		}
-		System.out.println(iR + " " + jR);
+
+		System.out.println(max);
 
 	}
 

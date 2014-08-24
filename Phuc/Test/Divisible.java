@@ -4,42 +4,34 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+class Divisible {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
 		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
-
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
+		int k = nextInt();
+		boolean a[][] = new boolean[n][k];
+		int t = nextInt();
+		a[0][t % k] = true;
 		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
+			t = nextInt();
+			for (int j = 0; j < k; ++j) {
+				if (a[i - 1][j]) {
+					if (j + t < 0) {
+						a[i][(k + (j + t) % k) % k] = true;
+					} else {
+						a[i][(j + t) % k] = true;
+					}
+
+					if (j - t < 0) {
+						a[i][(k + (j - t) % k) % k] = true;
+					} else {
+						a[i][(j - t) % k] = true;
+					}
 				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
 			}
 		}
-		System.out.println(iR + " " + jR);
+		System.out.println(a[n - 1][0] ? "Divisible" : "Not divisible");
 
 	}
 

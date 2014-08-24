@@ -4,43 +4,45 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class NumberofWays {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
+
 		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
+		long a[] = new long[n + 1];
+		for (int i = 1; i <= n; ++i) {
+			long t = nextLong();
+			a[i] = a[i - 1] + t;
 		}
-
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
+		if (a[n] % 3 != 0) {
+			System.out.println(0);
 			return;
 		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+		long s = a[n] / 3;
+		int count1[] = new int[n + 1];
+		int count2[] = new int[n + 2];
+		
+		int count = 0;
+		for (int i = 1; i <= n; ++i) {
+			if (a[i] == s) {
+				count++;
+				count1[i] = count;
 			}
 		}
-		System.out.println(iR + " " + jR);
-
+		count = 0;
+		for (int i = n; i >= 1; --i) {
+			if (a[i] - a[i - 1] == s) {
+				count++;
+				count2[i] = count;
+			}
+		}
+		long r = 0;
+		for (int i = n; i >= 1; --i) {
+			if(a[i]==s){
+				
+			}
+		}
 	}
 
 	static BufferedReader reader;
