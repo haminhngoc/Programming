@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="codeforces- New Year Candles"/>
+	<classpathentry kind="src" path="Codeforces Round #254 (Div. 2) Problem A"/>
+	<classpathentry kind="src" path="Codeforces_Round#FFDiv2_A_DZY Loves Hash"/>
+	<classpathentry kind="src" path="Codeforces_Round#FFDiv2_B_DZY Loves Strings"/>
+	<classpathentry kind="src" path="Codeforces_Round#FFDiv2_C_DZY Loves Sequences"/>
+	<classpathentry kind="src" path="CodeForces_421_A_Pasha and Hamsters"/>
+	<classpathentry kind="src" path="CodeForces_421_B_Start Up"/>
+	<classpathentry kind="src" path="CodeForce_257_Div2_A_Jzzhu and Children"/>
+	<classpathentry kind="src" path="CodeForce_257_Div2_B_Jzzhu and Sequences"/>
+	<classpathentry kind="src" path="CodeForce_257_Div2_C_Jzzhu and Chocolate"/>
+	<classpathentry kind="src" path="CodeForce_424_A"/>
+	<classpathentry kind="src" path="CodeForce_424_B"/>
+	<classpathentry kind="src" path="CodeForce_424_C"/>
+	<classpathentry kind="src" path="CodeForce_426_A"/>
+	<classpathentry kind="src" path="CodeForce_426_B"/>
+	<classpathentry kind="src" path="CodeForce_427_A"/>
+	<classpathentry kind="src" path="CodeForce_451_A"/>
+	<classpathentry kind="src" path="CodeForce_451_B"/>
+	<classpathentry kind="src" path="CodeForce_451_C"/>
+	<classpathentry kind="src" path="CodeForce_451_D"/>
+	<classpathentry kind="src" path="CodeForce_431_C"/>
+	<classpathentry kind="src" path="CodeForce_454_A"/>
+	<classpathentry kind="src" path="CodeForce_454_B"/>
+	<classpathentry kind="src" path="CodeForce_454_C"/>
+	<classpathentry kind="src" path="BaseCode"/>
+	<classpathentry kind="src" path="Array"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

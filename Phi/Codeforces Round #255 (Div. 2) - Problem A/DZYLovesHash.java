@@ -4,7 +4,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+<<<<<<< HEAD
+=======
+import java.math.BigInteger;
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 import java.util.*;
+
+import sun.awt.RepaintArea;
+
+import com.sun.media.sound.RIFFInvalidDataException;
 
 public class DZYLovesHash {
 
@@ -20,6 +28,7 @@ public class DZYLovesHash {
 	}
 }
 
+<<<<<<< HEAD
 class TaskE {
 	List<Integer>[] g;
 	int[] parents;
@@ -84,6 +93,22 @@ class TaskE {
 			if (parents[u] == -1)
 				dfs(u, i);
 		}
+=======
+class TaskC {
+
+	void swap(Integer a,Integer b)
+	{
+		Integer temp = new Integer(a);
+		a = new Integer(b);
+		b = new Integer(temp);
+	}
+	
+	public void solve(InputReader in, PrintWriter out) {
+		Integer a = 5;
+		Integer b = 4;
+		swap(a,b);
+		out.println(a + " " + b);
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 	}
 
 	private int gcd(int a, int b) {

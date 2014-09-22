@@ -11,6 +11,25 @@
 	<classpathentry kind="src" path="Codeforces Round #FF (Div. 2) - Problem B"/>
 	<classpathentry kind="src" path="Codeforces Round #FF (Div. 2) - Problem C"/>
 	<classpathentry kind="src" path="Codeforces Round #FF (Div. 2) - Problem D"/>
+	<classpathentry kind="src" path="Codeforces Round #231 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #241 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #242 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #243 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #244 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #245 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #246 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #248 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #249 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #249 (Div. 2) - Problem C"/>
+	<classpathentry kind="src" path="Codeforces Round #254 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="Codeforces Round #256 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #256 (Div. 2) - Problem C"/>
+	<classpathentry kind="src" path="Codeforces Round #256 (Div. 2) - Problem D"/>
+	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem A"/>
+	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem B"/>
+	<classpathentry kind="src" path="Codeforces Round #257 (Div. 2) - Problem C"/>
+	<classpathentry kind="src" path="Array"/>
+	<classpathentry kind="src" path="Arrays"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

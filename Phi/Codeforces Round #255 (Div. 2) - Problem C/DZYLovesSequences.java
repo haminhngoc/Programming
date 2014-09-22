@@ -52,7 +52,11 @@ public class DZYLovesSequences {
 		Integer[] order = new Integer[n];
 		for (int i = 0; i < n; i++)
 			order[i] = i;
+<<<<<<< HEAD
 		//Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
+=======
+	//	Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 		int[] sa = new int[n];
 		int[] classes = new int[n];
 		for (int i = 0; i < n; i++) {
@@ -125,7 +129,12 @@ public class DZYLovesSequences {
 					throw new RuntimeException();
 			}
 		}
+<<<<<<< HEAD
 		System.out.println("Test passed");	
+=======
+		System.out.println("Test passed");
+		
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 		int[] arr = new int[100000];
 		int n;
 		int left = 0, mid = 0;
@@ -174,5 +183,9 @@ public class DZYLovesSequences {
 		System.out.println(longest);
 =======
 		System.out.println(max);*/
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 	}
 }

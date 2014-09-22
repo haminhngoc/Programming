@@ -9,7 +9,7 @@
 	<classpathentry kind="src" path="The Child and Homework"/>
 	<classpathentry kind="src" path="Lucky Sum of Digits"/>
 	<classpathentry kind="src" path="Mafia"/>
-	<classpathentry excluding="src/|Helpful Maths/|Cinema Line/|Valera and Plates/|IQTest/|Anton and Letters/|The Child and Homework/|Lucky Sum of Digits/|Mafia/" kind="src" path=""/>
+	<classpathentry kind="src" path="#248 (Div. 2) - ProblemA"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
