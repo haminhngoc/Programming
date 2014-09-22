@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.StringTokenizer;
 import java.util.*;
 
 public class DZYLovesHash {
@@ -15,47 +14,84 @@ public class DZYLovesHash {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		TaskB solver = new TaskB();
+		TaskE solver = new TaskE();
 		solver.solve(in, out);
 		out.close();
 	}
 }
 
-class TaskB {
+class TaskE {
+	List<Integer>[] g;
+	int[] parents;
+	int[] value;
+	int n;
+
 	public void solve(InputReader in, PrintWriter out) {
-		int n,s;
 		n = in.nextInt();
-		s = in.nextInt();
-		List<Point> arrK = new ArrayList<Point>();
-		Point k = new Point();
-		double distance = 0;
-		double x,y;
-		
-		for(int i =0; i < n; i++)
-		{
-			x = in.nextDouble();
-			y = in.nextDouble();
-			k.distance = Math.sqrt(x+y);
-			k.population = in.nextLong();
+		int q = in.nextInt();
+		g = new ArrayList[n];
+		parents = new int[n];
+		value = new int[n];
+
+		Arrays.fill(parents, -1);
+		for (int i = 0; i < n; i++) {
+			g[i] = new ArrayList<Integer>();
+			value[i] = in.nextInt();
 		}
-		Collections.sort(arrK, new Comparator<Point>() {
-		    public int compare(Point p1, Point p2) {
-		        return p1.distance > p2.distance ? 1: -1;
-		    }
-		});
-		for(int i =0; i < n; i++)
-		{
-			
+
+		int vi;
+		int ui;
+		for (int i = 0; i < n - 1; i++) {
+			vi = in.nextInt() - 1;
+			ui = in.nextInt() - 1;
+			g[vi].add(ui);
+			g[ui].add(vi);
+		}
+
+		dfs(0, 0);
+		parents[0] = -1;
+		int v, w, type;
+		int max;
+		int k;
+		for (int i = 0; i < q; i++) {
+			type = in.nextInt();
+			if (type == 1) {
+				max = -1;
+				v = in.nextInt() - 1;
+				k = parents[v];
+				while(k != -1)
+				{
+	//				out.println("dfs " + k);
+					if(gcd(value[k],value[v]) > 1)
+					{
+						max = Math.max(max, k+1);
+					}
+					k = parents[k];
+				}
+				out.println(max);
+				
+			} else {
+				v = in.nextInt() - 1;
+				w = in.nextInt();
+				value[v] = w;
+			}			
 		}
 	}
-}
 
-class Point
-{
-	double distance;
-	long population;
-}
+	private void dfs(int i, int parent) {
+		parents[i] = parent;
+		for (int u : g[i]) {
+			if (parents[u] == -1)
+				dfs(u, i);
+		}
+	}
 
+	private int gcd(int a, int b) {
+		if (a == 0)
+			return b;
+		return gcd(b % a, a);
+	}
+}
 
 class InputReader {
 	public BufferedReader reader;
@@ -84,8 +120,9 @@ class InputReader {
 	public long nextLong() {
 		return Long.parseLong(next());
 	}
-	public float nextDouble(){
-		return (float) Double.parseDouble(next());
+
+	public double nextDouble() {
+		return Double.parseDouble(next());
 	}
 
 }
