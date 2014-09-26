@@ -52,7 +52,11 @@ public class DZYLovesSequences {
 		Integer[] order = new Integer[n];
 		for (int i = 0; i < n; i++)
 			order[i] = i;
+<<<<<<< HEAD
+		//Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
+=======
 	//	Arrays.sort(order, (a, b) -> Character.compare(S.charAt(a), S.charAt(b)));
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 		int[] sa = new int[n];
 		int[] classes = new int[n];
 		for (int i = 0; i < n; i++) {
@@ -106,7 +110,7 @@ public class DZYLovesSequences {
 		System.out.println("lcp = " + Arrays.toString(lcp(sa1, s1)));
 
 		// random test
-		Random rnd = new Random(1);
+	/*	Random rnd = new Random(1);
 		for (int step = 0; step < 100000; step++) {
 			int n = rnd.nextInt(100) + 1;
 			StringBuilder s = new StringBuilder();
@@ -125,49 +129,63 @@ public class DZYLovesSequences {
 					throw new RuntimeException();
 			}
 		}
+<<<<<<< HEAD
+		System.out.println("Test passed");	
+=======
 		System.out.println("Test passed");
 		
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 		int[] arr = new int[100000];
+		int n;
+		int left = 0, mid = 0;
+		int longest = 2;
+		
 		int[] longest = new int[100000];
 		int n, max = 2;
 		int lastEnd = 0;
 		int hasMistakeAt = 0;
 		int longestSub = 2;
-	/*	
+		
+>>>>>>> 3163f2619b87728cf8eeb74f07acd284ab21eaac
 		Scanner sc = new Scanner(System.in);
 		n= sc.nextInt();
 		arr[0] = sc.nextInt();
 		arr[1] = sc.nextInt();
 		if (arr[0] > arr[1])
 		{
-			hasMistakeAt = 1;
+			mid = 1;
 		}
-		longest[0] = 1;
-		longest[1] = 2;
 		
 		for (int i = 2; i < n; i++)
 		{
 			arr[i] = sc.nextInt();
-			if (arr[i] >= arr[i-1] &&  hasMistakeAt != 0)
+			if (arr[i] < arr[i-1] && arr[i] >= arr[i-2]) // level 1
 			{
-				longestSub =  longestSub > i- lastEnd + 1 ? longestSub : i- lastEnd + 1;
-				lastEnd = i;
+				if (mid != left)
+				{
+					longest = longest > i - left + 1 ? longest : i -left + 1;
+					left = mid;
+					mid = i;
+				}
+				else
+				{
+					mid = i;
+				}
 			}
-			else if (noMistake)
+			if (arr[i] < arr[i-2]) // level 2
 			{
-				longest[i] = longest[i-1] + 1;
-				noMistake = false;
-			}
-			else
-			{
-				longest[i] = longest[i-1];			
-			}
-			if (longest[i] > max)
-			{
-				max = longest[i];
+				longest = longest > i - left + 1 ? longest : i -left + 1;
+				left = i -1;
+				mid = i - 1;
 			}
 		}
+<<<<<<< HEAD
+		System.out.println(longest);
+=======
 		System.out.println(max);*/
+<<<<<<< HEAD
+=======
 		
+>>>>>>> 077728ba771defb07b906ed45bc48aaa8a6e72f5
 	}
 }
