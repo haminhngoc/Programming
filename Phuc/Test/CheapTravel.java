@@ -4,42 +4,27 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class CheapTravel {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
 		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
+		int m = nextInt();
+		int a = nextInt();
+		int b = nextInt();
 
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+		long result = 0;
+		if (a <= ((float) b) / ((float) m)) {
+			System.out.println(a * n);
+		} else {
+			result = n / m * b;
+			if (n % m * a >= b) {
+				result += b;
+			} else {
+				result += n % m * a;
 			}
+			System.out.println(result);
 		}
-		System.out.println(iR + " " + jR);
 
 	}
 

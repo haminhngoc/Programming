@@ -4,43 +4,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class PashmakandGarden {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
-		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
-
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
+		int x1 = nextInt();
+		int y1 = nextInt();
+		int x2 = nextInt();
+		int y2 = nextInt();
+		if (x1 == x2) {
+			System.out.println((x1 + (y2 - y1)) + " " + y1 + " "
+					+ (x1 + (y2 - y1) + " " + y2));
+		} else if (y2 == y1) {
+			System.out.println(x1 + " " + (y1 + (x2 - x1)) + " " + x2 + " "
+					+ (y2 + (x2 - x1)));
+		} else if (Math.abs(x2 - x1) == Math.abs(y2 - y1)) {
+			System.out.println(x1 + " " + y2 + " " + x2 + " " + y1);
+		} else {
 			System.out.println(-1);
-			return;
 		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
-			}
-		}
-		System.out.println(iR + " " + jR);
-
 	}
 
 	static BufferedReader reader;

@@ -2,45 +2,48 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class LittleDimaandEquation {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
-		int n = nextInt();
-		int a[] = new int[n];
-		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
+		int a = nextInt();
+		int b = nextInt();
+		int c = nextInt();
 
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
+		PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
+		StringBuilder result = new StringBuilder();
+		int count = 0;
+		for (int i = 1; i <= 81; ++i) {
+			long temp = (long) Math.pow(i, a) * b;
+			long x = temp + c;
 
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+			if (x > 0 && x < 1000000000 && check(x, i)) {
+				result.append(x + " ");
+				count++;
 			}
-		}
-		System.out.println(iR + " " + jR);
 
+		}
+		System.out.println(count);
+		System.out.println(result);
+
+	}
+
+	static boolean check(long x, long i) {
+		int sum = 0;
+		while (x > 0) {
+			sum += x % 10;
+			x /= 10;
+		}
+
+		if (sum == i) {
+			return true;
+
+		} else {
+			return false;
+		}
 	}
 
 	static BufferedReader reader;

@@ -46,7 +46,6 @@ public class A7 {
 		if (checkMax && n - start > maxL) {
 			startMax = start;
 			maxL = n - start;
-
 		}
 
 		if (startMax == -1) {
