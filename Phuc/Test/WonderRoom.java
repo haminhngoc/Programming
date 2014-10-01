@@ -4,50 +4,42 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class CielAndRobot {
+public class WonderRoom {
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
 
-		int a = nextInt();
-		int b = nextInt();
-		char s[] = next().toCharArray();
-		int sLength = s.length;
+		long n = nextLong();
+		long a = nextLong();
+		long b = nextLong();
+		long min = Math.min(a, b);
+		long max = Math.max(a, b);
+		if (a * b >= 6 * n) {
+			System.out.println(a * b);
+			System.out.println(a + " " + b);
+		} else {
+			long temp = 6 * n;
+			long end = (6 * n + min);
 
-		int xChange = 0;
-		int yChange = 0;
-		int changeX[] = new int[sLength];
-		int changeY[] = new int[sLength];
-		for (int i = 0; i < sLength; ++i) {
-			if (s[i] == 'R') {
-				// xChange++;
+			for (; temp <= end; ++temp) {
+				long t = (long) Math.sqrt(temp);
 
-				changeX[i] = 1 + i > 0 ? changeX[i - 1] : 0;
-			} else if (s[i] == 'L') {
-				// xChange--;
-				changeX[i] = -1 + i > 0 ? changeX[i - 1] : 0;
-
-			} else if (s[i] == 'U') {
-				// yChange++;
-				changeY[i] = 1 + i > 0 ? changeY[i - 1] : 0;
-			} else {
-				// yChange--;
-				changeY[i] = -1 + i > 0 ? changeY[i - 1] : 0;
+				for (long i = min; i <= t; ++i) {
+					if (temp % i == 0 && temp / i >= max) {
+						if (b >= a) {
+							System.out.println(temp);
+							System.out.println(i + " " + (temp / i));
+							return;
+						} else {
+							System.out.println(temp);
+							System.out.println((temp / i) + " " + i);
+							return;
+						}
+					}
+				}
 			}
 		}
 
-		for (int i = 0; i < sLength; ++i) {
-
-		}
-	}
-
-	boolean check(int a, int b, int x, int y) {
-		if (a * x < 0 || b * y < 0 || (a != x && a * x == 0)
-				|| (b != y && b * y == 0) || (a / x != b / y)) {
-			return false;
-		}
-
-		return true;
 	}
 
 	static BufferedReader reader;

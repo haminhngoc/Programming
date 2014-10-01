@@ -27,8 +27,8 @@ public class A7 {
 	static void solve(int k) {
 		int[] s = a[k];
 		int length = n[k];
-		int left = k1[k];
-		int right = k2[k];
+		int right = Math.max( k1[k], k2[k]);
+		int left = Math.min(k1[k], k2[k]);
 		int count = 0;
 		int max = s[0];
 		int maxLength = 0;

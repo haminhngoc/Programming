@@ -4,43 +4,56 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-public class A5 {
+public class Present {
+	static long a[];
+	static int n;
+	static int m;
+	static int w;
 
 	public static void main(String[] args) throws IOException {
 		Init(System.in);
-		int n = nextInt();
-		int a[] = new int[n];
+		n = nextInt();
+		m = nextInt();
+		w = nextInt();
+
+		a = new long[n];
+		long max = Long.MIN_VALUE;
 		for (int i = 0; i < n; ++i) {
-			a[i] = nextInt();
-		}
-
-		int iR = 0;
-		int jR = 1;
-		int max = Integer.MIN_VALUE;
-
-		int tempI = 0;
-		int tempJ = 1;
-		if (n == 0) {
-			System.out.println(-1);
-			return;
-		}
-
-		for (int i = 1; i < n; ++i) {
-			if (a[i] >= a[tempJ]) {
-				tempJ = i;
-				if (a[tempJ] - a[tempI] > a[jR] - a[iR]) {
-					iR = tempI;
-					jR = tempJ;
-				}
-			} else if (a[i] < a[tempI]) {
-				tempI = i;
-				tempJ = i + 1;
+			a[i] = nextLong();
+			if (a[i] > max) {
+				max = a[i];
 			}
 		}
-		System.out.println(iR + " " + jR);
 
+		long left = 0;
+		long right = max + m + 1;
+
+		while (left < right) {
+			long mid = (left + right + 1) >> 1;
+			if (check(mid)) {
+				left = mid;
+
+			} else {
+				right = mid - 1;
+			}
+		}
+
+		System.out.println(left);
+	}
+
+	private static boolean check(long mid) {
+		long b[] = new long[n + w];
+		long up = 0;
+		long day = 0;
+		for (int i = 0; i < n; ++i) {
+			up -= b[i];
+			if (a[i] + up < mid) {
+				b[i + w] = mid - a[i] - up;
+				day += b[i + w];
+				up += b[i + w];
+			}
+		}
+		return day <= m;
 	}
 
 	static BufferedReader reader;

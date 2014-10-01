@@ -3,65 +3,113 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.Random;
 
-public class A1 {
-	static final Modes mode = Modes.TEST;
+public class DuyTesA1 {
+	static final int INF = Integer.MAX_VALUE;
+	static String INPUT = "5 " + "5 " + "14 " + "2 1 -1 2 5 8 9 1 2 3 3 3 2 1 "
+			+ "4 " + "11 " + "3 2 1 -1 -1 -1 3 4 5 5 5 " + "20 " + "11 "
+			+ "2 4 6 8 11 14 17 21 45 50 100 " + "1 " + "5 " + "1 1 1 1 1 "
+			+ "-1 " + "5 " + "1 1 1 1 1 ";
 
-	static String INPUT = "3 " + "10 " + "2 1 -1 2 5 8 9 1 2 3 " + "5 "
-			+ "5 4 3 2 1 " + "10 " + "1 2 3 2 1 10 100 1000 10000 100000 ";
+	static final Modes mode = Modes.CODEFORCES;
 
 	public static void main(String[] args) {
+		generateTestCase(20, 1, 1000000);// run in mode test;
 		setMode(mode);
 		input();
-		long s = 0;
+		long s;
 		for (int i = 0; i < nTestCases; i++) {
 			s = System.currentTimeMillis();
-			solve(a[i]);
-			tr(System.currentTimeMillis() - s + " ms");
+			solve(a[i], ks[i]);
+			tr(System.currentTimeMillis() - s + "ms");
 		}
+
 	}
 
-	static void solve(int s[]) {
-		int max = 1;
-		int pos = 0;
-		int end = 0;
+	static void solve(int s[], int k) {
 		int length = s.length;
-		int val = 0;
+		int maxLength = 0;
+		int posMaxVal = 0;
+		int posMinVal = 0;
+		int maxVal = INF * -1;
+		int minVal = INF;
+		int pivotLeft = 0;
+		int pivotRight = 0;
+		int endPos = 0;
 
-		for (int i = 0; i < length - 1; i++) {
-			val = i - pos + 1;
-
-			if (i == length - 2 && s[i] <= s[i + 1]) {
-				val++;
+		for (int i = 0; i < length; i++) {
+			if (s[i] > maxVal) {
+				maxVal = s[i];
+				posMaxVal = i;
+			}
+			if (s[i] < minVal) {
+				minVal = s[i];
+				posMinVal = i;
+			}
+			if (maxVal - minVal > k && posMaxVal < posMinVal) {
+				pivotRight = posMinVal;
+				if (pivotRight - pivotLeft > maxLength) {
+					maxLength = pivotRight - pivotLeft;
+					endPos = pivotRight - 1;
+				}
+				pivotLeft = posMaxVal + 1;
+				while (pivotLeft < pivotRight
+						&& s[pivotLeft] - s[pivotRight] > k) {
+					pivotLeft++;
+				}
+				i = pivotLeft - 1;
+				minVal = INF;
+				maxVal = INF * -1;
 			}
 
-			if (s[i] > s[i + 1] || i == length - 2) {
-				if (val > max) {
-					max = val;
-					end = i == length - 2 ? i + 1 : i;
+			if (maxVal - minVal > k && posMaxVal > posMinVal) {
+				pivotRight = posMaxVal;
+				if (pivotRight - pivotLeft > maxLength) {
+					maxLength = pivotRight - pivotLeft;
+					endPos = pivotRight - 1;
 				}
-				pos = i + 1;
+				pivotLeft = posMinVal + 1;
+				while (pivotLeft < pivotRight
+						&& s[pivotRight] - s[pivotLeft] > k) {
+					pivotLeft++;
+				}
+				i = pivotLeft - 1;
+				minVal = INF;
+				maxVal = INF * -1;
+			}
+
+			if (i == length - 1 && maxVal - minVal <= k) {
+				pivotRight = length;
+				if (pivotRight - pivotLeft > maxLength) {
+					maxLength = pivotRight - pivotLeft;
+					endPos = pivotRight - 1;
+				}
 			}
 		}
-		printArray(s, end - max + 1, end);
+		printArray(s, endPos - maxLength + 1, endPos);
 	}
 
 	/*********************************** INPUT *********************************************/
-	static int nTestCases = 1; // number of testcases
+
+	static int nTestCases; // number of testcases
 	static int[] n; // length of ith testcase
+	static int[] ks;
 	static int[][] a; // ith arrays
 
 	static void input() {
 		nTestCases = !mode.equals(Modes.CODEFORCES) ? nextInt() : 1;
 		n = new int[nTestCases];
+		ks = new int[nTestCases];
 		a = new int[nTestCases][];
 		for (int i = 0; i < nTestCases; i++) {
+			ks[i] = nextInt();
 			n[i] = nextInt();
 			a[i] = nextAi(n[i]);
 		}
 	}
 
-	/******************************** BASIC READER *****************************************/
+	/******************************** BASIC READER ***************************************/
 	static InputStream is = System.in;
 	static private byte[] buffer = new byte[1024];
 	static private int lenbuf = 0, ptrbuf = 0;
@@ -169,8 +217,6 @@ public class A1 {
 		return a;
 	}
 
-	/******************************************************************************************/
-
 	static boolean oj = System.getProperty("ONLINE_JUDGE") != null;
 
 	static void tr(Object... o) {
@@ -200,7 +246,7 @@ public class A1 {
 		}
 	}
 
-	/******************************************************************************************/
+	/***************************************************************************************/
 
 	static void printArray(int[] a, int start, int end) {
 		int[] subArray = Arrays.copyOfRange(a, start, end + 1);
@@ -214,5 +260,26 @@ public class A1 {
 			out.append(a[i] + " ");
 		}
 		System.out.println(out);
+	}
+
+	private static void generateTestCase(int nTestcase, int min, int max) {
+		StringBuilder out = new StringBuilder();
+		out.append(nTestcase + " ");
+		for (int i = 0; i < nTestcase; i++) {
+			int k = randomInt(min, max);
+			int n = 1000000;
+			out.append(k + " ");
+			out.append(n + " ");
+			for (int j = 0; j < n; j++) {
+				out.append(randomInt(min, max) + " ");
+			}
+		}
+		INPUT = out.toString();
+	}
+
+	private static int randomInt(int min, int max) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
 	}
 }
