@@ -1,6 +1,6 @@
 Level 1:
 
-	1. 
+	1. http://vn.spoj.com/problems/NKSEQ/ -> code?
 	
 	2. 
 	
