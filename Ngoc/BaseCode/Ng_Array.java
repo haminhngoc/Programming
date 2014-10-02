@@ -42,6 +42,38 @@ public class Ng_Array {
 		return maxLen;
 	}
 
+	// Longest increase sub-sequence
+	static int LongestIncrease2(int[] source) {
+		int maxLen = 1;
+		int maxPos = 0;
+		int pre = 0;
+		int len = source.length;
+		for (int i = 0; i < len - 1; i++) {
+			if ( source[i] > source[i + 1]) {
+				if (maxLen < i - pre + 1) {
+					maxLen = i - pre + 1;
+					maxPos = pre;
+				}
+				pre = i+1;
+			} else if (i == len - 2 && source[i] <= source[i + 1]) {
+				if (maxLen < i + 1 - pre + 1) {
+					maxLen = i + 1 - pre + 1;
+					maxPos = pre;
+				}
+				pre = i+1;
+			}
+		}
+		for (int i = 0; i < len; i++) {
+			if (i == maxPos)
+				printTest("(");
+			printTest(source[i] + " ");
+			if (i == maxPos + maxLen - 1)
+				printTest(")");
+		}
+		printTestLn("");
+		return maxLen;
+	}
+
 	// Maximum increase sub-sequence
 	static int MaximumIncrease(int[] source) {
 		int max = 0;
@@ -79,6 +111,41 @@ public class Ng_Array {
 		return max;
 	}
 
+	// Maximum increase sub-sequence
+	static int MaximumIncrease2(int[] source) {
+		int max = 0;
+		int maxLen = 1;
+		int maxPos = 0;
+		int pre = 0;
+		int len = source.length;
+		for (int i = 0; i < len - 1; i++) {
+			if (source[i] > source[i + 1]) {
+				if (max < source[i] - source[pre]) {
+					max = source[i] - source[pre];
+					maxPos = pre;
+					maxLen = i - pre + 1;
+				}
+				pre = i+1;
+			} else if (i == len - 2 && source[i] <= source[i + 1]) {
+				if (max < source[i + 1] - source[pre]) {
+					max = source[i + 1] - source[pre];
+					maxPos = pre;
+					maxLen = i + 1 - pre + 1;
+				}
+				pre = i+1;
+			}
+		}
+		for (int i = 0; i < len; i++) {
+			if (i == maxPos)
+				printTest("(");
+			printTest(source[i] + " ");
+			if (i == maxPos + maxLen - 1)
+				printTest(")");
+		}
+		printTestLn(" = " + max);
+		return max;
+	}
+	
 	// Maximum Bottom to Top
 	static int MBT(int[] source) {
 		int len = source.length;
@@ -230,16 +297,21 @@ public class Ng_Array {
 				{ 2, -1, 2, -1, -1, 2, 1, -1 }, { 2, -1, 2, -1, 2, -2, 1, -1 },
 				{ 2, 1, 0, -1, -2, -3 } };
 
-		// for (int i = 0; i < samples.length; i++) {
-		// int[] source = samples[i];
-		// LongestIncrease(source);
-		// }
-		// printTestLn("-------------------");
-		// for (int i = 0; i < samples.length; i++) {
-		// int[] source = samples[i];
-		// MaximumIncrease(source);
-		// }
+		for (int i = 0; i < samples.length; i++) {
+		int[] source = samples[i];
+		LongestIncrease2(source);
+		}
+		 printTestLn("-------------------");
+		 for (int i = 0; i < samples.length; i++) {
+		 int[] source = samples[i];
+		 MaximumIncrease(source);
+		 }
 
+		 printTestLn("-------------------");
+		 for (int i = 0; i < samples.length; i++) {
+		 int[] source = samples[i];
+		 MaximumIncrease2(source);
+		 }
 		// printTestLn("-------------------");
 		// for (int i = 0; i < samples.length; i++) {
 		// int[] source = samples[i];
@@ -315,10 +387,32 @@ Bài tập Array (String), SubArray (String) liên tục. Tất cả bài tập 
 Yêu cầu khó hơn:
  4, 5, 6: Nếu có nhiều kết quả, xuất ra kết quả ngắn nhất
 
-Let modify: Tìm dãy con liên tục, có độ chênh lệch lớn nhất (hiệu phần tử lớn nhất và phần tử nhỏ nhất)
  
  Array không liên tục
+ Class 1:
  1. Có bao nhiêu cách chọn danh sách con trong dãy sao cho không có phần tử nào trong danh sách con trùng nhau
  2. f(i): số lượng chỉ số 0 <= k <= i thỏa mãn ak = ai. Tính toàn bộ f(0), f(1),...f(n-1)
+ 3. Cho n ruồi giấm đực kích thước a1, a2,...an. Và n ruồi giấm cái kích thước b1, b2,...bn.
+ 	Nếu ghép cặp một ruồi giấm ai, và bj sẽ sinh ra con có kích thươc sqrt(ai*bj).
+ 	Hãy ghép chúng thành n cặp sao cho tổng kích thước các con là lớn nhất.
+ 	Kết quả nhỏ nhất được không?
+ 4. Cho dãy không âm, tìm tổng lớn nhất dãy con sao cho không có hai phân tử nào đứng liên tiếp. App dụng cho CF256C
+ 	Giải quyết bài toán khi có số âm?
+ 
+ Class 2:
+ 1. Tìm dãy con không nhất thiết liên tục, tăng dài nhất - Phuc
+ 2. 
+ 
+ 
+ So sánh hai dãy con:
+ Class 1:
+ 1. Ghép cặp |ha-hb| < K => Số cặp nhiều nhiều nhất.
+ 2. Cho hai dãy A, B. a có thể ghép cặp với b khi a-k1 < b < a+k2. Tính tổng số cách chọn ra một cặp
  3. 
+ 
+ 
+ Class 2:
+ 1. lcs - Phi
+ 2. 
+
  */
