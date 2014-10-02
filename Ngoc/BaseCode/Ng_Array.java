@@ -400,19 +400,19 @@ Yêu cầu khó hơn:
  	Giải quyết bài toán khi có số âm?
  
  Class 2:
- 1. Tìm dãy con không nhất thiết liên tục, tăng dài nhất
+ 1. Tìm dãy con không nhất thiết liên tục, tăng dài nhất - Phuc
  2. 
  
  
  So sánh hai dãy con:
  Class 1:
  1. Ghép cặp |ha-hb| < K => Số cặp nhiều nhiều nhất.
- 2. Cho hai dãy A, B. a có thể ghép cặp với B khi a-k1 < b < a+k2. Tính tổng số cách chọn ra một cặp
+ 2. Cho hai dãy A, B. a có thể ghép cặp với b khi a-k1 < b < a+k2. Tính tổng số cách chọn ra một cặp
  3. 
  
  
  Class 2:
- 1. lcs
+ 1. lcs - Phi
  2. 
- 
+
  */
