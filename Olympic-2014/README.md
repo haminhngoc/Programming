@@ -1,80 +1,15 @@
-Programming Contest - Assigments And Practices
+http://vn.spoj.com/users/nguyenmanhphuc/
 
-Lecture: Ha Minh Ngoc (ngoc.ha@eiu.edu.vn / https://www.facebook.com/groups/eiu.olp/)
+http://vn.spoj.com/users/philuu/
 
-Problems by Solvers
+http://vn.spoj.com/users/duytran/
 
-1. Anh
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
+http://vn.spoj.com/users/truongkhang/
 
-2. Duy
-    1. Codeforces Round #253 (Div. 2) - Problem A
-    2. Codeforces Round #253 (Div. 2) - Problem B
-    3. Codeforces Round #254 (Div. 2) - Problem A
-    4. Codeforces Round #254 (Div. 2) - Problem B
-    5. Codeforces Round #252 (Div. 2) - Problem A
-	6. Codeforces Round #252 (Div. 2) - Problem B
-	7. Codeforces Round #252 (Div. 2) - Problem C
-	8. Codeforces Round #FF (Div. 2) - Problem A
-	9. Codeforces Round #FF (Div. 2) - Problem B
-	10. Codeforces Round #FF (Div. 2) - Problem C
-	11. Codeforces Round #FF (Div. 2) - Problem D
-3. Đạt
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
+http://vn.spoj.com/users/sonhung/
 
-3. Hoa
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
+http://vn.spoj.com/users/redbell014/
 
-3. Khánh
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
+http://htmlpreview.github.io/?https://github.com/haminhngoc/Programming/blob/master/Olympic-2014/Hints.htm
 
-4. Khang
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-
-5. Phi
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-
-6. Phúc
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-
-7. Sơn
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-
-8. Ngọc
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
+http://htmlpreview.github.io/?https://github.com/haminhngoc/Programming/blob/master/Olympic-2014/Practices.htm

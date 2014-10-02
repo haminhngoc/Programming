@@ -4,10 +4,16 @@
 	<classpathentry kind="src" path="2118"/>
 	<classpathentry kind="src" path="2203"/>
 	<classpathentry kind="src" path="15525"/>
-	<classpathentry kind="src" path="2299"/>
+	<classpathentry kind="src" path="NKTICK"/>
 	<classpathentry kind="src" path="2263"/>
 	<classpathentry kind="src" path="2250"/>
 	<classpathentry kind="src" path="1783"/>
+	<classpathentry kind="src" path="VOSRTRI"/>
+	<classpathentry kind="src" path="VOSSEVEN"/>
+	<classpathentry kind="src" path="NOTE"/>
+	<classpathentry kind="src" path="C11TRCNT"/>
+	<classpathentry kind="src" path="C11SEQ3"/>
+	<classpathentry kind="src" path="BASEH"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
