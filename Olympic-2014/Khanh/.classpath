@@ -4,6 +4,8 @@
 	<classpathentry kind="src" path="2240. Số huyền bí"/>
 	<classpathentry kind="src" path="2204. Hang động"/>
 	<classpathentry kind="src" path="13019. Hai nhà máy điện nguyên tử"/>
+	<classpathentry kind="src" path="20645. Bảng quan hệ"/>
+	<classpathentry kind="src" path="20650. Mỏ vàng"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
