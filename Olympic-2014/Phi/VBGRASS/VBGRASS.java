@@ -23,12 +23,12 @@ public class Main {
 }
 
 class TaskSPOJ {
-
     char[][] graph;
     boolean[][] visited;
     int Y;
     int X;
     int cnt;
+
     public void solve(int testNumber, InputReader in, PrintWriter out) {
         Y = in.nextInt();
         X = in.nextInt();
@@ -38,41 +38,32 @@ class TaskSPOJ {
         for(int i = 0; i < Y; ++i){
             graph[i] = in.next().toCharArray();
         }
-        dfs(0,0);
+        for(int i = 0; i < Y; ++i){
+            for(int j = 0; j < X; ++j){
+                if(!visited[i][j] && graph[i][j] == '#'){
+                    ++cnt;
+                    dfs(j,i);
+                }
+            }
+        }
         out.println(cnt);
     }
 
     void dfs(int x, int y){
-        boolean ok = true;
-        if(visited[y][x]) return;
-        visited[y][x] = true;
-        if(graph[y][x] == '#'){
+            if(visited[y][x] || graph[y][x] != '#') return;
+            visited[y][x] = true;
             if(x > 0){
-                if(graph[y][x-1] == '#' && visited[y][x-1]) ok = false;
+                dfs(x-1,y);
             }
             if(x < X-1){
-                if(graph[y][x+1] == '#' & visited[y][x+1]) ok = false;
+                dfs(x+1,y);
             }
             if(y > 0){
-                if(graph[y-1][x] == '#' && visited[y-1][x]) ok = false;
+                dfs(x,y-1);
             }
             if(y < Y-1){
-                if(graph[y+1][x] == '#' && visited[y+1][x]) ok = false;
+                dfs(x,y+1);
             }
-            if(ok) ++cnt;
-        }
-        if(x > 0){
-            dfs(x-1,y);
-        }
-        if(x < X-1){
-            dfs(x+1,y);
-        }
-        if(y > 0){
-            dfs(x,y-1);
-        }
-        if(y < Y-1){
-            dfs(x,y+1);
-        }
     }
 }
 
