@@ -75,7 +75,7 @@ class Person implements Comparable<Person> {
 }
 
 
-class InputReader {
+/*class InputReader {
     public BufferedReader reader;
     public StringTokenizer tokenizer;
 
@@ -100,4 +100,4 @@ class InputReader {
         return Integer.parseInt(next());
     }
 
-}
+}*/
