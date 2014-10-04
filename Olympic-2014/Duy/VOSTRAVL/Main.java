@@ -1,7 +1,5 @@
-import java.util.List;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -18,35 +16,54 @@ public class Main {
         OutputStream outputStream = System.out;
         InputReader in = new InputReader(inputStream);
         PrintWriter out = new PrintWriter(outputStream);
-        TaskA solver = new TaskA();
+        VOSTRAVL solver = new VOSTRAVL();
         solver.solve(1, in, out);
         out.close();
     }
 }
 
-class TaskA {
+class VOSTRAVL {
     static int[] label;
     StringBuilder res;
-    static List<Integer>[] a;
+    static int[][] a;
     static long num = 0;
+    static int s;
+    boolean checkRoad[];
 
     public void solve(int testNumber, InputReader in, PrintWriter out) {
         int n = in.nextInt();
         int m = in.nextInt();
-        int s = in.nextInt();
+        s = in.nextInt();
         int k = in.nextInt();
+
+        if (k == 0) {
+            out.println("TAK");
+            out.println(1 + " " + s);
+            return;
+        }
+        checkRoad = new boolean[n];
+        a = new int[n][];
         label = new int[n];
-        a = new List[n];
+        int[] x = new int[m];
+        int[] y = new int[m];
+        int[] cnt = new int[n];
+        int[] curPos = new int[n];
+        for (int i = 0; i < m; i++) {
+            x[i] = (in.nextInt() - 1);
+            y[i] = (in.nextInt() - 1);
+            cnt[x[i]]++;
+            cnt[y[i]]++;
+        }
         for (int i = 0; i < n; i++) {
-            a[i] = new ArrayList<Integer>();
+            a[i] = new int[cnt[i]];
+        }
+        for (int i = 0; i < m; i++) {
+            a[x[i]][curPos[x[i]]] = y[i];
+            curPos[x[i]]++;
+            a[y[i]][curPos[y[i]]] = x[i];
+            curPos[y[i]]++;
         }
 
-        for (int i = 0; i < m; i++) {
-            int x = in.nextInt();
-            int y = in.nextInt();
-            a[x - 1].add(y - 1);
-            a[y - 1].add(x - 1);
-        }
         int id = 0;
         for (int j = 0; j < n; j++) {
             if (label[j] == 0) {
@@ -54,6 +71,7 @@ class TaskA {
                 dfs(a, j, id);
             }
         }
+
         boolean check = true;
         int root = label[s - 1];
         for (int i = 0; i < k; i++) {
@@ -67,17 +85,8 @@ class TaskA {
             num = 0;
             out.println("TAK");
             res = new StringBuilder();
-            res.append(s);
-            num++;
-            for (int i = 0; i < a[s - 1].size(); i++) {
-                int temp = a[s - 1].get(i);
-                if (label[temp] == root) {
-                    res.append(" " + (temp + 1));
-                    num++;
-                    buildRoad(s - 1, temp, root);
-                }
-            }
-            out.print(num + " ");
+            buildRoad(-1, s - 1);
+            out.print(num);
             out.println(res);
 
 
@@ -86,31 +95,30 @@ class TaskA {
         }
     }
 
-    private void buildRoad(int p, int node, int root) {
-        int length = a[node].size();
-        if (length == 1) {
-            res.append(" " + (p + 1));
+    private void buildRoad(int parent, int cur) {
+        if (!checkRoad[cur]) {
+            res.append(" " + (cur + 1));
             num++;
-        } else {
-            for (int i = 0; i < length; i++) {
-                int temp = a[node].get(i);
-                if (label[temp] == root && temp != p) {
-                    res.append(" " + (temp + 1));
-                    num++;
-                    buildRoad(node, temp, root);
+            if (cur != s - 1) {
+                checkRoad[cur] = true;
+            }
+            for (int i = 0; i < a[cur].length; i++) {
+                if (!checkRoad[a[cur][i]] && a[cur][i] != parent) {
+                    buildRoad(cur, a[cur][i]);
                 }
             }
-            res.append(" " + (p + 1));
-            num++;
+            if (parent != -1) {
+                res.append(" " + (parent + 1));
+                num++;
+            }
         }
-        // return res.toString();
     }
 
-    private void dfs(List<Integer>[] a, int j, int id) {
+    private void dfs(int[][] a, int j, int id) {
         label[j] = id;
-        int length = a[j].size();
+        int length = a[j].length;
         for (int i = 0; i < length; i++) {
-            int tmp = a[j].get(i);
+            int tmp = a[j][i];
             if (label[tmp] == 0) {
                 dfs(a, tmp, id);
             }
