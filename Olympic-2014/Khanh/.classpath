@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="15282. Secret Garden"/>
 	<classpathentry kind="src" path="12963. Dãy số"/>
 	<classpathentry kind="src" path="12770. Bắn máy bay"/>
+	<classpathentry kind="src" path="6184. Chocolate Buying"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
