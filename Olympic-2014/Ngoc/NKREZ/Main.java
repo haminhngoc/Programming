@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.StringTokenizer;
 import java.io.InputStream;
-
-/* Just curious why someone's code is long or run slowly?
- */
 
 public class Main {
 	public static void main(String[] args) {
@@ -17,44 +15,59 @@ public class Main {
 		OutputStream outputStream = System.out;
 		InputReader in = new InputReader(inputStream);
 		PrintWriter out = new PrintWriter(outputStream);
-		VOSSEVEN solver = new VOSSEVEN();
+		NKREZ solver = new NKREZ();
 		solver.solve(1, in, out);
 		out.close();
 	}
 }
 
-/*
- * Complexity: O(n) why?
- * Run MainTest to generate large testcase (1M)
- */
-class VOSSEVEN {
+class NKREZ {
+	/* Complexity: MAX + O(n). Why?
+	 * Run MainTest to generate large testcase (1M)
+	 */
 	public void solve(int testNumber, InputReader in, PrintWriter out) {
-		char[] s = in.ns().toCharArray();
-		int length = s.length;
-		int[] counts = new int[length + 1];
+		int MAX = 30000 + 1;
+		int[] maxValues = new int[MAX];
 
-		int count7 = 0;
-		for (int i = 0; i <= length; i++) {
-			if (i < length && s[i] == '7') {
-				count7++;
-			} else {
-				if (count7 > 0) {
-					for (int j = 1; j <= count7; j++) {
-						counts[j] += (count7 + 1 - j);
-					}
-				}
-				count7 = 0;
+		int n = in.ni();
+		Record[] records = new Record[n];
+
+		for (int i = 0; i < n; i++) {
+			Record record = new Record();
+			record.start = in.ni();
+			record.end = in.ni();
+			records[i] = record;
+		}
+
+		Arrays.sort(records);
+		
+		int j = 0;
+		int i = 1;
+		for (i = 1; i < MAX; i++) {
+			maxValues[i] = maxValues[i - 1];
+
+			while (j < n && records[j].end == i) {
+				int start = records[j].start;
+				maxValues[i] = Math.max(maxValues[i], maxValues[start] + i - start);
+				j++;
+			}
+
+			if (j == n) {
+				i++;
+				break;
 			}
 		}
 
-		StringBuilder result = new StringBuilder();
-		for (int j = 1; j <= length; j++) {
-			if (counts[j] > 0) {
-				result.append(j + " " + counts[j] + "\r\n");
-			}
-		}
+		out.println(maxValues[i - 1]);
+	}
+}
 
-		out.write(result.toString());
+class Record implements Comparable<Record> {
+	public int start;
+	public int end;
+
+	public int compareTo(Record arg0) {
+		return end - arg0.end;
 	}
 }
 
@@ -66,7 +79,7 @@ class InputReader {
 	public InputReader(InputStream stream) {
 		is = stream;
 	}
-	
+
 	int readByte() {
 		if (lenbuf == -1)
 			throw new InputMismatchException();
@@ -122,20 +135,6 @@ class InputReader {
 		return n == p ? buf : Arrays.copyOf(buf, p);
 	}
 
-	char[][] nm(int n, int m) {
-		char[][] map = new char[n][];
-		for (int i = 0; i < n; i++)
-			map[i] = ns(m);
-		return map;
-	}
-
-	int[] na(int n) {
-		int[] a = new int[n];
-		for (int i = 0; i < n; i++)
-			a[i] = ni();
-		return a;
-	}
-
 	int ni() {
 		int num = 0, b;
 		boolean minus = false;
@@ -156,24 +155,12 @@ class InputReader {
 		}
 	}
 
-	long nl() {
-		long num = 0;
-		int b;
-		boolean minus = false;
-		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
-			;
-		if (b == '-') {
-			minus = true;
-			b = readByte();
-		}
-
-		while (true) {
-			if (b >= '0' && b <= '9') {
-				num = num * 10 + (b - '0');
-			} else {
-				return minus ? -num : num;
-			}
-			b = readByte();
-		}
-	}
 }
+
+/*
+out.println("=====================================");
+for (int i = 0; i < n; i++) {
+	out.println(records[i].start + " " + records[i].end);
+}
+out.println("=====================================");
+*/
