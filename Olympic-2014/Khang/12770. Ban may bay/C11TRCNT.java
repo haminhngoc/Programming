@@ -22,23 +22,18 @@ class C11TRCNTSolver {
 		}
 		int sum = 0;
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				if (i != j) {
-					for (int k = j + 1; k < n; k++) {
-						if (j != k && k != i) {
-							int[] tmp = new int[] { i, j, k };
-							Arrays.sort(tmp);
-							if (label[tmp[0]][tmp[1]][tmp[2]] == 0) {
-								if (check(points.get(i), points.get(j),
-										points.get(k))) {
-									label[tmp[0]][tmp[1]][tmp[2]] = 1;
-									sum++;
-									points.get(i).increaseDenfense();
-								}
-							} else {
-								points.get(i).increaseDenfense();
-							}
+			for (int j = i + 1; j < n; j++) {
+				for (int k = j + 1; k < n; k++) {
+					int[] tmp = new int[] { i, j, k };
+					Arrays.sort(tmp);
+					if (label[tmp[0]][tmp[1]][tmp[2]] == 0) {
+						if (check(points.get(i), points.get(j), points.get(k))) {
+							label[tmp[0]][tmp[1]][tmp[2]] = 1;
+							sum++;
+							points.get(i).increaseDenfense();
 						}
+					} else {
+						points.get(i).increaseDenfense();
 					}
 				}
 			}
@@ -55,7 +50,7 @@ class C11TRCNTSolver {
 				return 0;
 			}
 		});
-		System.out.println(sum + " " + points.get(0).getId());
+		System.out.print(sum + " " + points.get(0).getId());
 	}
 
 	private static boolean check(APoint a, APoint b, APoint c) {
@@ -80,9 +75,9 @@ class APoint {
 
 	long x;
 	long y;
-	int defense = 0;
+	long defense = 0;
 
-	public int getDefense() {
+	public long getDefense() {
 		return defense;
 	}
 
