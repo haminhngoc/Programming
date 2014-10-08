@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.StringTokenizer;
 import java.io.InputStream;
 
@@ -27,7 +29,7 @@ public class Main {
  */
 class VOSSEVEN {
 	public void solve(int testNumber, InputReader in, PrintWriter out) {
-		char[] s = in.next().toCharArray();
+		char[] s = in.ns().toCharArray();
 		int length = s.length;
 		int[] counts = new int[length + 1];
 
@@ -57,24 +59,121 @@ class VOSSEVEN {
 }
 
 class InputReader {
-	public BufferedReader reader;
-	public StringTokenizer tokenizer;
+	InputStream is;
+	byte[] inbuf = new byte[1024];
+	int lenbuf = 0, ptrbuf = 0;
 
 	public InputReader(InputStream stream) {
-		reader = new BufferedReader(new InputStreamReader(stream), 32768);
-		tokenizer = null;
-		tokenizer = null;
+		is = stream;
 	}
-
-	public String next() {
-		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+	
+	int readByte() {
+		if (lenbuf == -1)
+			throw new InputMismatchException();
+		if (ptrbuf >= lenbuf) {
+			ptrbuf = 0;
 			try {
-				tokenizer = new StringTokenizer(reader.readLine());
+				lenbuf = is.read(inbuf);
 			} catch (IOException e) {
-				throw new RuntimeException(e);
+				throw new InputMismatchException();
 			}
+			if (lenbuf <= 0)
+				return -1;
 		}
-		return tokenizer.nextToken();
+		return inbuf[ptrbuf++];
 	}
 
+	boolean isSpaceChar(int c) {
+		return !(c >= 33 && c <= 126);
+	}
+
+	int skip() {
+		int b;
+		while ((b = readByte()) != -1 && isSpaceChar(b))
+			;
+		return b;
+	}
+
+	double nd() {
+		return Double.parseDouble(ns());
+	}
+
+	char nc() {
+		return (char) skip();
+	}
+
+	String ns() {
+		int b = skip();
+		StringBuilder sb = new StringBuilder();
+		while (!(isSpaceChar(b))) {
+			sb.appendCodePoint(b);
+			b = readByte();
+		}
+		return sb.toString();
+	}
+
+	char[] ns(int n) {
+		char[] buf = new char[n];
+		int b = skip(), p = 0;
+		while (p < n && !(isSpaceChar(b))) {
+			buf[p++] = (char) b;
+			b = readByte();
+		}
+		return n == p ? buf : Arrays.copyOf(buf, p);
+	}
+
+	char[][] nm(int n, int m) {
+		char[][] map = new char[n][];
+		for (int i = 0; i < n; i++)
+			map[i] = ns(m);
+		return map;
+	}
+
+	int[] na(int n) {
+		int[] a = new int[n];
+		for (int i = 0; i < n; i++)
+			a[i] = ni();
+		return a;
+	}
+
+	int ni() {
+		int num = 0, b;
+		boolean minus = false;
+		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
+			;
+		if (b == '-') {
+			minus = true;
+			b = readByte();
+		}
+
+		while (true) {
+			if (b >= '0' && b <= '9') {
+				num = num * 10 + (b - '0');
+			} else {
+				return minus ? -num : num;
+			}
+			b = readByte();
+		}
+	}
+
+	long nl() {
+		long num = 0;
+		int b;
+		boolean minus = false;
+		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
+			;
+		if (b == '-') {
+			minus = true;
+			b = readByte();
+		}
+
+		while (true) {
+			if (b >= '0' && b <= '9') {
+				num = num * 10 + (b - '0');
+			} else {
+				return minus ? -num : num;
+			}
+			b = readByte();
+		}
+	}
 }
