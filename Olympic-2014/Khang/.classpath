@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="2118. Chuoi doi xung"/>
+	<classpathentry kind="src" path="1783. Tim so nguyen to"/>
+	<classpathentry kind="src" path="21086. Bai toan so 7"/>
+	<classpathentry kind="src" path="2299. Xep hang mua ve"/>
+	<classpathentry kind="src" path="21148. Tam giac vuong"/>
+	<classpathentry kind="src" path="2352. Noi mang"/>
+	<classpathentry kind="src" path="12963. Day so"/>
+	<classpathentry kind="src" path="12770. Ban may bay"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

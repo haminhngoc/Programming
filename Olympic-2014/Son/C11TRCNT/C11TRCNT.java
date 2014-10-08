@@ -1,18 +1,26 @@
-import java.util.Random;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+import java.io.InputStream;;
 
 public class C11TRCNT {
 
 	public static void main(String[] args) {
-		Scanner reader = new Scanner(System.in);
-		int n = reader.nextInt();
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		InputReader in = new InputReader(inputStream);
+		PrintWriter out = new PrintWriter(outputStream);
+		int n =in.nextInt();
 		//Random rd = new Random();
 		point[] p = new point[n];
 		int[] count = new int[n];
 		for (int i = 0; i < n; i++) {
 			point tmp = new point();
-			tmp.x = reader.nextLong();
-			tmp.y = reader.nextLong();
+			tmp.x = in.nextInt();
+			tmp.y = in.nextInt();
 			//tmp.x=rd.nextLong();
 			//tmp.y=rd.nextLong();
 			
@@ -23,7 +31,7 @@ public class C11TRCNT {
 		for (int i = 0; i < n - 2; i++)
 			for (int j = i + 1; j < n - 1; j++)
 				for (int k = j + 1; k < n; k++) {
-					if (Check(p[i], p[j], p[k]) == true) {
+					if (Check(p[i], p[j], p[k]) == false) {
 						count[i]++;
 						count[j]++;
 						count[k]++;
@@ -44,36 +52,50 @@ public class C11TRCNT {
 		// System.out.println(CheckTriangle(p[0], p[1], p[2]));
 
 	}
-
+	public static double Lenght(point a, point b)
+	{
+		double result=Math.sqrt(Math.pow((a.x-b.x),2)+Math.pow((a.y-b.y), 2));
+		return result;
+	}
 	public static boolean Check(point a, point b, point c) {
 
-		point A = new point();
-		point B = new point();
-		point tmp = new point();
-		A.x = (b.x - a.x);
-		A.y = (b.y - a.y);
-		B.x = (c.x - a.x);
-		B.y = (c.y - a.y);
-		if (B.x > A.x) {
-			tmp = A;
-			A = B;
-			B = tmp;
-
-		}
-		if (A.x == 0 && B.x == 0)
+		double A=Lenght(a,b);
+		double B=Lenght(b,c);
+		double C=Lenght(a,c);
+		if(A+B>C && A+C>B&&B+C>A)
 			return true;
-		else if (A.y == 0 && B.y == 0)
-			return true;
-		else if (A.x != 0 && A.y != 0 && B.x != 0 && B.y != 0) {
-			if (A.x / B.x == A.y / B.y && A.x % B.x == 0)
-			return true;
-		}
-		return false;
+		else return false;
+		
 	}
 
 }
 
 class point {
-	long x;
-	long y;
+	int x;
+	int y;
+}
+class InputReader {
+    public BufferedReader reader;
+    public StringTokenizer tokenizer;
+
+    public InputReader(InputStream stream) {
+        reader = new BufferedReader(new InputStreamReader(stream), 32768);
+        tokenizer = null;
+    }
+
+    public String next() {
+        while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+            try {
+                tokenizer = new StringTokenizer(reader.readLine());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return tokenizer.nextToken();
+    }
+
+    public int nextInt() {
+        return Integer.parseInt(next());
+    }
+
 }
