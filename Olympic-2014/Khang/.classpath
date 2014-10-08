@@ -11,6 +11,7 @@
 	<classpathentry kind="src" path="12770. Ban may bay"/>
 	<classpathentry kind="src" path="2720. Đi xem phim"/>
 	<classpathentry kind="src" path="2719. Bai co ngan nhat"/>
+	<classpathentry kind="src" path="2892. Cơ số H"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
