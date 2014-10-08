@@ -31,7 +31,7 @@ public class C11TRCNT {
 		for (int i = 0; i < n - 2; i++)
 			for (int j = i + 1; j < n - 1; j++)
 				for (int k = j + 1; k < n; k++) {
-					if (Check(p[i], p[j], p[k]) == false) {
+					if (Collinear(p[i], p[j], p[k]) == true) {
 						count[i]++;
 						count[j]++;
 						count[k]++;
@@ -51,6 +51,13 @@ public class C11TRCNT {
 		System.out.println(result + " " + (index + 1));
 		// System.out.println(CheckTriangle(p[0], p[1], p[2]));
 
+	}
+	public static boolean Collinear(point a, point b, point c)
+	{
+		if((a.y-b.y)*(a.x-c.x)==(a.y-c.y)*(a.x-b.x))
+			return true;
+		else
+			return false;
 	}
 	public static double Lenght(point a, point b)
 	{
