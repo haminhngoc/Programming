@@ -17,29 +17,32 @@ public class NKABD {
 				prime[i * j] = true;
 			}
 		
-		int count=0;
+		int[] arrPrime= new int[9592];
+		int index=0;
 		for(int i=0;i<n;i++)
 			if(prime[i]==false)
-				count++;
-		System.out.println(count);
+			{
+				arrPrime[index]=i;
+				index++;
+			}
 		
 		boolean [] num= new boolean[n];
-		/*for(int i=0;i<n;i++)
+		for(int i=0;i<n;i++)
 		{
 			if(prime[i]==true)
 			{
 				int sum=0;
-				for(int j=1;j<i/2;j++)
+				for(int j=0;j<9592;j++)
 				{
-					if(i%j==0)
-						sum+=j;
+					if(i%arrPrime[j]==0)
+						sum+=arrPrime[j];
 					if(sum>i)
 						break;
 				}
 				if(sum>i)
 					num[i]=true;
 			}
-		}*/
+		}
 		int result=0;
 		for(int i=L;i<=R;i++)
 			if(num[i]==true)
