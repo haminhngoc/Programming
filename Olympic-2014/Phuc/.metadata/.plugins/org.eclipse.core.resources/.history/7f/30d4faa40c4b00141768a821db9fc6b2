@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static long count = 0;
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+
+		int n = in.nextInt();
+		int m = in.nextInt();
+		int k = in.nextInt();
+
+		solve(k, (n + k - 1) / k, m, n, k);
+	}
+
+	private static void solve(int k, int i, int j, int n,int max) {
+		if (j == 1) {
+			if (n <= k) {
+				count++;
+			}
+			return;
+		}
+		long min = (n+k-1)/k;
+		for(int z = k; )
+
+	}
+}
