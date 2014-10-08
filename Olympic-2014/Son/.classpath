@@ -14,6 +14,7 @@
 	<classpathentry kind="src" path="C11TRCNT"/>
 	<classpathentry kind="src" path="C11SEQ3"/>
 	<classpathentry kind="src" path="BASEH"/>
+	<classpathentry kind="src" path="NKABD"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

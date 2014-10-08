@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 import java.io.InputStream;;
 
-public class C11TRCNT {
+class C11TRCNT {
 
 	public static void main(String[] args) {
 		InputStream inputStream = System.in;
@@ -31,7 +31,7 @@ public class C11TRCNT {
 		for (int i = 0; i < n - 2; i++)
 			for (int j = i + 1; j < n - 1; j++)
 				for (int k = j + 1; k < n; k++) {
-					if (Collinear(p[i], p[j], p[k]) == true) {
+					if (Check(p[i], p[j], p[k]) == false) {
 						count[i]++;
 						count[j]++;
 						count[k]++;
@@ -61,7 +61,7 @@ public class C11TRCNT {
 	}
 	public static double Lenght(point a, point b)
 	{
-		double result=Math.sqrt(Math.pow((a.x-b.x),2)+Math.pow((a.y-b.y), 2));
+		double result=Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
 		return result;
 	}
 	public static boolean Check(point a, point b, point c) {
@@ -69,7 +69,8 @@ public class C11TRCNT {
 		double A=Lenght(a,b);
 		double B=Lenght(b,c);
 		double C=Lenght(a,c);
-		if(A+B>C && A+C>B&&B+C>A)
+		
+		if(Double.compare(A+B, C)>0 && Double.compare(A+C, B)>0 && Double.compare(C+B, A)>0)
 			return true;
 		else return false;
 		
