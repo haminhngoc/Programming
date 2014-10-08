@@ -1,47 +1,85 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 class CBUYING_6184 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scan = new Scanner(System.in);
-		int N = scan.nextInt();
-		long B = scan.nextLong();
-		long C[] = new long[N];
-		long P[] = new long[N];
-		for (int i = 0; i < N; i++) {
-			P[i] = scan.nextLong();
-			C[i] = scan.nextLong();
+		InputStream inputStream = System.in;
+		InputReader in = new InputReader(inputStream);
+		// Scanner scan = new Scanner(System.in);
+		Integer N = in.nextInt();
+		long B = in.nextLong();
+		P[] A = new P[N];
+		for (int i = 0; i < N; ++i) {
+			A[i] = new P();
+			A[i].price = in.nextLong();
+			A[i].quantity = in.nextLong();
 		}
-		for (int i = 0; i < N - 1; i++)
-			for (int j = i + 1; j < N; j++)
-				if (P[i] > P[j]) {
-					long temp = P[i];
-					P[i] = P[j];
-					P[j] = temp;
-					temp = C[i];
-					C[i] = C[j];
-					C[j] = temp;
-				}
+
+		Arrays.sort(A);
+
 		long count = 0;
 		for (int i = 0; i < N; i++) {
-			long plus = Check(B, P[i], C[i]);
+			long plus = Check(B, A[i].price, A[i].quantity);
 			count += plus;
-			B -= (plus * P[i]);
-			if (plus < C[i])
+			B -= (plus * A[i].price);
+			if (plus < A[i].quantity)
 				i = N;
 		}
 		System.out.println(count);
-		scan.close();
 	}
 
 	private static long Check(long b, long l, long m) {
 		// TODO Auto-generated method stub
-		long div = b / l;
-		if (div > m)
-			return m;
+		long max = m * l;
+		if (max > b)
+			return b / l;
 		else
-			return div;
+			return m;
 	}
 
+}
+
+class P implements Comparable<P> {
+	public long quantity;
+	public long price;
+
+	public int compareTo(P arg0) {
+
+		return (int) (this.price - arg0.price);
+	}
+}
+
+class InputReader {
+	public BufferedReader reader;
+	public StringTokenizer tokenizer;
+
+	public InputReader(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
+	}
 }
