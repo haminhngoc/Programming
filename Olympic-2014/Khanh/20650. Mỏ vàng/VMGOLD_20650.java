@@ -1,43 +1,78 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 class VMGOLD_20650 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scan = new Scanner(System.in);
+		InputStream inputStream = System.in;
+		InputReader20650 in = new InputReader20650(inputStream);
 
-		int n = scan.nextInt();
-		int k = scan.nextInt();
-		int arr[] = new int[n];
+		Integer n = in.nextInt();
+		int k = in.nextInt();
+		long arr[] = new long[n];
 		for (int i = 0; i < n; i++)
-			arr[i] = scan.nextInt();
-		Arrays.sort(arr);
-		int r = Check(arr, n, k);
+			arr[i] = in.nextLong();
+		long r = Check(arr, n, k);
 		System.out.println(r);
-		scan.close();
 	}
 
-	private static int Check(int[] arr, int n, int k) {
+	private static long Check(long[] arr, int n, int k) {
 		// TODO Auto-generated method stub
-		for (int j = arr[n - 1] / 2; j > 1; j--) {
-			int r = CountDiv(arr, n, j);
-			if (r >= k)
-				return j;
+		long max = 0;
+		for (int i = 0; i < n; i++)
+			if (max < arr[i])
+				max = arr[i];
+		long x = max;
+		while (x > 1) {
+			int result = 0;
+			int i = n - 1;
+			while (i > 0) {
+				if (arr[i] % x == 0)
+					result++;
+				if (result >= k)
+					return x;
+				i--;
+			}
+			if (arr[0] % x == 0)
+				result++;
+			if (result >= k)
+				return x;
+			x--;
 		}
 		return 1;
 	}
+}
 
-	private static int CountDiv(int[] arr, int n, int j) {
-		// TODO Auto-generated method stub
-		int r = 0;
-		boolean pos[] = new boolean[arr[n - 1] + 1];
-		for (int i = j; i <= arr[n - 1]; i += j)
-			pos[i] = true;
-		for (int i = 0; i < n; i++)
-			if (pos[arr[i]] == true)
-				r++;
-		return r;
+class InputReader20650 {
+	public BufferedReader reader;
+	public StringTokenizer tokenizer;
+
+	public InputReader20650(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
 	}
 
 }
