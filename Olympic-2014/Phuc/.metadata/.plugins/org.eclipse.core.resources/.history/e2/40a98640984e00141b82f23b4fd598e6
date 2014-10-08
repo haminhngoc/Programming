@@ -31,7 +31,7 @@ public class Main {
 
 			long re = 1;
 			List<Integer> list = find(Math.min((long)Math.sqrt(count),k));
-			Long arr[]  = new Long[list.size()];
+			Long arr[]  = new Long[list.size]
 			System.out.println(re % z);
 			return;
 		}
