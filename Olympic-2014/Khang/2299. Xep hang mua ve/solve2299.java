@@ -9,9 +9,11 @@ class solve2299 {
 	}
 }
 
-class NKTICKSolver {
-	private static Scanner in = new Scanner(System.in);
-
+class NKTICKSolver {	
+	InputStream inputStream = System.in;
+	OutputStream outputStream = System.out;
+	InputReader in = new InputReader(inputStream);
+	
 	public void solve() {
 		int n = in.nextInt();
 		int[] t = new int[n];
@@ -30,4 +32,30 @@ class NKTICKSolver {
 		}	
 		System.out.println(dp[n - 1]);
 	}
+}
+
+class InputReader {
+    public BufferedReader reader;
+    public StringTokenizer tokenizer;
+
+    public InputReader(InputStream stream) {
+        reader = new BufferedReader(new InputStreamReader(stream), 32768);
+        tokenizer = null;
+    }
+
+    public String next() {
+        while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+            try {
+                tokenizer = new StringTokenizer(reader.readLine());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return tokenizer.nextToken();
+    }
+
+    public int nextInt() {
+        return Integer.parseInt(next());
+    }
+
 }
