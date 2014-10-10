@@ -38,7 +38,7 @@
     <div>
         <ul>
             <li>Ý tưởng: Dynamic Programming tương tự bài chuỗi tăng dài nhất<ul>
-                <li>Các em cùng làm bài này để tuần sau trao đổi!</li>
+                <li>Ref: Phi :)</li>
                 </ul>
             </li>
         </ul>
@@ -51,10 +51,31 @@
 
     
     <h1>
-        <a href=""></a></h1>
+        <a href="http://vn.spoj.com/problems/NKSEQ/">2203. Dãy số (Level 5)</a></h1>
     <div>
         <ul>
-            <li></li>
+            <li>Ý tưởng:
+                <ul>
+                    <li>Tận dụng tổng a1+a2...+ai (Được tính lần đầu tiên) để kiểm tra tất cả tổng có kết thúc tại i</li>
+                    <li>Thay vì so sánh với 0 (Hằng số), ta so sánh với 0, a1, a1+a2... (hàm số)</li>
+                    <li>Chỉ cần so sánh giá trị nhỏ nhất</li>
+                </ul>
+            </li>
+            <li>Xét biến thể của cây <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL</a></li>
+            <ul>
+                <li>Mỗi Node có biến Count: Khi thêm một phần tử trùng => Count += 1</li>
+                <li>Khi loại phần tử => Count -= 1. Khi Count == 0 => Loại node ra khỏi cây</li>
+            </ul>
+            <li>Add n giá trị sau vào cây: a1, a1+a2, a1+a2+a3..., sum(ai)</li>
+            <li>Lấy giá trị nhỏ nhất so sánh vơi 0</li>
+            <li>Tại bước thứ i:
+                <ul>
+                    <li>Đặt Si=a1+a2...+ai. Lấy phần tử Si ra khỏi cây</li>
+                    <li>Thêm phần tử Sum + Si vào cây</li>
+                    <li>Lấy giá trị nhỏ nhất so sánh với Si</li>
+                </ul>
+            </li>
+            <li>Độ phức tạp: O(nlgn)</li>
         </ul>
     </div>
 

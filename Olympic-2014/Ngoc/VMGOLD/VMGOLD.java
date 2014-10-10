@@ -20,8 +20,10 @@ public class VMGOLD {
 		tr(System.currentTimeMillis() - s + "ms");
 	}
 
-	/* Not yet completed
-	 * */
+	/*
+	 * Demonstrate idea, has not tested or debugged
+	 * Can someone help me?
+	 */
 	static void solve() {
 		int n = ni();
 		int k = ni();
@@ -41,7 +43,7 @@ public class VMGOLD {
 			}
 		}
 
-		// Sort for Java 6? divisors
+		Collections.sort(divisors);
 
 		int maxValue = 1;
 
@@ -110,6 +112,13 @@ public class VMGOLD {
 
 			if (pPower > 0) {
 				sq = (int) (Math.round(Math.sqrt(x)) + 1);
+			}
+		}
+
+		if (x > 1) {
+			int cur = divisors.size();
+			for (int i = 0; i < cur; i++) {
+				divisors.add(divisors.get(i) * (int) x);
 			}
 		}
 
