@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="TEST"/>
+	<classpathentry kind="src" path="NKREZ"/>
+	<classpathentry kind="src" path="QTDIVSEQ"/>
+	<classpathentry kind="src" path="VMGOLD"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

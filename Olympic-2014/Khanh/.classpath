@@ -2,6 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="2240. Số huyền bí"/>
+	<classpathentry kind="src" path="2204. Hang động"/>
+	<classpathentry kind="src" path="13019. Hai nhà máy điện nguyên tử"/>
+	<classpathentry kind="src" path="20645. Bảng quan hệ"/>
+	<classpathentry kind="src" path="20650. Mỏ vàng"/>
+	<classpathentry kind="src" path="15282. Secret Garden"/>
+	<classpathentry kind="src" path="12963. Dãy số"/>
+	<classpathentry kind="src" path="12770. Bắn máy bay"/>
+	<classpathentry kind="src" path="6184. Chocolate Buying"/>
+	<classpathentry kind="src" path="2719. Bãi cỏ ngon nhất"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

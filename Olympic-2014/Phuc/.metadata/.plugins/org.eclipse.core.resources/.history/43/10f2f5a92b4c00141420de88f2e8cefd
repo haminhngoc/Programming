@@ -1,0 +1,112 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Init(System.in);
+		int n = nextInt();
+		List<Integer> list = new ArrayList<Integer>();
+		long R = 0;
+		int a[] = new int[n];
+		int count[] = new int[100000];
+		int t[] = new int[100];
+		for (int i = 0; i < n; ++i) {
+			a[i] = nextInt();
+
+			int z = a[i] / 1000;
+			for (int j = 99; j > z; --j) {
+				R += t[j];
+			}
+
+			for (int j = a[i] + 1; j / 1000 == z; ++j) {
+				R += count[j];
+			}
+			count[a[i]]++;
+			t[a[i] / 1000]++;
+
+		}
+
+		System.out.println(R);
+
+	}
+
+	public static int lower(List<Integer> list, int v) {
+		int size = list.size();
+		if (v <= list.get(0)) {
+			return 0;
+		}
+
+		int left = 0;
+		int right = size - 1;
+		while (left < right) {
+			int mid = (left + right + 1) / 2;
+			if (list.get(mid) >= v) {
+				right = mid - 1;
+			} else {
+				left = mid;
+			}
+		}
+		if (list.get(left) < v) {
+			return left + 1;
+		} else {
+			return left;
+		}
+	}
+
+	public static int upper(List<Integer> list, int v) {
+		int size = list.size();
+		if (v >= list.get(size - 1)) {
+			return 0;
+		}
+
+		int left = 0;
+		int right = size - 1;
+		while (left < right) {
+			int mid = (left + right) / 2;
+			if (list.get(mid) <= v) {
+				left = mid + 1;
+			} else {
+				right = mid;
+			}
+		}
+		if (list.get(left) > v) {
+			return size - left;
+		} else {
+			return size - left - 1;
+		}
+	}
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+}
