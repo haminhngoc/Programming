@@ -1,0 +1,114 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Init(System.in);
+
+		char s[] = next().toCharArray();
+
+		int length = s.length;
+		int con = 'z' - 'a' + 1;
+		List<Integer>[] list = new List[con];
+		for (int i = 0; i < con; ++i) {
+			list[i] = new ArrayList<Integer>();
+		}
+
+		for (int i = 0; i < length; ++i) {
+			list[s[i] - 'a'].add(i);
+		}
+
+		int max = 1;
+		P[] arr = new P[length + 1];
+		for (int i = 0; i <= length; ++i) {
+			arr[i] = new P();
+		}
+		arr[1].index = 0;
+
+		for (int i = 1; i < length; ++i) {
+			for (int j = max; j >= 0; --j) {
+				int t = binarySearch(list[s[i] - 'a'], j > 0 ? arr[j].index : i);
+				if (j + 2 <= length && arr[j + 2].index < t) {
+					arr[j + 2].index = t;
+					arr[j+2].s = Arrays.copyOf(arr[j], 2000);
+					max = j + 2 > max ? j + 2 : max;
+				}
+			}
+			arr[1].index = i;
+
+		}
+
+		System.out.println(arr[max].s);
+
+	}
+
+	private static int binarySearch(List<Integer> list, int i) {
+		int right = list.size() - 1;
+		int left = 0;
+		while (left < right) {
+			int mid = (left + right + 1) / 2;
+
+			if (list.get(mid) >= i) {
+				right = mid - 1;
+			} else {
+				left = mid;
+			}
+		}
+		if (list.get(left) < i) {
+			return list.get(left);
+		}
+
+		if (left >= 1) {
+			return list.get(left - 1);
+
+		}
+		return -1;
+	}
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+}
+
+class P {
+	int index = 0;
+	char [] s;
+
+	public P() {
+		index = -1;
+		s = new char[2000];
+	}
+}

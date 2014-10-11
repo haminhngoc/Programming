@@ -16,22 +16,31 @@ public class Main {
 		long sum[] = new long[n + 1];
 		int z = (int) (1e9 + 7);
 		for (int i = 0; i < n; ++i) {
-			long t = nextLong();
-
-			sum[i + 1] = sum[i] + t;
+			sum[i + 1] = sum[i] + nextLong();
 		}
 
 		if (sum[n] == 0) {
-			long count = 0;
+			
+			int count = 0;
 			for (int i = 1; i <= n; ++i) {
 				if (sum[i] == 0) {
 					count++;
 				}
 			}
 
-			long re = exe(count, k);
+			if (count < k) {
+				System.out.println(0);
+				return;
+			}
+			if (k == 1) {
+				System.out.println(1);
+				return;
+			}
 
-			System.out.println(re % z);
+		
+			long re = exe(count - 1, k - 1);
+
+			System.out.println(re);
 			return;
 		}
 		if (sum[n] % k != 0) {
@@ -46,65 +55,85 @@ public class Main {
 			if (sum[i] % t != 0 || sum[i] == 0) {
 				continue;
 			}
-			long temp = sum[i] / t;
-	
-			arr[(int) temp] += arr[(int) (temp - 1)];
+			int temp = (int) (sum[i] / t);
+			if (temp == k) {
+				continue;
+			}
+			arr[temp] += arr[(temp - 1)];
+			arr[temp] %= z;
 		}
 
 		System.out.println(arr[k - 1]);
 
 	}
 
-	private static long exe(long count, int k) {
-
+	private static long exe(int count, int k) {
+		int con = 1000000007;
 		long re = 1;
-		long min = Math.min(k, count - k);
-		long max = Math.max(k, count - k);
-		List<Integer> list = find(min);
-		long arr[] = new long[list.size()];
-		long size = list.size();
-		for (int i = (int) (max + 1); i <= count; ++i) {
-			int j = 0;
-			long z = i;
-			while (z != 1) {
-				if (j >= size) {
-					break;
-				}
-				if (z % list.get(j) == 0) {
-					arr[j]++;
-					z /= list.get(j);
-				} else {
-					j++;
+		int min = Math.min(k, count - k);
+		int max = Math.max(k, count - k);
+		List<Integer> list = generatePrimeList((int) Math.sqrt(count));
+		int size = list.size();
+		int arr[] = new int[count + 1];
+		for (int i = 2; i <= count; ++i) {
+			arr[i] = i;
+		}
+		for (int i = 0; i < size; ++i) {
+			int temp = list.get(i);
+			int end1 = min / temp;
+			long c = 0;
+			for (int j = 1; j <= end1; ++j) {
+				int z = j * temp;
+				while (arr[z] % temp == 0) {
+					arr[z] /= temp;
+					c--;
 				}
 			}
-			re *= z;
-			re %= 1e9 + 7;
+			int end2 = count / temp;
+
+			for (int j = (max + temp) / temp; j <= end2; ++j) {
+				int z = j * temp;
+				while (arr[z] % temp == 0) {
+					arr[z] /= temp;
+					c++;
+				}
+			}
+
+			re *= pow(temp, c);
+			re %= con;
 		}
+		int temp[] = new int[min + 1];
+
 		for (int i = 2; i <= min; ++i) {
-			int j = 0;
-			int z = i;
-			while (z != 1) {
-				if (j >= size) {
-					break;
-				}
-				if (z % list.get(j) == 0) {
-					arr[j]--;
-					z /= list.get(j);
-				} else {
-					j++;
-				}
+
+			temp[arr[i]]--;
+
+		}
+
+		for (int i = max + 1; i <= count; ++i) {
+			if (arr[i] <= 1) {
+				continue;
+			}
+			if (arr[i] <= min) {
+				temp[arr[i]]++;
+			} else {
+				re *= arr[i];
+				re %= con;
 			}
 		}
 
-		for (int i = 0; i < size; ++i) {
-			re *= pow(list.get(i), arr[i]);
-			re %= 1e9 + 7;
+		for (int i = 2; i <= min; ++i) {
+			if (temp[i] == 0) {
+				continue;
+			}
+			re *= pow(i, temp[i]);
+			re %= con;
 		}
 
 		return re;
 	}
 
-	private static long pow(long n, Long k) {
+	private static long pow(long n, long k) {
 		long result = 0;
 		if (k == 0) {
 			return 1;
@@ -113,7 +142,7 @@ public class Main {
 			return n;
 		}
 		result = pow(n, k / 2);
-		result *= result;
+		result = result * result;
 		result %= 1e9 + 7;
 		if (k % 2 == 1) {
 			result *= n;
@@ -122,14 +151,30 @@ public class Main {
 		return result;
 	}
 
-	private static List<Integer> find(long n) {
-		List<Integer> list = new ArrayList<Integer>();
-		for (int i = 2; i <= n; ++i) {
-			if (check(i)) {
-				list.add(i);
+	private static ArrayList<Integer> generatePrimeList(int limit) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		result.add(2);
+		result.add(3);
+		int resultSize = 2;
+		int end;
+		int j;
+		for (int i = 5; i <= limit; i += 2) {
+			end = (int) Math.sqrt(i);
+			j = 0;
+			while (j < resultSize && result.get(j) <= end) {
+				if (i % result.get(j) == 0) {
+					break;
+				}
+				j++;
+
 			}
+			if (j >= resultSize || result.get(j) > end) {
+				result.add(i);
+				resultSize++;
+			}
+
 		}
-		return list;
+		return result;
 	}
 
 	private static boolean check(long n) {

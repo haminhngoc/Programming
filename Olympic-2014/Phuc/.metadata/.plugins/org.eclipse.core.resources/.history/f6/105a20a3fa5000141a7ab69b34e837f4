@@ -1,0 +1,90 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Init(System.in);
+
+		int n = nextInt();
+		int m = nextInt();
+
+		// long sum[] = new long[n + 1];
+
+		List<Staff> list = new ArrayList<Staff>();
+		PriorityQueue<Long> staff = new PriorityQueue<Long>();
+		long sum = 0;
+		int size = 0;
+		long temp = 0;
+		for (int i = 0; i < n; ++i) {
+			long t = nextLong();
+		//	sum += nextLong();
+			int numberOfStaff = nextInt();
+			for (int j = 0; j < numberOfStaff; j++) {
+				temp = nextLong();
+				temp -= sum;
+				if (size < m) {
+					staff.add(-temp);
+					size++;
+				} else if (temp > staff.peek()) {
+					staff.poll();
+					staff.add(-temp);
+				}
+			}
+			sum += t;
+		}
+
+		System.out.println(staff.peek() + sum);
+
+	}
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+}
+
+class Staff implements Comparable<Staff> {
+	public int p;
+	public long time;
+
+	@Override
+	public int compareTo(Staff arg0) {
+		if (this.time < arg0.time) {
+			return -1;
+		} else if (this.time > arg0.time) {
+			return 1;
+		}
+		return 0;
+	}
+}
