@@ -14,7 +14,7 @@
             </li>
             <li>* Ước lớn nhất có thể là a/2 ~ 500M (maxP). Tổng số ước tối đa ~ 2^8 * 4 ~ 1K (Why?)</li>
             <li>* Trường hợp xấu nhất là gì? hãy đưa vào testcase để kiểm tra thời gian thực thi!</li>
-            <li>Thời gian 1s, cho phép thử nghiệm giải pháp đơn giản: tính phần dư của 3^d chia cho M với độ phức tạp lg(maxP)
+            <li>Thời gian 1s, cho phép thử nghiệm giải pháp đơn giản: tính phần dư của 3^d chia cho M với độ phức tạp log(maxP)
                 (Độ khó 1)
                 <ul>
                 <li>Code?</li>
@@ -54,6 +54,7 @@
         <a href="http://vn.spoj.com/problems/NKSEQ/">2203. Dãy số (Level 5)</a></h1>
     <div>
         <ul>
+            <li>* Russian Winter Training Camp 2004</li>
             <li>Ý tưởng:
                 <ul>
                     <li>Tận dụng tổng a1+a2...+ai (Được tính lần đầu tiên) để kiểm tra tất cả tổng có kết thúc tại i</li>
@@ -75,7 +76,36 @@
                     <li>Lấy giá trị nhỏ nhất so sánh với Si</li>
                 </ul>
             </li>
-            <li>Độ phức tạp: O(nlgn)</li>
+            <li>Độ phức tạp: O(nlogn)</li>
+        </ul>
+    </div>
+
+
+    
+
+
+
+    
+    <h1>
+        <a href="http://vn.spoj.com/problems/NKMAXSEQ/">2250. Dãy con dài nhất</a></h1>
+    <div>
+        <ul>
+            <li>* Đề thi quốc gia 2006. Sự phức tạp là điều khó tránh :)</li>
+            <li>Ý tưởng: 
+                <ul>
+                    <li>Xét dãy số sau: S0 = 0, S1=a1, S2=a1+a2...Sn=a1+a2...+an </li>
+                    <li>=> Trọng lượng của dãy con [i,j] là Sj - S(i-1)</li>
+                    <li>Với mỗi S(i-1) ta cần tìm chỉ số j lớn nhất sao cho Sj &gt;= S(i-1)+p</li>
+                </ul>
+            </li>
+            <li>=&gt; Có thể đoán được cần sử dụng cấu trúc cây, để đảm bảo chạy được cho trường hợp xấu nhất =&gt; ta sử dụng cây nhị phân 
+                cân bằng (AVL - giống bài ở trên)</li>
+            <li>Biến thể Node như sau: Ngoài giá trị cần tìm, ta lưu chỉ số lớn nhất của giá trị lớn hơn hoặc bằng giá trị node hiện tại<ul>
+                <li><img src="https://raw.githubusercontent.com/haminhngoc/Programming/master/Olympic-2014/Pictures/AVL-LastIndex.JPG" alt="./Pictures/AVL-LastIndex.JPG" /> </li>
+                <li>F(7) = F(4) = F(8) = F(9) = F(10) = 10, F(15) = 5</li>
+                </ul>
+            </li>
+            <li>Độ phức tạp: Xây dựng cây AVL O(nlogn) + tìm kiếm O(nlogn)</li>
         </ul>
     </div>
 
@@ -106,10 +136,6 @@
             <li></li>
         </ul>
     </div>
-
-
-    
-
 
 
     
