@@ -1,20 +1,20 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class NumberAlgorithms {
-	
+
 	/*****************************************************************
-	 *************FACTORIZATION AND DIVISOR****************************
+	 ************* FACTORIZATION AND DIVISOR****************************
 	 *****************************************************************/
-	
+
 	/*
-	 * July 19th, 2014. Created by Ngoc
-	 * 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37 => Maximum 2^11 ~ 2K divisors
-	*/
+	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37
+	 * => Maximum 2^11 ~ 2K divisors
+	 */
 	public static List<NumberFactor> fatorization(long x) {
 		long sq = Math.round(Math.sqrt(x)) + 1; // 10 ^ 6
 		List<NumberFactor> list = new ArrayList<NumberFactor>();
@@ -41,7 +41,7 @@ public class NumberAlgorithms {
 
 	/*
 	 * July 19th, 2014. Created by Ngoc
-	*/
+	 */
 	public static List<Long> getDivisors(long x) {
 		List<Long> divisors = new ArrayList<Long>();
 		divisors.add((long) 1);
@@ -64,11 +64,10 @@ public class NumberAlgorithms {
 	}
 
 	/*
-	 * July 19th, 2014. Created by Ngoc
-	 * 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37 => Maximum 2^11 ~ 2K divisors
-	*/
-	public static Map<Long, List<Long>> getDivisorsOfDivisor(long x,
-			List<Long> divisors) {
+	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37
+	 * => Maximum 2^11 ~ 2K divisors
+	 */
+	public static Map<Long, List<Long>> getDivisorsOfDivisor(long x, List<Long> divisors) {
 
 		Map<Long, List<Long>> divisorMap = new HashMap<Long, List<Long>>();
 		List<Long> firstList = new ArrayList<Long>();
@@ -109,67 +108,146 @@ public class NumberAlgorithms {
 		return divisorMap;
 	}
 
-	
+	public static List<Integer> getDivisors(long x, int[] primes) {
+		List<Integer> divisors = new ArrayList<Integer>();
+		divisors.add(1);
+
+		int pi = 0;
+		int p = primes[pi++];
+		int sq = (int) (Math.round(Math.sqrt(x)) + 1);
+		while (p < sq) {
+
+			int pPower = 1;
+			int cur = divisors.size();
+			while (x % p == 0) {
+				pPower *= p;
+				x /= p;
+
+				for (int i = 0; i < cur; i++) {
+					divisors.add(divisors.get(i) * pPower);
+				}
+			}
+
+			if (pPower > 0) {
+				sq = (int) (Math.round(Math.sqrt(x)) + 1);
+			}
+		}
+
+		if (x > 1) {
+			int cur = divisors.size();
+			for (int i = 0; i < cur; i++) {
+				divisors.add(divisors.get(i) * (int) x);
+			}
+		}
+
+		return divisors;
+	}
+
+	public static int[] getDivisors_Simple(int n) {
+		List<Integer> divisors = new ArrayList<>();
+		for (int d = 1; d * d <= n; d++)
+			if (n % d == 0) {
+				divisors.add(d);
+				if (d * d != n) {
+					divisors.add(n / d);
+				}
+			}
+		int[] result = new int[divisors.size()];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = divisors.get(i);
+		}
+		Arrays.sort(result);
+		return result;
+	}
+
 	/*****************************************************************
 	 * GCD & LCM *****************************************************
 	 *****************************************************************/
-	
+
 	/*
-	 * Find greatest common divisor
-	 * Edited by Duy
+	 * Find greatest common divisor Edited by
 	 */
-	public static long gcd(long number1, long number2){
+	public static long gcd(long a, long b) {
+		if (a > b) {
+			long temp = a;
+			a = b;
+			b = temp;
+		}
+		while (a > 0) {
+			long temp = a;
+			a = b % a;
+			b = temp;
+		}
+		return b;
+	}
+
+	/*
+	 * Find greatest common divisor Edited by Duy
+	 */
+	public static long lcm(long number1, long number2) {
 		return 0;
 	}
-	/*
-	 * Find greatest common divisor
-	 * Edited by Duy
-	 */
-	public static long lcm(long number1, long number2){
-		return 0;
-	}
-	
+
 	/*****************************************************************
 	 * PRIME *********************************************************
 	 *****************************************************************/
-	
+
 	/*
-	 * This method is used to check prime multiple times > 10^8
-	 * Edited by Phi
+	 * This method is used to check prime multiple times > 10^8 Edited by
 	 */
-	public static void initPrimeList(int limit){
-		// Note: what is the best method? performance and easily to re-write?
+	public static boolean[] getPrimeMap(int limit) {
+		boolean[] map = new boolean[limit + 1];
+		Arrays.fill(map, 2, limit + 1, true);
+		for (int i = 2; i * i <= limit; i++) {
+			if (map[i]) {
+				for (int j = i * i; j <= limit; j += i) {
+					map[j] = false;
+				}
+			}
+		}
+		return map;
 	}
-	
+
+	public static int[] getPrimes(int limit) {
+		boolean[] map = getPrimeMap(limit);
+
+		int[] primes = new int[limit + 1];
+		int cnt = 0;
+		for (int i = 0; i < map.length; i++) {
+			if (map[i]) {
+				primes[cnt++] = i;
+			}
+		}
+
+		return Arrays.copyOf(primes, cnt);
+	}
+
 	/*
-	 * Check prime in O(0)
-	 * Edited by Phi
+	 * Check prime in O(0) Edited by Phi
 	 */
-	public static boolean isPrime(int number){
+	public static boolean isPrime(int number) {
 		return false;
 	}
-	
+
 	/*
-	 * Check if a number is prime
-	 * Edited by Phi
+	 * Check if a number is prime Edited by Phi
 	 */
-	public static boolean isPrimeSimple(int number){
+	public static boolean isPrimeSimple(int number) {
 		return false;
 	}
-	
+
 	/*****************************************************************
-	 *********************BASE AND BIG NUMBER*************************
+	 ********************* BASE AND BIG NUMBER*************************
 	 *****************************************************************/
-	
+
 	/*
-	 * Check if a number is prime
-	 * Edited by Phuc
+	 * Check if a number is prime Edited by Phuc
 	 */
-	
+
 	/*****************************************************************
-	 ***********************UTILITY SECTION***************************
+	 *********************** UTILITY SECTION***************************
 	 *****************************************************************/
-	
+
 	public static Comparator<Long> comparator() {
 		return new Comparator<Long>() {
 			public int compare(Long arg0, Long arg1) {
@@ -177,12 +255,11 @@ public class NumberAlgorithms {
 			}
 		};
 	}
-	
-	
+
 	/*****************************************************************
-	 ***********************TEST SECTION*******************************
+	 *********************** TEST SECTION*******************************
 	 *****************************************************************/
-	
+
 	public static void testFactorization(long x) {
 		List<NumberFactor> factors = fatorization(x);
 		for (int i = 0; i < factors.size(); i++) {
@@ -204,7 +281,7 @@ public class NumberAlgorithms {
 	public static void testMap(long x) {
 		List<Long> divisors = new ArrayList<Long>();
 		Map<Long, List<Long>> divisorMap = getDivisorsOfDivisor(x, divisors);
-		
+
 		int total = 0;
 		for (int i = 0; i < divisors.size(); i++) {
 			long divisor = divisors.get(i);
