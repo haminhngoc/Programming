@@ -1,0 +1,121 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Init(System.in);
+
+		int n = nextInt();
+		int q = nextInt();
+		int a[] = new int[n];
+
+		for (int i = 0; i < n; ++i) {
+			a[i] = nextInt();
+		}
+
+		StringBuilder str = new StringBuilder();
+		for (int i = 0; i < q; ++i) {
+			int z = nextInt();
+			int b = nextInt();
+
+			str.append(exe(z - 1, b - 1, max, min, a));
+			str.append("\n");
+		}
+
+		System.out.println(str);
+	}
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+}
+
+class SegmentTree {
+	int[] max;
+	int[] min;
+	int[] data;
+
+	int maxVal = -1;
+	int minVal = Integer.MAX_VALUE;
+
+	public SegmentTree(int[] data) {
+		this.data = data;
+		max = new int[4 * data.length + 20];
+		min = new int[4 * data.length + 20];
+
+		buildTree(0, 0, data.length - 1);
+	}
+
+	private void buildTree(int root, int left, int right) {
+		if (left == right) {
+			max[root] = min[left] = data[root];
+			return;
+		}
+		int mid = (left + right) >> 1;
+		buildTree(root, left, mid);
+		buildTree(root, mid + 1, right);
+
+		max[root] = Math.max(max[left(root)], max[right(root)]);
+		min[root] = Math.max(min[left(root)], min[right(root)]);
+
+	}
+
+	public long get(int left, int right) {
+		maxVal = -1;
+		minVal = Integer.MAX_VALUE;
+		return get(0, 0, data.length - 1, left, right);
+	}
+
+	private void get(int root, int leftRange, int rightRange, int left,
+			int right) {
+		if (left > rightRange || right < leftRange) {
+			return;
+		}
+
+		if (left <= leftRange && right >= rightRange) {
+			return (Math.max(max[root], maxVal) - Math.min(min[root], minVal));
+		} else {
+			int mid = (leftRange + rightRange) >> 1;
+		return	(left(root),left,mid, left, right);
+		}
+		return 0;
+	}
+
+	static int left(int root) {
+		return (root << 1) + 1;
+	}
+
+	static int right(int root) {
+		return (root << 1) + 2;
+	}
+
+}
