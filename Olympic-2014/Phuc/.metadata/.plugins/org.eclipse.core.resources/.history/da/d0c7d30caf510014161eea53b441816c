@@ -1,0 +1,72 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Init(System.in);
+
+		int n = nextInt();
+		StringBuilder str = new StringBuilder();
+		while (n-- > 0) {
+			char s[] = next().toCharArray();
+			str.append(solve(s));
+			str.append("\n");
+		}
+
+	}
+
+	private static long solve(char[] s) {
+		int con = 'A';
+		int arr[] = new int['Z' - con + 1];
+		int length = s.length;
+		for (int i = 0; i < length; ++i) {
+			arr[s[i] - con]++;
+		}
+
+		long r = exe(length);
+		for (int i = 'A'; i <= 'Z'; ++i) {
+			r -= exe(arr[i]);
+		}
+		return 0;
+	}
+
+	private static long exe(int length) {
+
+		long re = 0;
+		while (length % 5 == 0) {
+			re += length / 5;
+		}
+		return 0;
+	}
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	static void Init(InputStream input) {
+		reader = new BufferedReader(new InputStreamReader(input));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double NextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+}

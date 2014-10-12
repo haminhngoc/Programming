@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -12,31 +15,40 @@ public class Main {
 		int n = nextInt();
 		int k = nextInt();
 
-		long has[][] = new long[n + 1][k + 1];
-		long no[][] = new long[n + 1][k + 1];
-
+		List<Long> list = new ArrayList<Long>();
 		for (int i = 0; i < n; ++i) {
-			long t = nextLong();
-			has[i][1] = t;
-			no[i][1] =1;
-			for (int j = 2; j <= k; ++j) {
-				has[i][j] = 1;
-				for (int z = 0; z < i; ++z) {
+			long a = nextLong();
+			long end = (long) Math.sqrt(a);
+			for (int j = 1; j <= end; ++j) {
+				if (a % j == 0) {
+					list.add((long) j);
 
-					if (has[z][j - 1] != 0) {
-						has[i][j] = Math.max(has[i][j], gcd(t, has[z][j - 1]));
-					}
-					if (no[z][j - 1] != 0) {
-						has[i][j] = Math.max(has[i][j], gcd(t, no[z][j - 1]));
-						no[i][j] = Math.max(no[i][j], has[z][j]);
-						no[i][j] = Math.max(has[z][j], no[z][j]);
+					if (a / j != j) {
+						list.add(a / j);
 					}
 				}
 			}
-
-			
 		}
-		System.out.println(Math.max(has[n][k], no[n][k]));
+
+		Collections.sort(list);
+
+		long val = 1;
+		long count = 0;
+		long size = list.size();
+		for (int i = (int) (size - 1); i >= 0; --i) {
+			if (list.get(i) == val) {
+				count++;
+			} else {
+				if (count >= k) {
+					System.out.println(val);
+					return;
+				}
+				val = list.get(i);
+				count = 1;
+			}
+		}
+
+		System.out.println(1);
 
 	}
 

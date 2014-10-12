@@ -1,0 +1,13 @@
+public class Main {
+
+	public static void main(String[] args) {
+		for (int i = 10000; i < 1e10; ++i) {
+			int end = (int) Math.sqrt(i);
+			long count = 0;
+			for (int j = 2; j <= end; ++j) {
+
+			}
+		}
+
+	}
+}
