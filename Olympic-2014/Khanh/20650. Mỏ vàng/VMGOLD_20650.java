@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 class VMGOLD_20650 {
@@ -14,34 +16,44 @@ class VMGOLD_20650 {
 		Integer n = in.nextInt();
 		int k = in.nextInt();
 		long arr[] = new long[n];
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++) {
 			arr[i] = in.nextLong();
-		long r = Check(arr, n, k);
+		}
+		long r = Solve(arr, n, k);
 		System.out.println(r);
 	}
 
-	private static long Check(long[] arr, int n, int k) {
-		// TODO Auto-generated method stub
-		long max = 0;
-		for (int i = 0; i < n; i++)
-			if (max < arr[i])
-				max = arr[i];
-		long x = max;
-		while (x > 1) {
-			int result = 0;
-			int i = n - 1;
-			while (i > 0) {
-				if (arr[i] % x == 0)
-					result++;
-				if (result >= k)
-					return x;
-				i--;
+	private static long Solve(long[] arr, int n, int k) {
+		ArrayList<Long> val = new ArrayList<Long>();
+		for (int i = 0; i < n; i++) {
+			Long I = arr[i];
+			val.add(I);
+			int sqrtAi = (int) Math.sqrt(I);
+			for (int j = 2; j <= sqrtAi; j++)
+				if (I % j == 0) {
+					Long J = I / j;
+					val.add(J);
+					if (J != j)
+						val.add((long) j);
+				}
+		}
+		Collections.sort(val);
+
+		int size = val.size();
+		if (k == 1)
+			return val.get(size - 1);
+		Long x = val.get(size - 1);
+		int count = 1;
+		for (int i = size - 2; i >= 0; i--) {
+			Long y = val.get(i);
+			if (y == x) {
+				count++;
+				if (count >= k)
+					return y;
+			} else {
+				count = 1;
+				x = y;
 			}
-			if (arr[0] % x == 0)
-				result++;
-			if (result >= k)
-				return x;
-			x--;
 		}
 		return 1;
 	}

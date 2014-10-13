@@ -1,4 +1,8 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 class Point {
 	int x = 0;
@@ -22,27 +26,27 @@ class Point {
 class NUCLEAR_13019 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
+		InputReader13019 in = new InputReader13019(System.in);
+
+		int n = in.nextInt();
 		Point arr[] = new Point[n];
 		for (int iN = 0; iN < n; iN++) {
-			arr[iN] = new Point(scan.nextInt(), scan.nextInt());
+			arr[iN] = new Point(in.nextInt(), in.nextInt());
 		}
-		Point facA = new Point(scan.nextInt(), scan.nextInt());
-		Point facB = new Point(scan.nextInt(), scan.nextInt());
+		Point facA = new Point(in.nextInt(), in.nextInt());
+		Point facB = new Point(in.nextInt(), in.nextInt());
 		double arrRangeA[] = new double[n];
 		double arrRangeB[] = new double[n];
 		for (int iN = 0; iN < n; iN++) {
 			arrRangeA[iN] = arr[iN].getRange(facA);
 			arrRangeB[iN] = arr[iN].getRange(facB);
 		}
-		int T = scan.nextInt();
+		int T = in.nextInt();
 		for (int iT = 0; iT < T; iT++) {
-			int r1 = scan.nextInt();
-			int r2 = scan.nextInt();
+			int r1 = in.nextInt();
+			int r2 = in.nextInt();
 			System.out.println(Check(n, arrRangeA, arrRangeB, r1, r2));
 		}
-		scan.close();
 	}
 
 	private static int Check(int n, double[] arrRangeA, double[] arrRangeB,
@@ -53,4 +57,30 @@ class NUCLEAR_13019 {
 				result++;
 		return result;
 	}
+}
+
+class InputReader13019 {
+	public BufferedReader reader;
+	public StringTokenizer tokenizer;
+
+	public InputReader13019(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
 }
