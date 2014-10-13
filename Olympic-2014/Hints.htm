@@ -53,6 +53,7 @@
     <h1>
         <a href="http://vn.spoj.com/problems/NKSEQ/">2203. Dãy số (Level 5)</a></h1>
     <div>
+        <h2>Solution 1: </h2>
         <ul>
             <li>* Russian Winter Training Camp 2004</li>
             <li>Ý tưởng:
@@ -77,6 +78,31 @@
                 </ul>
             </li>
             <li>Độ phức tạp: O(nlogn)</li>
+        </ul>
+        
+        <h2>Solution 2 (Phúc): DP</h2>
+        <ul>
+            <li></li>
+        </ul>
+        
+        <h2>Solution 3: </h2>
+        <ul>
+            <li>* Solution 1 làm khá nhiều việc thừa :)</li>
+            <li>Ý tưởng khác: với yêu cầu của đề bài, tại vị trí j nếu ta chỉ ra được một trường hợp đủ xấu thì không cần kiểm tra các tổng còn lại<ul>
+                <li>Ví dụ: Nếu aj &lt;= 0 thì có thể loại bỏ j</li>
+                </ul>
+            </li>
+            <li> Giải pháp:
+                <ul>
+                    <li>Bắt đầu ví trí j mà aj không dương và số bên phải của nó dương</li>
+                    <li>Ta tính quay ngược về bên trái, tính tổng Sij = ai + a(i+1)...+aj, loại đi tất cả vị trí mà Sij không dương</li>
+                    <li>Nếu i là số tận cùng bên trái bị loại => hoặc i quay lại vị trí j, hoặc S(i-1)k (k đi từ i đến j) là số dương (Vì 
+                        S(i-1)k + Skj &gt; 0 &amp; Skj &lt;= 0)</li>
+                    <li>Ta đã có đoạn dương (i-1)j =&gt; Được xem là một Node dương</li>
+                    <li>Tiếp tục các bước dịch sang trái => Hoặc ta có M đoạn dương, hoặc có đoạn âm đủ lớn để triệt tiêu các đoạn dương đã tạo ra ở lần lặp lại thứ hai</li>
+                    <li> => Kết quả là số Node dương còn lại</li>
+                </ul>
+            </li>
         </ul>
     </div>
 
