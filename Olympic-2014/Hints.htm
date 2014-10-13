@@ -134,6 +134,18 @@
             </li>
             <li>Độ phức tạp: Xây dựng cây AVL O(nlogn) + tìm kiếm O(nlogn)</li>
         </ul>
+
+        <h4>Improvement: </h4>
+        <ul>
+            <li>Ý tưởng:<ul>
+                <li>Không dùng Tree, sử dụng danh sách xắp xếp hợp lý</li>
+                <li>* Có thể áp dụng cho các bài khác!</li>
+                </ul>
+            </li>
+            <li>Tạo Node chứa chỉ số i và giá trị Si</li>
+            <li>Xắp xếp tăng dần theo Si và i</li>
+            <li>Duyệt từ cuối danh sách đã xắp xếp =&gt; Cập nhật chỉ số Node(i).Index = Max(Node(j).Index, Node(i+1).Index)</li>
+        </ul>
     </div>
 
 
