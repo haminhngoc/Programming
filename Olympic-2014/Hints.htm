@@ -185,6 +185,16 @@
             </li>
             <li>Độ phức tạp: O(nlogn)</li>
         </ul>
+
+        <h4>Nếu muốn tránh AVL: </h4>
+        <ul>
+            <li>Ý tưởng:<ul>
+                <li>Xắp xếp danh sách Rbj, xây dựng cây nhị phân từ chính giá trị Rbj</li>
+                <li>E.g. BuildTree(n): Node((n+1)/2) {Left = BuildTree(0,(n+1)/2-1), Right = BuildTree((n+1)/2+1,n)}</li>
+                <li>Mặc nhiên có cây cân bằng. Add(value) =&gt; Thay đổi CountLeft, CountRight của node tương ứng</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
 
