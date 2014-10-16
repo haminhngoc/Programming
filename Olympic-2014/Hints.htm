@@ -229,11 +229,31 @@
 
     
     <h1>
-        <a href=""></a></h1>
+        <a href="http://vn.spoj.com/problems/VOSEXP/">21154. Lũy thừa</a></h1>
     <div>
-        <ul>
-            <li></li>
-        </ul>
+        <h4>Bài này có vài ý khá hay cần chú ý, đặc biệt trong OLP</h4>
+        <ol>
+            <li>Không nên tập trung vào Ti.<ul>
+                <li>Nếu d là số nguyên tố thì sẽ không có mối liên hệ "đơn giản" nào giữa Ti (Ngoại trừ phép toán %)</li>
+                <li>Có ~90% số nguyên tố nhỏ hơn 10^12 lớn hơn 10^11 (Why?)</li>
+                <li>=> Cần tính A^Ti - với Ti bất kỳ</li>
+                </ul>
+            </li>
+            <li>% (Mod) là phép toán chiếm nhiều CPU - Trong 1s chỉ thực hiện được ít hơn 100M phép toán&nbsp; =&gt; ĐÂY LÀ THÁCH THỨC CHÍNH CỦA BÀI TOÁN</li>
+            <li>Mehod powerModBase có độ phức tạp log(n), Ti ~ 10^12 ~ 2^40 => Cần tới 40 * 2 phép toán => Chỉ khả thi khi M ~ 10^6 =&gt; Cần cải tiến ~ 
+                4*20 lần để chạy được cho M ~ 20M</li>
+            <li> Ý tưởng: Tính toán trước một số giá trị, lưu vào bộ nhớ để sử dụng lại</li>
+            <ul>
+                <li>Nếu sử dụng bộ nhớ tính toán trước 1M giá trị X (A^X % BASE) => Có thể giảm được một nửa thời gian chạy (Với T ~ 10^12) 
+                    =&gt; CHƯA ĐỦ</li>
+            <li>&nbsp;Áp dụng phương pháp "Căn bậc hai của lũy thừa" (Ngoc) => Phân tích T thành hai phần theo biểu diễn nhị phân tại vị trí bit 20: T = 2^20*TLeft + TRight<ul>
+                <li>&nbsp;A^T = A^(2^20*TLeft + TRight) = A^(2^20*TLeft) * A^TRight</li>
+                <li>Ta tính trước tất cả số sạng: A^(2^20*TLeft) và A^TRight => A^T là tích (Mod BASE) của hai số tương ứng</li>
+                <li>&nbsp;Tổng số phép % ~ M + CACHE</li>
+                </ul>
+                </li>
+            </ul>
+        </ol>
     </div>
 
 
