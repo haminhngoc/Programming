@@ -63,10 +63,12 @@ class VOSEXP {
 		for (int i = 1; i <= M; i++) {
 			int right = (int) (T & rightFlag);
 			int left = (int) (T >> rightBit);
-			F = (F + rightCache[right] * leftCache[left]) % BASE; // Problem? Why or Why not?
+			F = (F + (long)rightCache[right] * leftCache[left]) % BASE; // Problem? Why or Why not?
 			T = (T * b + c) % d;
 		}
+		
 		// WHAT IS WRONG? DO I MISSUNDERSTAND THE PROBLEM? SMALL TESTCASES RETURN THE SAME VALUE AS MANUALTEST.XLSX!
+		// UPDATED: A SILLY MISTAKE OF MULTIPLY INTEGERS
 		out.println(F);
 	}
 
