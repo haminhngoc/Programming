@@ -1,0 +1,20 @@
+5 5
+.a...
+a.ab.
+.abzb
+.bzbz
+..bz.
+
+=> 5
+
+8 6
+.a....
+a.ab..
+.abzb.
+.bzbz.
+..bz.a
+ab.bab
+.ab.b.
+...b..
+
+=> 9
