@@ -15,6 +15,18 @@ public class MainTest {
 		Random rand = new Random();
 
 		if (true) {
+			// For KVIP
+			int n = 1000;
+			System.out.println(n);
+			for (int i = 0; i < 100; i++) {
+				for (int j = 0; j < n; j++) {
+					System.out.print(rand.nextInt(1000000000) + " ");
+				}
+				System.out.println("");
+			}
+		}
+
+		if (false) {
 			// For NKREZ
 			int MAX = 30000;
 			int n = 50000;
