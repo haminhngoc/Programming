@@ -12,32 +12,24 @@ class KVIP {
 	static String INPUT = "";
 
 	public static void main(String[] args) throws Exception {
-		//oj = true;
-		//is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
-		//out = new PrintWriter(System.out);
+		oj = true;
+		is = oj ? System.in : new ByteArrayInputStream(INPUT.getBytes());
+		out = new PrintWriter(System.out);
 
 		long s = System.currentTimeMillis();
-		initReader();
 		solve();
-		//out.flush();
-		//tr(System.currentTimeMillis() - s + "ms");
-		//System.out.println(System.currentTimeMillis() - s + "ms");
+		out.flush();
+		tr(System.currentTimeMillis() - s + "ms");
 	}
 
 	static void solve() throws IOException {
-		int N = nextInt(); //ni();
+		int N = ni();
 
-		// How to improve
 		int[][] satisfies = new int[N][N];
 		for (int i = 0; i < N; i++) {
-			// satisfies[i] = na(N);
-			for (int j = 0; j < N; j++) {
-				satisfies[i][j] =  nextInt(); //ni();
-			}
+			satisfies[i] = na(N);
 		}
-		
-		long s = System.currentTimeMillis();
-		
+
 		long[] sums = new long[N];
 		long pre = 0;
 		for (int i = 0; i < N; i++) {
@@ -49,23 +41,20 @@ class KVIP {
 		long[] massMaxValues = new long[N];
 		massMaxValues[0] = 0; // Do not care
 		for (int i = 1; i < N; i++) {
-			massMaxValues[i] = 0;
+			massMaxValues[i] = Long.MIN_VALUE;
 			for (int j = 0; j < i; j++) {
 				// When j make a choice to i => (j,i-1] will be in right position
 				massMaxValues[i] = Math.max(massMaxValues[i], massMaxValues[j] + sums[i - 1] - sums[j] + satisfies[j][i]);
 			}
 		}
 
-		long result = 0;
+		long result = Long.MIN_VALUE; // ANOTHER SILLY MISTAKE OF READING PROBLEM'S STATEMENT |C[i,j]| <= 1.000.000.000
 		for (int i = 0; i < N; i++) {
 			// When i make a choice to 0, and let every one behind in the right position
 			result = Math.max(result, massMaxValues[i] + satisfies[i][0] + sums[N - 1] - sums[i]);
 		}
 
 		System.out.println(result);
-		
-		//15ms for processing
-		//System.out.println(System.currentTimeMillis() - s + "ms");
 	}
 
 	/*
@@ -73,74 +62,6 @@ class KVIP {
 	 * ******************* BASIC READER ******************************* ***************************************************************
 	 */
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	static BufferedReader reader;
-	static StringTokenizer tokenizer;
-
-	public static void initReader() {
-		reader = new BufferedReader(new InputStreamReader(System.in));
-		tokenizer = new StringTokenizer("");
-	}
-
-	static String next() throws IOException {
-		while (!tokenizer.hasMoreTokens()) {
-			tokenizer = new StringTokenizer(reader.readLine());
-		}
-		return tokenizer.nextToken();
-	}
-
-	static String nextLine() throws IOException {
-		return reader.readLine();
-	}
-
-	static int nextInt() throws IOException {
-		return Integer.parseInt(next());
-	}
-
-	static long nextLong() throws IOException {
-		return Long.parseLong(next());
-	}
-
-	static Double nextDouble() throws IOException {
-		return Double.parseDouble(next());
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	static byte[] inbuf = new byte[16384]; // 1024
 	static int lenbuf = 0, ptrbuf = 0;
 

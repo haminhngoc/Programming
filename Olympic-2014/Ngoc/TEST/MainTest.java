@@ -6,11 +6,19 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.RandomAccess;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.io.InputStream;
 
 public class MainTest {
 	public static void main(String[] args) {
+
+		initReader();
+		
+
+		if (true) {
+			return;
+		}
 
 		Random rand = new Random();
 
@@ -53,4 +61,41 @@ public class MainTest {
 			System.out.println(text.toString());
 		}
 	}
+
+	/*
+	 * *****************************************************************
+	 * ******************* BASIC READER ******************************* ***************************************************************
+	 */
+
+	static BufferedReader reader;
+	static StringTokenizer tokenizer;
+
+	public static void initReader() {
+		reader = new BufferedReader(new InputStreamReader(System.in));
+		tokenizer = new StringTokenizer("");
+	}
+
+	static String next() throws IOException {
+		while (!tokenizer.hasMoreTokens()) {
+			tokenizer = new StringTokenizer(reader.readLine());
+		}
+		return tokenizer.nextToken();
+	}
+
+	static String nextLine() throws IOException {
+		return reader.readLine();
+	}
+
+	static int nextInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static long nextLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static Double nextDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+
 }
