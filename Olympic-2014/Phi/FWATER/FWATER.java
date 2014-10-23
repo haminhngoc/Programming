@@ -9,6 +9,10 @@ import java.util.StringTokenizer;
 import java.util.Collections;
 import java.io.InputStream;
 
+/**
+ * Built using CHelper plug-in
+ * Actual solution is at the top
+ */
 public class Main {
 	public static void main(String[] args) {
 		InputStream inputStream = System.in;
@@ -48,18 +52,16 @@ class FWATER {
         }
 
         UnionSet set = new UnionSet(n+1);
-        Edge edge;
         int res = 0;
         Collections.sort(list);
         int nEdge = 0;
-        while(list.size() != 0 && nEdge < n){
-            edge = list.get(0);
-            list.remove(0);
+       for(Edge edge : list){
             if(!set.isSameSet(edge.x,edge.y)){
                 res += edge.cost;
                 ++nEdge;
                 set.unionSet(edge.x,edge.y);
             }
+           if(nEdge == n) break;
         }
         out.println(res);
     }
