@@ -1,19 +1,100 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class NumberAlgorithms {
+
+	/*****************************************************************
+	 ************* BIG INTEGET MODULAR ****************************
+	 *****************************************************************/
+
+	static long powerModular(long X, long p, long BASE) {
+
+		if (p == 0) {
+			return 1;
+		}
+
+		if (p == 1) {
+			return X % BASE;
+		}
+
+		long result = powerModular(X, p >> 1, BASE);
+		result = (result * result) % BASE;
+
+		if ((p & 0x1) == 1) {
+			result = (result * X) % BASE;
+		}
+		return result;
+	}
+
+	// http://docs.oracle.com/javase/6/docs/api/java/math/BigInteger.html
+	// 4 times slower than powerModular
+	static long powerModularEx(long X, long p, long BASE) {
+		return BigInteger.valueOf(X).modPow(BigInteger.valueOf(p), BigInteger.valueOf(BASE)).longValue();
+
+	}
+
+	// http://rosettacode.org/wiki/Modular_inverse#Java
+	// http://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+	// http://docs.oracle.com/javase/6/docs/api/java/math/BigInteger.html
+	static int nCr(int n, int k, int BASE) {
+
+		if (k > n || k < 0) {
+			return -1; // Invalid
+		}
+
+		long result = 1;
+
+		if (k > n - k) {
+			k = n - k;
+		}
+		BigInteger base = BigInteger.valueOf(BASE);
+
+		for (int i = 1; i <= k; i++) {
+			result *= BigInteger.valueOf(i).modInverse(base).intValue();
+			result *= (n - i + 1);
+			result /= BASE;
+		}
+
+		return (int) result;
+	}
+
+	// Good news: k = 10^5 => run in 200ms
+	// BASE should be a prime, for e.g 10^9 + 7, 10^9 + 9...
+	static int[] nCrAll(int n, int k, int BASE) {
+
+		if (k > n || k < 0) {
+			return null; // Invalid
+		}
+
+		long temp = 1;
+		int[] result = new int[k + 1];
+		result[0] = (int) temp;
+
+		BigInteger base = BigInteger.valueOf(BASE);
+		for (int i = 1; i <= k; i++) {
+			temp *= BigInteger.valueOf(i).modInverse(base).intValue();
+			temp %= BASE;
+			temp *= (n - i + 1);
+			temp %= BASE;
+
+			result[i] = (int) temp;
+		}
+
+		return result;
+	}
 
 	/*****************************************************************
 	 ************* FACTORIZATION AND DIVISOR****************************
 	 *****************************************************************/
 
 	/*
-	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37
-	 * => Maximum 2^11 ~ 2K divisors
+	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37 => Maximum 2^11 ~ 2K divisors
 	 */
 	public static List<NumberFactor> fatorization(long x) {
 		long sq = Math.round(Math.sqrt(x)) + 1; // 10 ^ 6
@@ -64,8 +145,7 @@ public class NumberAlgorithms {
 	}
 
 	/*
-	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37
-	 * => Maximum 2^11 ~ 2K divisors
+	 * July 19th, 2014. Created by Ngoc 10^12 < 2*3*5*7*11*13*17*19*23*29*31*37 => Maximum 2^11 ~ 2K divisors
 	 */
 	public static Map<Long, List<Long>> getDivisorsOfDivisor(long x, List<Long> divisors) {
 
@@ -182,10 +262,10 @@ public class NumberAlgorithms {
 	}
 
 	/*
-	 * Find greatest common divisor Edited by Duy
+	 * Find greatest common divisor Edited by
 	 */
 	public static long lcm(long number1, long number2) {
-		return 0;
+		return number1 / gcd(number1, number2) * number2;
 	}
 
 	/*****************************************************************
@@ -223,14 +303,14 @@ public class NumberAlgorithms {
 	}
 
 	/*
-	 * Check prime in O(0) Edited by Phi
+	 * Check prime in O(0) Edited by
 	 */
 	public static boolean isPrime(int number) {
 		return false;
 	}
 
 	/*
-	 * Check if a number is prime Edited by Phi
+	 * Check if a number is prime Edited by
 	 */
 	public static boolean isPrimeSimple(int number) {
 		return false;
@@ -241,7 +321,7 @@ public class NumberAlgorithms {
 	 *****************************************************************/
 
 	/*
-	 * Check if a number is prime Edited by Phuc
+	 * Check if a number is prime Edited by
 	 */
 
 	/*****************************************************************
@@ -301,6 +381,52 @@ public class NumberAlgorithms {
 		}
 	}
 
+	public static void main(String[] args) {
+
+		long start, end;
+
+		int A5 = 100000; // 10^5
+		int A6 = 1000000; // 10^6
+		int A9 = 1000000000; // 10^9
+		Random rand = new Random();
+
+		if (true) {
+			start = System.currentTimeMillis();
+			int[] temp = nCrAll(A5, A5, A9 + 9);
+			end = System.currentTimeMillis();
+			System.out.println("nCrAll(A5, A5, A9+9): " + (end - start));
+		}
+
+		// TEST powerModular vs. powerModularEx:
+		if (false) {
+			start = System.currentTimeMillis();
+			for (int i = 0; i < A5; i++) {
+				long temp = powerModular(rand.nextInt(A9), rand.nextInt(A9), rand.nextInt(A9));
+			}
+			end = System.currentTimeMillis();
+			System.out.println("powerModular: " + (end - start));
+
+			start = System.currentTimeMillis();
+			for (int i = 0; i < A5; i++) {
+				long tempEx = powerModularEx(rand.nextInt(A9), rand.nextInt(A9), rand.nextInt(A9));
+			}
+			end = System.currentTimeMillis();
+			System.out.println("powerModularEx: " + (end - start));
+
+			boolean ok = true;
+			start = System.currentTimeMillis();
+			for (int i = 0; i < A5; i++) {
+				long X = rand.nextInt(A9);
+				long p = rand.nextInt(A9);
+				long BASE = rand.nextInt(A9);
+				long temp = powerModularEx(X, p, BASE);
+				long tempEx = powerModularEx(X, p, BASE);
+				ok &= (temp == tempEx);
+			}
+			end = System.currentTimeMillis();
+			System.out.println("powerModular vs. powerModularEx: " + ok + " in " + (end - start));
+		}
+	}
 }
 
 class NumberFactor {
