@@ -5,19 +5,17 @@
         <a href="http://vn.spoj.com/problems/MYSTERY/">2240. Số huyền bí (Level 4)</a></h1>
     <div>
         <ul>
-            <li>
-                Tìm tất cả ước số của a (Độ khó 3, ref: 
-                https://github.com/haminhngoc/Programming/blob/master/Ngoc/BaseCode/NumberAlgorithms.java)<ul>
-                    <li>Phân tích thừa số nguyên tố</li>
-                    <li>Tổ hợp thừa số này để tạo thành ước số</li>
-                </ul>
+            <li>Tìm tất cả ước số của a (Độ khó 3, ref: https://github.com/haminhngoc/Programming/blob/master/Ngoc/BaseCode/NumberAlgorithms.java)<ul>
+                <li>Phân tích thừa số nguyên tố</li>
+                <li>Tổ hợp thừa số này để tạo thành ước số</li>
+            </ul>
             </li>
             <li>* Ước lớn nhất có thể là a/2 ~ 500M (maxP). Tổng số ước tối đa ~ 2^8 * 4 ~ 1K (Why?)</li>
             <li>* Trường hợp xấu nhất là gì? hãy đưa vào testcase để kiểm tra thời gian thực thi!</li>
-            <li>Thời gian 1s, cho phép thử nghiệm giải pháp đơn giản: tính phần dư của 3^d chia cho M với độ phức tạp log(maxP)
-                (Độ khó 1)
+            <li>Thời gian 1s, cho phép thử nghiệm giải pháp đơn giản: tính phần dư của 3^d chia cho M với độ phức tạp log(maxP) (Độ khó
+                1)
                 <ul>
-                <li>Code?</li>
+                    <li>Code?</li>
                     <li>Tính số dư của tích (3^d-1) với tối đa 1K ước số không cần thiết phải cải thiện</li>
                 </ul>
             </li>
@@ -25,35 +23,26 @@
                 <li>Xắp xếp ước theo thứ tự tăng dần, sử dụng kết quả trước đó để tính phần dư 3^d</li>
                 <li>Sử dụng bộ đệm 1M phần tử lưu trữ tất cả kết quả đã tính</li>
                 <li>=&gt; giảm 50% thời gian chạy (How?)</li>
-                </ul>
+            </ul>
             </li>
         </ul>
     </div>
-
-
-
-    
     <h1>
         <a href="http://vn.spoj.com/problems/NKPALIN/">2118. Chuỗi đối xứng (Level 3+)</a></h1>
     <div>
         <ul>
             <li>Ý tưởng: Dynamic Programming tương tự bài chuỗi tăng dài nhất<ul>
                 <li>Ref: Phi :)</li>
-                </ul>
+            </ul>
             </li>
         </ul>
     </div>
-
-
-    
-
-
-
-    
     <h1>
         <a href="http://vn.spoj.com/problems/NKSEQ/">2203. Dãy số (Level 5)</a></h1>
     <div>
-        <h2>Solution 1: </h2>
+        <h2>
+            Solution 1:
+        </h2>
         <ul>
             <li>* Russian Winter Training Camp 2004</li>
             <li>Ý tưởng:
@@ -79,81 +68,73 @@
             </li>
             <li>Độ phức tạp: O(nlogn)</li>
         </ul>
-        
-        <h2>Solution 2 (Phúc): DP</h2>
+        <h2>
+            Solution 2 (Phúc): DP</h2>
         <ul>
             <li></li>
         </ul>
-        
-        <h2>Solution 3: </h2>
+        <h2>
+            Solution 3:
+        </h2>
         <ul>
             <li>* Solution 1 làm khá nhiều việc thừa :)</li>
-            <li>Ý tưởng khác: với yêu cầu của đề bài, tại vị trí j nếu ta chỉ ra được một trường hợp đủ xấu thì không cần kiểm tra các tổng còn lại<ul>
-                <li>Ví dụ: Nếu aj &lt;= 0 thì có thể loại bỏ j</li>
+            <li>Ý tưởng khác: với yêu cầu của đề bài, tại vị trí j nếu ta chỉ ra được một trường hợp đủ xấu thì không cần kiểm tra các tổng
+                còn lại<ul>
+                    <li>Ví dụ: Nếu aj &lt;= 0 thì có thể loại bỏ j</li>
                 </ul>
             </li>
-            <li> Giải pháp:
+            <li>Giải pháp:
                 <ul>
                     <li>Bắt đầu ví trí j mà aj không dương và số bên phải của nó dương</li>
                     <li>Ta tính quay ngược về bên trái, tính tổng Sij = ai + a(i+1)...+aj, loại đi tất cả vị trí mà Sij không dương</li>
-                    <li>Nếu i là số tận cùng bên trái bị loại => hoặc i quay lại vị trí j, hoặc S(i-1)k (k đi từ i đến j) là số dương (Vì 
-                        S(i-1)k + Skj &gt; 0 &amp; Skj &lt;= 0)</li>
+                    <li>Nếu i là số tận cùng bên trái bị loại => hoặc i quay lại vị trí j, hoặc S(i-1)k (k đi từ i đến j) là số dương (Vì S(i-1)k
+                        + Skj &gt; 0 &amp; Skj &lt;= 0)</li>
                     <li>Ta đã có đoạn dương (i-1)j =&gt; Được xem là một Node dương</li>
-                    <li>Tiếp tục các bước dịch sang trái => Hoặc ta có M đoạn dương, hoặc có đoạn âm đủ lớn để triệt tiêu các đoạn dương đã tạo ra ở lần lặp lại thứ hai</li>
-                    <li> => Kết quả là số Node dương còn lại</li>
+                    <li>Tiếp tục các bước dịch sang trái => Hoặc ta có M đoạn dương, hoặc có đoạn âm đủ lớn để triệt tiêu các đoạn dương đã tạo
+                        ra ở lần lặp lại thứ hai</li>
+                    <li>=> Kết quả là số Node dương còn lại</li>
                 </ul>
             </li>
         </ul>
     </div>
-
-
-    
-
-
-
-    
     <h1>
         <a href="http://vn.spoj.com/problems/NKMAXSEQ/">2250. Dãy con dài nhất (Level 4)</a></h1>
     <div>
         <ul>
             <li>* Đề thi quốc gia 2006. Sự phức tạp là điều khó tránh :)</li>
-            <li>Ý tưởng: 
+            <li>Ý tưởng:
                 <ul>
                     <li>Xét dãy số sau: S0 = 0, S1=a1, S2=a1+a2...Sn=a1+a2...+an </li>
                     <li>=> Trọng lượng của dãy con [i,j] là Sj - S(i-1)</li>
                     <li>Với mỗi S(i-1) ta cần tìm chỉ số j lớn nhất sao cho Sj &gt;= S(i-1)+p</li>
                 </ul>
             </li>
-            <li>=&gt; Có thể đoán được cần sử dụng cấu trúc cây, để đảm bảo chạy được cho trường hợp xấu nhất =&gt; ta sử dụng cây nhị phân 
+            <li>=&gt; Có thể đoán được cần sử dụng cấu trúc cây, để đảm bảo chạy được cho trường hợp xấu nhất =&gt; ta sử dụng cây nhị phân
                 cân bằng (AVL - giống bài ở trên)</li>
             <li>Biến thể Node như sau: Ngoài giá trị cần tìm, ta lưu chỉ số lớn nhất của giá trị lớn hơn hoặc bằng giá trị node hiện tại<ul>
-                <li><img src="https://raw.githubusercontent.com/haminhngoc/Programming/master/Olympic-2014/Pictures/AVL-LastIndex.JPG" 
-                        alt="./Pictures/AVL-LastIndex.JPG" style="height: 300px;" /> </li>
+                <li>
+                    <img src="https://raw.githubusercontent.com/haminhngoc/Programming/master/Olympic-2014/Pictures/AVL-LastIndex.JPG" alt="./Pictures/AVL-LastIndex.JPG"
+                        style="height: 300px;" />
+                </li>
                 <li>F(7) = F(4) = F(8) = F(9) = F(10) = 10, F(15) = 5</li>
-                </ul>
+            </ul>
             </li>
             <li>Độ phức tạp: Xây dựng cây AVL O(nlogn) + tìm kiếm O(nlogn)</li>
         </ul>
-
-        <h4>Improvement: </h4>
+        <h4>
+            Improvement:
+        </h4>
         <ul>
             <li>Ý tưởng:<ul>
                 <li>Không dùng Tree, sử dụng danh sách xắp xếp hợp lý</li>
                 <li>* Có thể áp dụng cho các bài khác!</li>
-                </ul>
+            </ul>
             </li>
             <li>Tạo Node chứa chỉ số i và giá trị Si</li>
             <li>Xắp xếp tăng dần theo Si và i</li>
             <li>Duyệt từ cuối danh sách đã xắp xếp =&gt; Cập nhật chỉ số Node(i).Index = Max(Node(j).Index, Node(i+1).Index)</li>
         </ul>
     </div>
-
-
-    
-
-
-
-    
     <h1>
         <a href="http://vn.spoj.com/problems/NUCLEAR/">13019. Hai nhà máy điện nguyên tử (Level 5)</a></h1>
     <div>
@@ -162,61 +143,57 @@
             <li>Những gia đình bị ảnh hưởng là tập: Uj(A, B) = Sj(A) + Sj(B) - Ij(A, B) => Hai vấn đề:
                 <ul>
                     <li>Tổng số gia đình ảnh hưởng bởi A, và tổng số gia đình ảnh hưởng bởi B<ul>
-                        <li>=&gt; Xắp xếp gia đình theo khoảng cách đến A =&gt; Tìm số gia đình bị ảnh hưởng bởi từng dự án =&gt; Độ phức tạp O(nlogn) (A*)</li>
+                        <li>=&gt; Xắp xếp gia đình theo khoảng cách đến A =&gt; Tìm số gia đình bị ảnh hưởng bởi từng dự án =&gt; Độ phức tạp O(nlogn)
+                            (A*)</li>
                         <li>=&gt; Tương tự cho B</li>
-                        </ul>
+                    </ul>
                     </li>
                     <li>Số gia đình ảnh hưởng bởi cả A và B (2)</li>
                 </ul>
             </li>
             <li>Ý tưởng (2):&nbsp;
                 <ul>
-                    <li>Xắp xếp các dự án theo bán kính ảnh hưởng bởi A (Ra1 &lt;= Ra2 &lt;= Ra3...) =&gt; Cho phép khi ta tận dụng được một phần kết quả 
-                        đã tính trước đó</li>
-                    <li>Ta xét tất cả gđ trong A* bị ảnh hưởng bởi A trong dự án j (&lt;= Raj), kiểm tra có bao nhiêu gđ bị ảnh hưởng trong dự án 
+                    <li>Xắp xếp các dự án theo bán kính ảnh hưởng bởi A (Ra1 &lt;= Ra2 &lt;= Ra3...) =&gt; Cho phép khi ta tận dụng được một phần
+                        kết quả đã tính trước đó</li>
+                    <li>Ta xét tất cả gđ trong A* bị ảnh hưởng bởi A trong dự án j (&lt;= Raj), kiểm tra có bao nhiêu gđ bị ảnh hưởng trong dự án
                         này bởi B (&lt;= Rbj - Lưu ý Rbj không có thứ tự)</li>
                 </ul>
             </li>
             <li>Giải pháp:<ul>
-                <li>Giống như hai bài trên, ta sử dụng <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL</a> với khả năng trả lời có bao nhiêu node con bên phải hoặc bên trái</li>
+                <li>Giống như hai bài trên, ta sử dụng <a href="http://en.wikipedia.org/wiki/AVL_tree">AVL</a> với khả năng trả lời có bao nhiêu
+                    node con bên phải hoặc bên trái</li>
                 <li>Lần lượt thêm tất cả gđ có khoảng cách đến A không lớn hơn Raj vào cây - Node&#39;s value là khoảng cách đến B</li>
                 <li>Hỏi xem có bao nhiêu node con có giá trị không lớn hơn Rbj</li>
-                </ul>
+            </ul>
             </li>
             <li>Độ phức tạp: O(nlogn)</li>
         </ul>
-
-        <h4>Nếu muốn tránh AVL: </h4>
+        <h4>
+            Nếu muốn tránh AVL:
+        </h4>
         <ul>
             <li>Ý tưởng:<ul>
                 <li>Xắp xếp danh sách Rbj, xây dựng cây nhị phân từ chính giá trị Rbj</li>
                 <li>E.g. BuildTree(n): Node((n+1)/2) {Left = BuildTree(0,(n+1)/2-1), Right = BuildTree((n+1)/2+1,n)}</li>
                 <li>Mặc nhiên có cây cân bằng. Add(value) =&gt; Thay đổi CountLeft, CountRight của node tương ứng</li>
-                </ul>
+            </ul>
             </li>
         </ul>
     </div>
-
-
-    
-
-
-
-    
-    <h1>Thảo luận</h1>
+    <h1>
+        Thảo luận</h1>
     <div>
         <ol>
             <li>Khánh và Sơn "có năng khiếu" chọn các bài khó :) => Có lẽ nên tránh các bài *OI</li>
-            <li>AVL được sử dụng để tránh trường hợp xấu nhất trong cây nhị phân. Nếu có khả năng thêm các node vào một cách ngẫu nhiêu thì cũng không cần đến</li>
-            <li>Những năm trước đây, có vẻ người ra đề thiên vị sử dụng cây nhị phân, giống như hiện nay là Segment/Interval/Fenwick Tree ... </li>
-            <li>Hoặc là sau khi làm một bài có sử dụng AVL, có vẻ suy nghĩ bị thiên vị về hướng này. =&gt; Coi như là một giải pháp ban 
+            <li>AVL được sử dụng để tránh trường hợp xấu nhất trong cây nhị phân. Nếu có khả năng thêm các node vào một cách ngẫu nhiêu
+                thì cũng không cần đến</li>
+            <li>Những năm trước đây, có vẻ người ra đề thiên vị sử dụng cây nhị phân, giống như hiện nay là Segment/Interval/Fenwick Tree
+                ... </li>
+            <li>Hoặc là sau khi làm một bài có sử dụng AVL, có vẻ suy nghĩ bị thiên vị về hướng này. =&gt; Coi như là một giải pháp ban
                 đầu.</li>
             <li>=&gt; Các em trao đổi các giải pháp khác nữa nhé.</li>
         </ol>
     </div>
-
-
-    
     <h1>
         <a href="http://vn.spoj.com/problems/VOSMUL/">21165. Sinh nhật của Benjamin (Level 3+)</a></h1>
     <div>
@@ -224,10 +201,103 @@
             <li>Bài này không quá khó, BruteForce và xử lý khéo trạng thái là đủ</li>
             <li>Khánh + Phi + Duy + Phúc: Thử làm đi nhé. Tuần sau sẽ trao đổi</li>
         </ul>
+        <h4>
+            Updated</h4>
+        <ul>
+            <li>Với mỗi vị trí i, ta tìm Ij nhỏ nhất sao cho SubA(i:j) chia hết cho K hoặc Ij = N</li>
+            <li>=&gt; Số dãy con đặc biệt: Sums(N - Ij)</li>
+            <li>Không giảm tính tổng quát, xắp xếp Bi theo thứ tự tăng dần - phục vụ việc tìm kiếm</li>
+            <li>Ta cần dãy con S (M phần tử) theo dõi trạng thái chia hết của SubA(i:j) cho từng phần tử Bi. Và SS là số lượng phần tử của
+                S đạt yêu cầu (Si >= Ci)</li>
+            <li>Ai &lt;= 10^9 =&gt; A có tối đa 2^9 ước (Why?) => Thời gian thực thi ~ O(NlogM) * 500 </li>
+        </ul>
     </div>
-
-
-    
+    <h1>
+        <a href="http://vn.spoj.com/problems/VOSEXP/">21154. Lũy thừa (Level 4+)</a></h1>
+    <div>
+        <h4>
+            Bài này có vài ý khá hay cần chú ý, đặc biệt trong OLP</h4>
+        <ol>
+            <li>Không nên tập trung vào Ti.<ul>
+                <li>Nếu d là số nguyên tố thì sẽ không có mối liên hệ "đơn giản" nào giữa Ti (Ngoại trừ phép toán %)</li>
+                <li>Có ~90% số nguyên tố nhỏ hơn 10^12 lớn hơn 10^11 (Why?)</li>
+                <li>=> Cần tính A^Ti - với Ti bất kỳ</li>
+            </ul>
+            </li>
+            <li>% (Mod) là phép toán chiếm nhiều CPU - Trong 1s chỉ thực hiện được ít hơn 100M phép toán&nbsp; =&gt; ĐÂY LÀ THÁCH THỨC CHÍNH
+                CỦA BÀI TOÁN</li>
+            <li>Mehod powerModBase có độ phức tạp log(n), Ti ~ 10^12 ~ 2^40 => Cần tới 40 * 2 phép toán => Chỉ khả thi khi M ~ 10^6 =&gt;
+                Cần cải tiến ~ 4*20 lần để chạy được cho M ~ 20M</li>
+            <li>Ý tưởng: Tính toán trước một số giá trị, lưu vào bộ nhớ để sử dụng lại</li>
+            <ul>
+                <li>Nếu sử dụng bộ nhớ tính toán trước 1M giá trị X (A^X % BASE) => Có thể giảm được một nửa thời gian chạy (Với T ~ 10^12)
+                    =&gt; CHƯA ĐỦ</li>
+                <li>&nbsp;Áp dụng phương pháp "Căn bậc hai của lũy thừa" (Ngoc) => Phân tích T thành hai phần theo biểu diễn nhị phân tại vị
+                    trí bit 20: T = 2^20*TLeft + TRight<ul>
+                        <li>&nbsp;A^T = A^(2^20*TLeft + TRight) = A^(2^20*TLeft) * A^TRight</li>
+                        <li>Ta tính trước tất cả số sạng: A^(2^20*TLeft) và A^TRight => A^T là tích (Mod BASE) của hai số tương ứng</li>
+                        <li>&nbsp;Tổng số phép % ~ M + CACHE</li>
+                    </ul>
+                </li>
+            </ul>
+        </ol>
+    </div>
+    <h1>
+        <a href="http://vn.spoj.com/problems/VMGOLD/">20650. Mỏ vàng (Level 4)</a></h1>
+    <div>
+        <ul>
+            <li>Với mỗi Ai tìm tất cả các ước của nó, Ai &lt;= 10^9 =&gt; có tối đa 2^9 ước phân biệt (Why?)</li>
+            <li>Tạo danh sách chứa tất cả các ước, xắp xếp tăng dần</li>
+            <li>Trong danh sách này, trong các số xuất hiện nhiều hơn K lần, tìm ra số lớn nhất</li>
+            <li>Độ phức tạp: O(NlogN)</li>
+        </ul>
+    </div>
+    <h1>
+        <a href="http://vn.spoj.com/problems/C11STAR/">17305. Counting Star (Level 2+)</a></h1>
+    <div>
+        <ul>
+            <li>Tricks: <a href="https://github.com/haminhngoc/Programming/blob/master/Olympic-2014/Ngoc/C11STAR/C11STAR.java">Ref</a><ol>
+                <li>Kiểm tra các đường chéo theo phương nhất định (for e.g. North-East)</li>
+                <li>Thêm vào một số không gian trống để giảm số điều kiện cần kiểm tra, làm code rõ hơn (emptyRow)</li>
+                <li>Sử dụng bộ đếm trường hợp cho từng ký tự (rects)</li>
+                <li>Thiết lập công thức giữa hai đỉnh kế cận: space[i - column][column] vs. space[j - column - colDiff][column + colDiff]</li>
+            </ol>
+            </li>
+        </ul>
+    </div>
+    <h1>
+        <a href="http://vn.spoj.com/problems/KVIP/">17306. Very Important People (Level 4)</a></h1>
+    <div>
+        <ul>
+            <li>Vấn đề này có thể dẫn đến suy nghĩ về DP. Tổng hợp một số ý tưởng DP:
+                <ol>
+                    <li>Tính trực tiếp F(n) từ kết quả trước nó (n-1, n-2...) - Level 1 (e.g. <a href="https://www.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Fa%2Feiu.edu.vn%2Ffile%2Fd%2F0B9sDRCw47wfsS21XVGFYcWZxWWc%2Fview%3Fusp%3Dsharing&h=PAQE_AVHT&enc=AZPlfKtdkDKKZ1lXjqOfV4BGGiEJBeJmmB3Qtd80vOR8tOlLHGcWs8DGeHZvvmQm0be6vN_Pr0IlEhY8jyog4vSqeViRaoNGsJZErgTlaYWU6qYxRUnVmbqXqDfCJaYyE2qjqLtCau5H_X-GrTHUywYo8KNlhayxM747BiyAlj5r_A&s=1">
+                        Programming Exchange 2014, Problem D</a>)</li>
+                    <li>Tính F(n) bằng cách tổng hợp kết quả trước và tham số của bài toán - Level 2, 3 (e.g. <a href="http://vn.spoj.com/problems/NKREZ/">
+                        2187. Hội trường</a>)</li>
+                    <li>Phân rã F(n) thành một số tiêu chuẩn liên quan F1(n), F2(n), F3(n) - Level 2, 3 (e.g. <a href="http://codeforces.com/contest/431/problem/C">
+                        C. k-Tree</a>)</li>
+                    <li>Kết hợp 2,3 và lựa chọn những trạng thái phù hợp trước đó - Level 3+ (e.g. <a href="https://icpcarchive.ecs.baylor.edu/external/61/6177.pdf">
+                        6177 The King's Ups and Downs</a>, <a href="https://icpcarchive.ecs.baylor.edu/external/61/6131.pdf">6131 Arranging Heaps</a>)</li>
+                </ol>
+            </li>
+            <li>Bài này có ý tưởng khá hay: Thiết lập tiêu chuẩn DP gián tiếp, hoặc xem đó là một bài toán khác (Khác với 2: Là phân rã
+                từ tiêu chuẩn trực tiếp). Sau đó sử dụng kết quả của bài toán gián tiếp để xử lý bài toán ban đầu:<ol>
+                    <li>
+                        Tính giá trị lớn nhất trước khi một vị trí i thực hiện việc chọn ghế (Lưu ý: Nếu ghế i còn trống thì i không phải chọn). 
+                        Tình trạng này xảy ra khi có một người vào trước đã chọn vị trí i.</li>
+                    <li>
+                        Người thứ i có thể kết thúc sự lộn xộn bằng cách chọn vị trí đầu tiên, hoặc tiếp tục tình trang lộn xộn khi chọn vị trí 
+                        j &gt; i. Trong phạm vi DP, ta chỉ quan tâm đến vế sau.</li>
+                    <li>
+                        Cuối cùng, sử dụng tất cả kết quả trên để so sánh giá trị của tất cả vị trí i 
+                        nếu quyết định kết thúc sự lộn xộn <a href="https://github.com/haminhngoc/Programming/blob/master/Olympic-2014/Ngoc/KVIP/KVIP.java">Ref</a>.
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <!--
     <h1>
         <a href=""></a></h1>
     <div>
@@ -235,37 +305,7 @@
             <li></li>
         </ul>
     </div>
-
-
-    
-    <h1>
-        <a href=""></a></h1>
-    <div>
-        <ul>
-            <li></li>
-        </ul>
-    </div>
-
-
-    
-    <h1>
-        <a href=""></a></h1>
-    <div>
-        <ul>
-            <li></li>
-        </ul>
-    </div>
-
-
-    
-    <h1>
-        <a href=""></a></h1>
-    <div>
-        <ul>
-            <li></li>
-        </ul>
-    </div>
-
+    -->
     <style>
         h1
         {

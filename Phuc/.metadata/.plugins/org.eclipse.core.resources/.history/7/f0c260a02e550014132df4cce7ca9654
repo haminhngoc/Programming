@@ -1,0 +1,13 @@
+public class Generate {
+
+	public static void main(String[] args) {
+		int n = 30;
+		for (int i = 1; i <= n; ++i) {
+			for (int j = i + 1; j <= n; ++j) {
+
+			}
+		}
+
+	}
+
+}

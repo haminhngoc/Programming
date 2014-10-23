@@ -1,0 +1,33 @@
+public class Generate {
+
+	public static void main(String[] args) {
+		int n = 10;
+		long count = 0;
+		for (int i = 1; i <= n; ++i) {
+			for (int j = i + 1; j <= n; ++j) {
+				if (check(i + j)) {
+					continue;
+				}
+				for (int k = j + 1; k <= n; ++k) {
+					if (!check(i + k) && !(check(j + k))) {
+						count++;
+					}
+				}
+			}
+		}
+		
+		System.out.println(count);
+
+	}
+
+	private static boolean check(int i) {
+		int n = (int) Math.sqrt(i);
+		for (int j = 2; j <= n; ++j) {
+			if (i % j == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}
