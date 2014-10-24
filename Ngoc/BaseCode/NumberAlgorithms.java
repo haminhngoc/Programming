@@ -90,6 +90,49 @@ public class NumberAlgorithms {
 	}
 
 	/*****************************************************************
+	 ************* COMBINATORY ****************************
+	 *****************************************************************/
+
+	// n should be less than 10^4
+	static int[][] getPascalTriagle(int n, int BASE) {
+		// 1 1
+		// 1 2 1
+		// 1 3 3 1
+		// 1 4 6 4 1
+		int[][] result = new int[n][];
+		result[0] = new int[] { 1, 1 };
+		for (int i = 1; i < n; i++) {
+			int[] rowi = result[i] = new int[i + 2];
+			rowi[0] = rowi[i + 1] = 1;
+			int[] rowi1 = result[i - 1];
+			for (int j = 1; j < i + 1; j++) {
+				rowi[j] = (rowi1[j - 1] + rowi1[j]) % BASE;
+			}
+		}
+		return result;
+	}
+
+	// n should be less than 10^4 (200ms)
+	static int[] nCrAll_small(int n, int BASE) {
+		if (n < 1) {
+			return null;
+		}
+		int[] result = new int[n + 1];
+		result[0] = 1;
+		result[1] = 1;
+		for (int i = 1; i < n; i++) {
+			int pre = result[0];
+			for (int j = 1; j < i + 1; j++) {
+				int temp = result[j];
+				result[j] = (pre + result[j]) % BASE;
+				pre = temp;
+			}
+			result[i + 1] = 1;
+		}
+		return result;
+	}
+
+	/*****************************************************************
 	 ************* FACTORIZATION AND DIVISOR****************************
 	 *****************************************************************/
 
@@ -395,6 +438,23 @@ public class NumberAlgorithms {
 			int[] temp = nCrAll(A5, A5, A9 + 9);
 			end = System.currentTimeMillis();
 			System.out.println("nCrAll(A5, A5, A9+9): " + (end - start));
+
+			int n1000 = 1000;
+			int[][] pascal1000 = getPascalTriagle(n1000, A9 + 9);
+			int[] nCr1000Small = nCrAll_small(n1000, A9 + 9);
+			int[] nCr100 = nCrAll(n1000, n1000, A9 + 9);
+
+			boolean ok = true;
+			for (int i = 0; i <= n1000; i++) {
+				ok &= (nCr100[i] == nCr1000Small[i] && nCr100[i] == pascal1000[n1000 - 1][i]);
+			}
+
+			System.out.println("getPascalTriagle vs. nCr1000Small vs. nCr100: " + ok);
+
+			start = System.currentTimeMillis();
+			nCr1000Small = nCrAll_small(10000, A9 + 9);
+			end = System.currentTimeMillis();
+			System.out.println("nCr1000Small 10K: " + (end - start));
 		}
 
 		// TEST powerModular vs. powerModularEx:
