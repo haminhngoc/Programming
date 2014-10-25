@@ -1,9 +1,0 @@
-public class Main {
-
-	public static void main(String[] args) {
-		for (int i = 10000; i < 1e10; ++i) {
-			int end = Math.sqrt(i);
-		}
-
-	}
-}
