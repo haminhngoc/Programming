@@ -1,0 +1,10 @@
+public class Main {
+	static int lock1[] = new int[3];
+	static int lock2[] = new int[3];
+
+	public static void main(String[] args) {
+		Scanner in new Scanner (System.in);
+		int n = 
+
+	}
+}

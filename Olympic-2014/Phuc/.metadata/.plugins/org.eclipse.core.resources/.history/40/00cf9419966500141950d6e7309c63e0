@@ -1,0 +1,149 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+
+public class Main {
+
+	public static void main(String[] args) {
+		int n = nextInt();
+		int m = nextInt();
+		double arr[] = new double[n];
+		double result[] = new double[1000 + 1];
+		StringBuilder str = new StringBuilder();
+		arr[0] = nextInt();
+		for (int i = 1; i < n; ++i) {
+			arr[i] = nextDouble();
+			for (int j = 1; j <= 1000; ++j) {
+				result[j] += cal(arr[i], arr[i - 1], j);
+			}
+		}
+
+		for (int i = 0; i < m; ++i) {
+			char c = nextChar();
+			if (c == 'Q') {
+				int h = nextInt();
+				str.append(Math.round(result[h] * 1000) / 1000);
+				str.append('\n');
+			} else if (c == 'U') {
+				int p = nextInt();
+				int h = nextInt();
+				if (p != 0) {
+					for (int j = 1; j <= 1000; ++j) {
+						result[j] -= cal(arr[p], arr[p - 1], j);
+						result[j] += cal(h, arr[p - 1], j);
+					}
+
+				}
+				if (p != n - 1) {
+					for (int j = 1; j <= 1000; ++j) {
+						result[j] -= cal(arr[p], arr[p + 1], j);
+						result[j] += cal(h, arr[p + 1], j);
+					}
+				}
+				arr[p] = h;
+			}
+		}
+
+		System.out.println(str);
+	}
+
+	private static double cal(double h1, double h2, double h) {
+
+		double max = Math.max(h1, h2);
+
+		double min = Math.min(h1, h2);
+		if (h <= min) {
+			return 0;
+		}
+		if (h > max) {
+			return (h - max) + (max - min) / 2;
+		}
+		double ratio = (h - min) / (max - min);
+		return ratio * ratio * (max - min) / 2;
+	}
+
+	private static long solve() {
+
+		return 0;
+	}
+
+	public static InputStream in = System.in;
+	public static byte[] bytes = new byte[1024];
+	public static int lenbuf = 0;
+	public static int ptrbuf = 0;
+
+	public static int readByte() {
+
+		if (lenbuf == -1) {
+			throw new InputMismatchException();
+		}
+		if (ptrbuf >= lenbuf) {
+			ptrbuf = 0;
+			try {
+				lenbuf = in.read(bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new InputMismatchException();
+			}
+			if (lenbuf <= 0) {
+				return -1;
+			}
+
+		}
+
+		return bytes[ptrbuf++];
+	}
+
+	public static boolean isSpace(int b) {
+		return !(b >= 33 && b <= 126);
+	}
+
+	public static String nextString2() {
+		StringBuilder str = new StringBuilder();
+
+		int b = readByte();
+		while (!isSpace(b) || b == ' ') {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+
+		return str.toString();
+	}
+
+	public static int read() {
+		int b;
+		while ((b = readByte()) != -1 && isSpace(b))
+			;
+		return b;
+	}
+
+	public static char nextChar() {
+		return (char) read();
+	}
+
+	public static String nextString() {
+		StringBuilder str = new StringBuilder();
+
+		int b = read();
+		while (!isSpace(b)) {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+
+		return str.toString();
+	}
+
+	public static int nextInt() {
+		return Integer.parseInt(nextString());
+	}
+
+	public static long nextLong() {
+		return Long.parseLong(nextString());
+	}
+
+	public static double nextDouble() {
+		return Double.parseDouble(nextString());
+	}
+
+}

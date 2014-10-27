@@ -1,0 +1,38 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		int n = nextInt();
+		StringBuilder str = new StringBuilder();
+		int m = nextInt();
+ 
+		while (n + m > 0) {
+			UnionSet set = new UnionSet(n + 1);
+			for (int i = 0; i < m; ++i) {
+				if (nextChar() == '!') {
+					int a = nextInt();
+					int b = nextInt();
+					int w = nextInt();
+					if (!set.isSameSet(a, b)) {
+						set.unionSet(a, b, w);
+					}
+				} else {
+					int a = nextInt();
+					int b = nextInt();
+					if (set.isSameSet(a, b)) {
+						long result = set.value[a] - set.value[b];
+						str.append(result);
+						str.append('\n');
+					} else {
+						str.append("UNKNOWN\n");
+					}
+				}
+			}
+			n = nextInt();
+			m = nextInt();
+		}
+		System.out.println(str);
+
+	}
+
+}

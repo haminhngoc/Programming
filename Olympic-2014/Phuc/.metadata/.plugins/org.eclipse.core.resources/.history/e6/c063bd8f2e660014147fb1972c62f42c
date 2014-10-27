@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Main {
+	static int lock1[] = new int[3];
+	static int lock2[] = new int[3];
+	static int n;
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		n = in.nextInt();
+
+		for (int i = 0; i < 3; ++i) {
+			lock1[i] = in.nextInt();
+		}
+
+		for (int i = 0; i < 3; ++i) {
+			lock2[i] = in.nextInt();
+		}
+
+		for (int i = 1; i <= n; ++i) {
+			for (int j = 1; j <= n; ++j) {
+				for (int k = 1; k <= n; ++k) {
+					boolean c1 = check1(i, j, k);
+				}
+			}
+		}
+	}
+
+	private static boolean check1(int i, int j, int k) {
+
+		if (!(i >= lock1[0] - 2 && i <= lock1[0] + 2)
+				&& !(i >= lock1[0] + n - 2 && i <= lock1[0] + n + 2)) {
+			return false;
+		}
+		if (!(j >= lock1[1] - 2 && j <= lock1[1] + 2)
+				&& !(j >= lock1[1] + n - 2 && j <= lock1[1] + n + 2)) {
+			return false;
+		}
+		if (!(k >= lock1[2] - 2 && k <= lock1[2] + 2)
+				&& !(k >= lock1[2] + n - 2 && k <= lock1[2] + n + 2)) {
+			return false;
+		}
+		return true;
+	}
+	
+	private static boolean check1(int i, int j, int k) {
+
+		if (!(i >= lock1[0] - 2 && i <= lock1[0] + 2)
+				&& !(i >= lock1[0] + n - 2 && i <= lock1[0] + n + 2)) {
+			return false;
+		}
+		if (!(j >= lock1[1] - 2 && j <= lock1[1] + 2)
+				&& !(j >= lock1[1] + n - 2 && j <= lock1[1] + n + 2)) {
+			return false;
+		}
+		if (!(k >= lock1[2] - 2 && k <= lock1[2] + 2)
+				&& !(k >= lock1[2] + n - 2 && k <= lock1[2] + n + 2)) {
+			return false;
+		}
+		return true;
+	}
+}

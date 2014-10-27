@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	static int countR = 0;
+	static int count = 1;
+	static List<Integer>[] list;
+	static int m;
+	static boolean isUsed[];
+	static int result[];
+	static StringBuilder str;
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		m = n << 1;
+		int primes[] = { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
+		list = new List[2 * n + 1];
+		for (int i = 1; i <= m; ++i) {
+			list[i] = new ArrayList<Integer>();
+			int primeL = primes.length;
+			for (int j = 0; j < primeL; ++j) {
+				if (primes[j] <= i || primes[j] - i == i) {
+					continue;
+				}
+				if (primes[j] - i > m) {
+					break;
+				}
+				list[i].add(primes[j] - i);
+			}
+		}
+		isUsed = new boolean[m + 1];
+		isUsed[1] = true;
+		result = new int[m];
+		result[0] = 1;
+		str = new StringBuilder();
+		dfs(1);
+		System.out.println(countR);
+	}
+
+	private static void dfs(int current) {
+		int l = list[current].size();
+		for (int i = 0; i < l; ++i) {
+			if (!isUsed[list[current].get(i)]) {
+				count++;
+				result[count] = list[current].get(i);
+				isUsed[list[current].get(i)] = true;
+				if (count == m) {
+					countR++;
+					if (countR <= 10000) {
+						str.append(result.toString());
+					}
+				} else {
+					dfs(list[current].get(i));
+				}
+				isUsed[list[current].get(i)] = false;
+				count--;
+			}
+		}
+	}
+}

@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		StringBuilder str = new StringBuilder();
+		int m = in.nextInt();
+
+		while (n + m > 0) {
+			UnionSet set = new UnionSet(n + 1);
+			for (int i = 0; i < m; ++i) {
+				if (in.next().charAt(0) == '!') {
+					int a = in.nextInt();
+					int b = in.nextInt();
+					int w = in.nextInt();
+					if (!set.isSameSet(a, b)) {
+						set.unionSet(a, b, w);
+					}
+				} else {
+					int a = in.nextInt();
+					int b = in.nextInt();
+					if(b>n||b>n){
+						
+					}
+					if (set.isSameSet(a, b)) {
+						long result = set.value[a] - set.value[b];
+						str.append(result);
+						str.append('\n');
+					} else {
+						str.append("UNKNOWN\n");
+					}
+				}
+			}
+			n = in.nextInt();
+			m = in.nextInt();
+		}
+		System.out.println(str);
+
+	}
+
+}
+
+class UnionSet {
+	public int[] pset;
+	public long[] value;
+
+	public UnionSet(int n) {
+		pset = new int[n];
+
+		for (int i = 0; i < n; ++i) {
+			pset[i] = i;
+		}
+		value = new long[n];
+
+	}
+
+	int findSet(int i) {
+		if (pset[i] == i) {
+			return i;
+		}
+		int p = findSet(pset[i]);
+		value[i] += value[pset[i]];
+		return pset[i] = p;
+	}
+
+	void unionSet(int i, int j, long w) {
+		int pi = findSet(i);
+		int pj = findSet(j);
+		long e = value[i];
+		long f = value[j];
+		value[pi] = w - e + f;
+		pset[pi] = pj;
+
+	}
+
+	boolean isSameSet(int p1, int p2) {
+		return findSet(p1) == findSet(p2);
+	}
+}

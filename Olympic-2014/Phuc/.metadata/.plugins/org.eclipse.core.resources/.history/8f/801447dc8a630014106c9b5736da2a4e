@@ -1,0 +1,109 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.StringTokenizer;
+
+class Main {
+
+	public static void main(String[] args) {
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		InputReader in = new InputReader(inputStream);
+		PrintWriter out = new PrintWriter(outputStream);
+		Task solver = new Task();
+		solver.solve(in, out);
+		out.close();
+	}
+}
+
+class Task {
+	static InputReader in;
+
+	public void solve(InputReader in, PrintWriter out) {
+		int t = in.nextInt();
+
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 1; i <= t; ++i) {
+			stringBuilder.append(i);
+			stringBuilder.append(' ');
+			stringBuilder.append(solve1(in));
+			stringBuilder.append('\n');
+		}
+
+		System.out.print(stringBuilder);
+	}
+
+	private long solve1(InputReader in2) {
+		char[] s = in.next("[").toCharArray();
+		int max = 0;
+		int current = 0;
+
+		int l = s.length;
+		for (int i = 0; i < l; ++i) {
+			if (s[i] == '[') {
+				current++;
+				if (current > max) {
+					max = current;
+				}
+			} else {
+				current--;
+			}
+		}
+
+		return pow(max);
+	}
+
+	private long pow(int max) {
+		if (max == 1) {
+			return 2;
+		}
+		if (max == 0) {
+			return 1;
+		}
+		long v = pow(max / 2);
+		long r = v * v;
+		if ((max & 2) == 1) {
+			r = r << 1;
+		}
+
+		return r;
+	}
+
+}
+
+class InputReader {
+	BufferedReader reader;
+	StringTokenizer tokenizer;
+
+	InputReader(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
+	}
+}

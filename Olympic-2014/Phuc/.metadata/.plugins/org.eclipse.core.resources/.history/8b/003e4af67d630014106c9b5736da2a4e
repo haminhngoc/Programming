@@ -1,0 +1,166 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Stack;
+
+public class Main {
+	static List<Integer>[] graph;
+	static boolean[] visited;
+	static Stack<Integer> stack;
+	static int time;
+	static int[] lowlink;
+	static List<List<Integer>> components;
+
+	public static void main(String[] args) {
+		int k = nextInt();
+		int n = nextInt();
+		int m = nextInt();
+		int[] people = new int[k];
+		for (int i = 0; i < k; ++i) {
+			people[i] = nextInt();
+		}
+
+		List<Integer>[] g = new List[n + 1];
+		for (int i = 0; i < g.length; i++)
+			g[i] = new ArrayList<>();
+
+		for (int i = 0; i < m; ++i) {
+			int t = nextInt();
+			int p = nextInt();
+			g[t].add(p);
+			g[p].add(t);
+		}
+
+		scc(g);
+		int[] placesComponent = new int[n + 1];
+		for (int i = 0; i < components.size(); ++i) {
+			int size = components.get(i).size();
+			for (int j = 0; j < size; ++j) {
+				placesComponent[components.get(i).get(j)] = i;
+			}
+		}
+	}
+
+	public static List<List<Integer>> scc(List<Integer>[] g) {
+		int n = g.length;
+		graph = g;
+		visited = new boolean[n];
+		stack = new Stack<>();
+		time = 0;
+		lowlink = new int[n];
+		components = new ArrayList<>();
+
+		for (int u = 0; u < n; u++)
+			if (!visited[u])
+				dfs(u);
+
+		return components;
+	}
+
+	static void dfs(int u) {
+		lowlink[u] = time++;
+		visited[u] = true;
+		stack.add(u);
+		boolean isComponentRoot = true;
+
+		for (int v : graph[u]) {
+			if (!visited[v])
+				dfs(v);
+			if (lowlink[u] > lowlink[v]) {
+				lowlink[u] = lowlink[v];
+				isComponentRoot = false;
+			}
+		}
+
+		if (isComponentRoot) {
+			List<Integer> component = new ArrayList<>();
+			while (true) {
+				int x = stack.pop();
+				component.add(x);
+				lowlink[x] = Integer.MAX_VALUE;
+				if (x == u)
+					break;
+			}
+			components.add(component);
+		}
+	}
+
+	public static InputStream in = System.in;
+	public static byte[] bytes = new byte[1024];
+	public static int lenbuf = 0;
+	public static int ptrbuf = 0;
+
+	public static int readByte() {
+
+		if (lenbuf == -1) {
+			throw new InputMismatchException();
+		}
+		if (ptrbuf >= lenbuf) {
+			ptrbuf = 0;
+			try {
+				lenbuf = in.read(bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new InputMismatchException();
+			}
+			if (lenbuf <= 0) {
+				return -1;
+			}
+
+		}
+
+		return bytes[ptrbuf++];
+	}
+
+	public static boolean isSpace(int b) {
+		return !(b >= 33 && b <= 126);
+	}
+
+	public static String nextString2() {
+		StringBuilder str = new StringBuilder();
+
+		int b;
+		while ((b = readByte()) != -1 && isSpace(b) && b != ' ')
+			;
+		while (!isSpace(b) || b == ' ') {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+
+		return str.toString();
+	}
+
+	public static int read() {
+		int b;
+		while ((b = readByte()) != -1 && isSpace(b))
+			;
+		return b;
+	}
+
+	public static char nextChar() {
+		return (char) read();
+	}
+
+	public static String nextString() {
+		StringBuilder str = new StringBuilder();
+
+		int b = read();
+		while (!isSpace(b)) {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+
+		return str.toString();
+	}
+
+	public static int nextInt() {
+		return Integer.parseInt(nextString());
+	}
+
+	public static long nextLong() {
+		return Long.parseLong(nextString());
+	}
+
+}
