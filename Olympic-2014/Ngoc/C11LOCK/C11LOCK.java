@@ -52,13 +52,13 @@ class C11LOCK {
 		int[] a5 = na(n);
 
 		int groupSize = n * n;
-		Integer[] g12 = new Integer[groupSize];
-		Integer[] g45 = new Integer[groupSize];
+		Long[] g12 = new Long[groupSize];
+		Long[] g45 = new Long[groupSize];
 
 		int g = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				g12[g] = a1[i] + a2[j];
+				g12[g] = (long) (a1[i] + a2[j]);
 				g++;
 			}
 		}
@@ -66,7 +66,7 @@ class C11LOCK {
 		g = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				g45[g] = k - a4[i] - a5[j];
+				g45[g] = (long) (k - a4[i] - a5[j]);
 				g++;
 			}
 		}
@@ -75,7 +75,19 @@ class C11LOCK {
 		Arrays.sort(a3);
 		Arrays.sort(g45);
 
-		int result = 0;
+		long[] a12 = new long[groupSize];
+		for (int i = 0; i < groupSize; i++) {
+			a12[i] = g12[i];
+		}
+
+		long[] a45 = new long[groupSize];
+		for (int i = 0; i < groupSize; i++) {
+			a45[i] = g45[i];
+		}
+
+		// #!@$ Java and Java 6: Have to use Integer[] to sort, and int[] to process 
+
+		long result = 0;
 
 		// Problem: Access Memory too many times: 250M
 		for (int i = 0; i < n; i++) {
@@ -83,22 +95,22 @@ class C11LOCK {
 
 			int x = 0, y = 0;
 			while (x < groupSize && y < groupSize) {
-				int v123 = g12[x] + a3i;
-				int v45 = g45[y];
+				long v123 = a12[x] + a3i;
+				long v45 = a45[y];
 				if (v123 == v45) {
 					int curX = x;
 					x++;
-					while (x < groupSize && g12[x - 1] == g12[x]) {
+					while (x < groupSize && a12[x - 1] == a12[x]) {
 						x++;
 					}
 
 					int curY = y;
 					y++;
-					while (y < groupSize && g45[y - 1] == g45[y]) {
+					while (y < groupSize && a45[y - 1] == a45[y]) {
 						y++;
 					}
 
-					result += (x - curX) * (y - curY);
+					result += (long)(x - curX) * (y - curY);
 				}
 				else if (v123 < v45) {
 					x++;
@@ -233,8 +245,8 @@ class C11LOCK {
 	static boolean oj = System.getProperty("ONLINE_JUDGE") != null;
 
 	static void tr(Object... o) {
-		// if (!oj) {
-		System.out.println(Arrays.deepToString(o));
-		// }
+		if (!oj) {
+			System.out.println(Arrays.deepToString(o));
+		}
 	}
 }
