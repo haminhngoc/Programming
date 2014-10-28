@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class C11LOCK {
+class C11LOCK {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -21,7 +21,95 @@ public class C11LOCK {
 		tr(System.currentTimeMillis() - s + "ms");
 	}
 
+	static void solve2() {
+		int n = ni();
+		int k = ni();
+
+		int groupSize = n * n;
+		int result = 0;
+
+		for (int i = 0; i < n; i++) {
+			int x = 0, y = 0;
+			while (x < groupSize && y < groupSize) {
+				if (x < y)
+					x++;
+				else
+					y++;
+				result++;
+			}
+		}
+
+		System.out.println(result);
+	}
+
 	static void solve() {
+		int n = ni();
+		int k = ni();
+		int[] a1 = na(n);
+		int[] a2 = na(n);
+		int[] a3 = na(n);
+		int[] a4 = na(n);
+		int[] a5 = na(n);
+
+		int groupSize = n * n;
+		Integer[] g12 = new Integer[groupSize];
+		Integer[] g45 = new Integer[groupSize];
+
+		int g = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				g12[g] = a1[i] + a2[j];
+				g++;
+			}
+		}
+
+		g = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				g45[g] = k - a4[i] - a5[j];
+				g++;
+			}
+		}
+
+		Arrays.sort(g12);
+		Arrays.sort(a3);
+		Arrays.sort(g45);
+
+		int result = 0;
+
+		// Problem: Access Memory too many times: 250M
+		for (int i = 0; i < n; i++) {
+			int a3i = a3[i];
+
+			int x = 0, y = 0;
+			while (x < groupSize && y < groupSize) {
+				int v123 = g12[x] + a3i;
+				int v45 = g45[y];
+				if (v123 == v45) {
+					int curX = x;
+					x++;
+					while (x < groupSize && g12[x - 1] == g12[x]) {
+						x++;
+					}
+
+					int curY = y;
+					y++;
+					while (y < groupSize && g45[y - 1] == g45[y]) {
+						y++;
+					}
+
+					result += (x - curX) * (y - curY);
+				}
+				else if (v123 < v45) {
+					x++;
+				}
+				else /* v123 > v45 */{
+					y++;
+				}
+			}
+		}
+
+		System.out.println(result);
 	}
 
 	/*
@@ -145,8 +233,8 @@ public class C11LOCK {
 	static boolean oj = System.getProperty("ONLINE_JUDGE") != null;
 
 	static void tr(Object... o) {
-		if (!oj) {
-			System.out.println(Arrays.deepToString(o));
-		}
+		// if (!oj) {
+		System.out.println(Arrays.deepToString(o));
+		// }
 	}
 }

@@ -14,15 +14,22 @@ public class MainTest {
 	public static void main(String[] args) {
 
 		initReader();
-		
-
-		if (true) {
-			return;
-		}
 
 		Random rand = new Random();
-
+		int A9 = 1000000000;
 		if (true) {
+			// For C11LOCK
+			int n = 500;
+			System.out.println(n + " " + (A9 + 2 * rand.nextInt(A9)));
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < n; j++) {
+					System.out.print((A9 + 2 * rand.nextInt(A9)) + " ");
+				}
+				System.out.println();
+			}
+		}
+
+		if (false) {
 			// For KVIP
 			int n = 1000;
 			System.out.println(n);

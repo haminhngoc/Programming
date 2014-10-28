@@ -5,8 +5,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-
-public class PTRANG {
+class PTRANG {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -23,6 +22,27 @@ public class PTRANG {
 	}
 
 	static void solve() {
+		int N = ni();
+		int L = ni();
+
+		int[] w = na(N);
+
+		int[] bestValues = new int[N + 1];
+		// bestValues[0] = 0;
+
+		for (int i = 0; i < N; i++) {
+			int wi = w[i];
+			int lastLine = 0;
+			bestValues[i + 1] = L;
+			int j = i;
+			while (j >= 0 && lastLine + w[j] <= L) {
+				lastLine += w[j];
+				bestValues[i + 1] = Math.min(bestValues[i + 1], Math.max(bestValues[j], L - lastLine));
+				j--;
+			}
+		}
+
+		System.out.println(bestValues[N]);
 	}
 
 	/*

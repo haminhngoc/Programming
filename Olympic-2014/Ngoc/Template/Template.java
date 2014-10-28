@@ -2,9 +2,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 
-class PTIT122K {
+public class Template {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -21,16 +22,6 @@ class PTIT122K {
 	}
 
 	static void solve() {
-		// Ideas
-		// BuildSegmentTree (n+m) element
-		// 		Each node has value 0, 1 ~ has disk or empty
-		// 		Initial value: 1 1 1... n 0 0 0......
-		// 		Head = n
-		// 		Every time a disk is added top (or Head) 
-		// 			We can easily calculate how many disk between old position and head
-		// 			Then Head++
-		//	int[n] mapId => store and find current position [0:n+m) of diskId
-		// WILL DO LATER!
 	}
 
 	/*
