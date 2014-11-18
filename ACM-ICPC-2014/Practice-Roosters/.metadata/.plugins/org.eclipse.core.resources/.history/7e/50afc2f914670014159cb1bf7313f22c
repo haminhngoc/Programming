@@ -1,0 +1,130 @@
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+class Main {
+
+	public static void main(String[] args) {
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		PrintWriter out = new PrintWriter(outputStream);
+		Task1 solver = new Task1();
+		solver.solve(out);
+		out.close();
+	}
+
+}
+
+class Task1 {
+	static List<Integer> res = new ArrayList<Integer>();;
+	static List<Integer> pre = new ArrayList<Integer>();
+	static int index = 1;
+	StringBuilder str = new StringBuilder();
+
+	// static List<Integer> sorted;
+
+	public void solve(PrintWriter out) {
+		int foo = 0;
+		pre.add(nextInt());
+		while (hasNext()) {
+			pre.add(nextInt());
+		}
+		recur(0, pre.size() - 1);
+		System.out.println(str);
+	}
+
+	private void recur(int l, int r) {
+		if (r < l) {
+			return;
+		}
+		if (l == r) {
+			if (str.length() != 0) {
+				str.append(' ');
+			}
+			str.append(pre.get(l));
+			return;
+		}
+		int i = l;
+		for (; i <= r; ++i) {
+			if (pre.get(i) > pre.get(l)) {
+				break;
+			}
+		}
+		recur(l + 1, i - 1);
+		if (i <= r) {
+			recur(i, r);
+		}
+
+		if (str.length() != 0) {
+			str.append(' ');
+		}
+		str.append(pre.get(l));
+	}
+
+	static InputStream in = System.in;
+	static byte[] bytes = new byte[1000000];
+	static int lenbuf = 0;
+	static int ptrbuf = 0;
+
+	static int readByte() {
+		if (lenbuf == -1) {
+			throw new InputMismatchException();
+		}
+		if (ptrbuf >= lenbuf) {
+			try {
+				lenbuf = in.read(bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new InputMismatchException();
+			}
+			ptrbuf = 0;
+			if (lenbuf <= 0) {
+				return -1;
+			}
+		}
+
+		return bytes[ptrbuf++];
+	}
+
+	static boolean hasNext() {
+		for (; ptrbuf < lenbuf; ++ptrbuf) {
+			if (!isSpace(bytes[ptrbuf])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	static boolean isSpace(int c) {
+		return !(c >= 33 && c <= 126);
+	}
+
+	static int read() {
+		int b;
+		while ((b = readByte()) != -1 && isSpace(b))
+			;
+		return b;
+	}
+
+	static String nextString() {
+		int b;
+		b = read();
+		StringBuilder str = new StringBuilder();
+		while (!isSpace(b)) {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+		return str.toString();
+	}
+
+	static int nextInt() {
+		return Integer.parseInt(nextString());
+	}
+}

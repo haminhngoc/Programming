@@ -1,0 +1,191 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+class Main {
+
+	public static void main(String[] args) {
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		InputReader in = new InputReader(inputStream);
+		PrintWriter out = new PrintWriter(outputStream);
+		Task solver = new Task();
+		solver.solve(in, out);
+		out.close();
+	}
+
+}
+
+class Task {
+	Node root;
+	Node cur;
+	List<Integer> res;
+
+	public void solve(InputReader in, PrintWriter out) {
+		List<Integer> pre = new ArrayList<Integer>();
+		int foo = 0;
+		pre.add(nextInt());
+		while (hasNext()) {
+			foo = nextInt();
+			pre.add(foo);
+		}
+		
+		root = new Node();
+		root.value = pre.get(0);
+		cur = root;
+		int i = 0;
+		for (i = 1; i < pre.size() && pre.get(i) < pre.get(0); ++i) {
+			cal(pre.get(i));
+		}
+		if(i < pre.size()){
+			root.rightChild = new Node();
+			root.rightChild.value = pre.get(i);
+			cur = root.rightChild;
+			++i;
+			for(; i < pre.size(); ++i){
+				cal(pre.get(i));
+			}
+		}
+		res = new ArrayList<Integer>();
+		post(root);
+		StringBuilder sb = new StringBuilder();
+		for (int item : res) {
+			sb.append(item);
+			sb.append("\n");
+		}
+		out.print(sb);
+	}
+
+	void post(Node node) {
+		if (node.leftChild != null) {
+			post(node.leftChild);
+		}
+		if (node.rightChild != null) {
+			post(node.rightChild);
+		}
+		res.add(node.value);
+	}
+
+	void cal(int value) {
+		if (cur.parent == null || value < cur.parent.value) {
+			if (value < cur.value) {
+				cur.leftChild = new Node();
+				cur.leftChild.value = value;
+				cur.leftChild.parent = cur;
+				cur = cur.leftChild;
+			} else {
+				cur.rightChild = new Node();
+				cur.rightChild.value = value;
+				cur.rightChild.parent = cur;
+				cur = cur.rightChild;
+			}
+			return;
+		}
+		cur = cur.parent;
+		cal(value);
+	}
+
+	static InputStream in = System.in;
+	static byte[] bytes = new byte[1000000];
+	static int lenbuf = 0;
+	static int ptrbuf = 0;
+
+	static int readByte() {
+		if (lenbuf == -1) {
+			throw new InputMismatchException();
+		}
+		if (ptrbuf >= lenbuf) {
+			try {
+				lenbuf = in.read(bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new InputMismatchException();
+			}
+			ptrbuf = 0;
+			if (lenbuf <= 0) {
+				return -1;
+			}
+		}
+
+		return bytes[ptrbuf++];
+	}
+
+	static boolean hasNext() {
+		for (; ptrbuf < lenbuf; ++ptrbuf) {
+			if (!isSpace(bytes[ptrbuf])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	static boolean isSpace(int c) {
+		return !(c >= 33 && c <= 126);
+	}
+
+	static int read() {
+		int b;
+		while ((b = readByte()) != -1 && isSpace(b))
+			;
+		return b;
+	}
+
+	static String nextString() {
+		int b;
+		b = read();
+		StringBuilder str = new StringBuilder();
+		while (!isSpace(b)) {
+			str.appendCodePoint(b);
+			b = readByte();
+		}
+		return str.toString();
+	}
+
+	static int nextInt() {
+		return Integer.parseInt(nextString());
+	}
+}
+
+class Node {
+	Node parent;
+	Node leftChild;
+	Node rightChild;
+	int value;
+}
+
+class InputReader {
+	BufferedReader reader;
+	StringTokenizer tokenizer;
+
+	InputReader(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
+	}
+}

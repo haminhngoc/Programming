@@ -1,0 +1,90 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+class Main {
+
+	public static void main(String[] args) {
+		InputStream inputStream = System.in;
+		OutputStream outputStream = System.out;
+		InputReader in = new InputReader(inputStream);
+		PrintWriter out = new PrintWriter(outputStream);
+		Task solver = new Task();
+		solver.solve(in, out);
+		out.close();
+	}
+
+}
+
+class Task {
+	public void solve(InputReader in, PrintWriter out) {
+		int nTest = in.nextInt();
+		for (int id = 1; id <= nTest; ++id) {
+			long l = in.nextLong();
+			long m = in.nextLong();
+			long n = in.nextLong();
+
+			l *= l;
+
+			long temp = l - m;
+
+			long value = 1;
+			for (long i = l; i > temp; --i) {
+				value *= i;
+			}
+			long BASE =10000000000007;
+			long result =0;
+			for(long i =m; i<=n; ++i){
+				result+=value;
+				result
+			}
+		}
+	}
+
+	long calA(long n, long k) {
+		long nkFact = 1;
+		long nFact = 1;
+		for (int i = 2; i <= n; ++i) {
+			nFact *= i;
+			if (i <= n - k) {
+				nkFact *= i;
+			}
+		}
+		return nFact / nkFact;
+	}
+
+}
+
+class InputReader {
+	BufferedReader reader;
+	StringTokenizer tokenizer;
+
+	InputReader(InputStream stream) {
+		reader = new BufferedReader(new InputStreamReader(stream), 32768);
+		tokenizer = null;
+	}
+
+	public String next() {
+		while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+			try {
+				tokenizer = new StringTokenizer(reader.readLine());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return tokenizer.nextToken();
+	}
+
+	public int nextInt() {
+		return Integer.parseInt(next());
+	}
+
+	public long nextLong() {
+		return Long.parseLong(next());
+	}
+}
