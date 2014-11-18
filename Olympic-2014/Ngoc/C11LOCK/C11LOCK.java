@@ -2,9 +2,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 
-class TPCDLCS {
+class C11LOCK {
 	static InputStream is;
 	static PrintWriter out;
 	static String INPUT = "";
@@ -20,121 +21,107 @@ class TPCDLCS {
 		tr(System.currentTimeMillis() - s + "ms");
 	}
 
-	// Ref: https://github.com/haminhngoc/Programming/blob/master/Ngoc/BaseCode/ArrrayAlgorithms.java#LCS
+	static void solve2() {
+		int n = ni();
+		int k = ni();
+
+		int groupSize = n * n;
+		int result = 0;
+
+		for (int i = 0; i < n; i++) {
+			int x = 0, y = 0;
+			while (x < groupSize && y < groupSize) {
+				if (x < y)
+					x++;
+				else
+					y++;
+				result++;
+			}
+		}
+
+		System.out.println(result);
+	}
+
 	static void solve() {
-		char[] s1 = ns().toCharArray();
-		char[] s2 = ns().toCharArray();
+		int n = ni();
+		int k = ni();
+		int[] a1 = na(n);
+		int[] a2 = na(n);
+		int[] a3 = na(n);
+		int[] a4 = na(n);
+		int[] a5 = na(n);
 
-		int[][] map = buildLCSMap(s1, s2);
-		String[][][] cache = new String[s1.length + 1][s2.length + 1][];
+		int groupSize = n * n;
+		Long[] g12 = new Long[groupSize];
+		Long[] g45 = new Long[groupSize];
 
-		String[] result = readLCSAllResult(s1, s2, map, s1.length, s2.length, cache);
-
-		Arrays.sort(result);
-
-		System.out.println(result.length);
-
-		for (int i = 0; i < result.length; i++) {
-			System.out.println(result[i]);
+		int g = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				g12[g] = (long) (a1[i] + a2[j]);
+				g++;
+			}
 		}
-	}
 
-	static int[][] buildLCSMap(char[] s1, char[] s2) {
-		int len1 = s1.length;
-		int len2 = s2.length;
+		g = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				g45[g] = (long) (k - a4[i] - a5[j]);
+				g++;
+			}
+		}
 
-		int[][] map = new int[len1 + 1][len2 + 1];
+		Arrays.sort(g12);
+		Arrays.sort(a3);
+		Arrays.sort(g45);
 
-		for (int i = 1; i <= len1; i++) {
-			char c1 = s1[i - 1];
-			for (int j = 1; j <= len2; j++) {
-				if (c1 == s2[j - 1]) {
-					map[i][j] = map[i - 1][j - 1] + 1;
+		long[] a12 = new long[groupSize];
+		for (int i = 0; i < groupSize; i++) {
+			a12[i] = g12[i];
+		}
+
+		long[] a45 = new long[groupSize];
+		for (int i = 0; i < groupSize; i++) {
+			a45[i] = g45[i];
+		}
+
+		// #!@$ Java and Java 6: Have to use Integer[] to sort, and int[] to process 
+
+		long result = 0;
+
+		// Problem: Access Memory too many times: 250M
+		for (int i = 0; i < n; i++) {
+			int a3i = a3[i];
+
+			int x = 0, y = 0;
+			while (x < groupSize && y < groupSize) {
+				long v123 = a12[x] + a3i;
+				long v45 = a45[y];
+				if (v123 == v45) {
+					int curX = x;
+					x++;
+					while (x < groupSize && a12[x - 1] == a12[x]) {
+						x++;
+					}
+
+					int curY = y;
+					y++;
+					while (y < groupSize && a45[y - 1] == a45[y]) {
+						y++;
+					}
+
+					result += (long)(x - curX) * (y - curY);
 				}
-				else {
-					map[i][j] = Math.max(map[i - 1][j], map[i][j - 1]);
+				else if (v123 < v45) {
+					x++;
 				}
-			}
-		}
-		return map;
-	}
-
-	static String[] readLCSAllResult(char[] s1, char[] s2, int[][] map, int x, int y, String[][][] cache) {
-
-		if (cache[x][y] != null) {
-			return cache[x][y];
-		}
-
-		if (x == 0 || y == 0) {
-			return null;
-		}
-
-		String[] result = null;
-		if (s1[x - 1] == s2[y - 1]) {
-			String[] preCache = readLCSAllResult(s1, s2, map, x - 1, y - 1, cache);
-
-			if (preCache == null) {
-				preCache = new String[] { "" };
-			}
-
-			result = cache[x][y] = new String[preCache.length];
-			for (int i = 0; i < preCache.length; i++) {
-				result[i] = preCache[i] + s1[x - 1];
-			}
-
-			return result;
-		}
-
-		String[] left = null, right = null;
-
-		if (map[x - 1][y] >= map[x][y - 1]) {
-			left = readLCSAllResult(s1, s2, map, x - 1, y, cache);
-		}
-
-		if (map[x - 1][y] <= map[x][y - 1]) {
-			right = readLCSAllResult(s1, s2, map, x, y - 1, cache);
-		}
-
-		if (left != null && right != null && left != right) {
-			result = unionTwoArray(left, right);
-		}
-		else {
-			result = left != null ? left : right;
-		}
-
-		cache[x][y] = result;
-		return result;
-	}
-
-	static String[] unionTwoArray(String[] s1, String[] s2) {
-		int count = 0;
-		String[] temp = new String[s2.length];
-
-		for (int j = 0; j < s2.length; j++) {
-			int i = 0;
-			for (i = 0; i < s1.length; i++) {
-				// Distinct location
-				// if (s2[j] == s1[i]) {
-				// break;
-				// }
-
-				// Disinct result
-				if (s2[j].compareTo(s1[i]) == 0) {
-					break;
+				else /* v123 > v45 */{
+					y++;
 				}
 			}
-			if (i == s1.length) {
-				temp[count++] = s2[j];
-			}
 		}
-		String[] result = new String[s1.length + count];
-		for (int i = 0; i < count; i++) {
-			result[i] = temp[i];
-		}
-		for (int i = 0; i < s1.length; i++) {
-			result[count + i] = s1[i];
-		}
-		return result;
+
+		System.out.println(result);
 	}
 
 	/*

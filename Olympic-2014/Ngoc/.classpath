@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="TEST"/>
+	<classpathentry kind="src" path="C11PAIRS"/>
+	<classpathentry kind="src" path="INSUL"/>
+	<classpathentry kind="src" path="PTIT122K"/>
+	<classpathentry kind="src" path="PTRANG"/>
+	<classpathentry kind="src" path="C11LOCK"/>
 	<classpathentry kind="src" path="TPCDLCS"/>
-	<classpathentry kind="src" path="C11STAR"/>
-	<classpathentry kind="src" path="KVIP"/>
-	<classpathentry kind="src" path="BINTREE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
